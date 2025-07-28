@@ -1,25 +1,18 @@
-# 🚀 Sự Cố Datafile trên Oracle RAC – Trải Nghiệm Tương Tác
-[![Phiên bản](https://img.shields.io/badge/version-1.0.0-blue)]() [![Giấy phép](https://img.shields.io/badge/license-MIT-green)]()
-> **Phân tích trực quan “kinh điển” khi đặt datafile sai chỗ trên Oracle RAC**  
-> Khám phá **phát hiện**, **khắc phục** & **phòng ngừa** sự cố Datafile cục bộ vs ASM qua minh hoạ động và mô phỏng thực tế.
+[![🌐 Xem Website](https://img.shields.io/badge/Live_Demo-Click_Here-orange?style=for-the-badge&logo=firefox-browser&logoColor=white)](https://ngockhanhvd2812.github.io/dev_to_dba/)
+
+# 🚀 Khóa học Oracle 12c DBA qua Đối Thoại Dev & DBA
+
+> **Từ Developer đến Database Administrator – Hành trình chuyển đổi chuyên nghiệp**  
+> Một khóa học “đối thoại” tương tác, dẫn dắt bạn qua **7 phần** từ cơ bản đến nâng cao.
 
 ---
 
-### 🌐 Kiến Trúc RAC Tương Tác
-- **SVG động** với 2 instance, shared ASM, datafile cục bộ  
-- **Kéo–thả** datafile sang ASM để “fix”  
-- **Glow** & **confetti** khi xử lý thành công  
+## 📋 Mục Lục
 
-### ⚠️ Phân Tích Hệ Quả
-- 4 card mở rộng chi tiết (click để xem)  
-- **Pie Chart** minh hoạ tỉ lệ ORA‑01157, treo session, mất recover, outage  
-
-### 🔍 Phát Hiện Lỗi
-1. **SQL Simulation**: filter `gv$datafile`  
-2. **Alert Log**: slide‑in log với ORA errors  
-3. **OS Check**: “ls” trên FS giả lập file không tồn tại  
-
-### 📊 Biểu Đồ So Sánh
-- **Bar Chart** downtime (phút) cho Online (12c+) vs Offline (≤11g)  
-- Tương tác hover để xem chi tiết  
-
+- Phần 1 – Giới thiệu & Mở đầu  
+- Phần 2 – Kiến trúc Oracle 12c  
+- Phần 3 – Cài đặt & Kết nối  
+- Phần 4 – Quản lý Schema & Tablespace  
+- Phần 5 – Tối ưu truy vấn SQL  
+- Phần 6 – Sao lưu & Phục hồi  
+- Phần 7 – Tư duy Dev vs DBA
