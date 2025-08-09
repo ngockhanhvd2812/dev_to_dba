@@ -137,6 +137,9 @@
             padding: 8px 14px;
             border-radius: 999px;
             font-size: .9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         .hero-wrap {
@@ -306,12 +309,51 @@
             font-style: italic;
             color: var(--gray-600);
         }
+        
+        /* Custom List Styling */
+        .styled-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+
+        .styled-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 0.75rem;
+            font-size: 1.02rem;
+            line-height: 1.6;
+        }
+
+        .styled-list li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 4px;
+            width: 20px;
+            height: 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .highlight-box .styled-list li::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230284c7'%3E%3Cpath fill-rule='evenodd' d='M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z' clip-rule='evenodd' /%3E%3C/svg%3E");
+        }
+        
+        .tips-box .styled-list li::before {
+             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23D97706'%3E%3Cpath fill-rule='evenodd' d='M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zM12.75 6a.75.75 0 00-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 000-1.5h-3.75V6z' clip-rule='evenodd' /%3E%3C/svg%3E");
+        }
+
+        .warning-box .styled-list li::before {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f59e0b'%3E%3Cpath fill-rule='evenodd' d='M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.31 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z' clip-rule='evenodd' /%3E%3C/svg%3E");
+        }
 
         /* Highlight boxes */
         .highlight-box, .warning-box, .lesson-box, .tips-box {
             border-left: 4px solid var(--blue-400);
             background: var(--blue-50);
-            padding: 12px 14px;
+            padding: 16px 20px;
             border-radius: 0 8px 8px 0;
             margin: 14px 0;
         }
@@ -327,34 +369,109 @@
         }
 
         .tips-box {
-            background: linear-gradient(90deg, var(--yellow-50), var(--amber-50));
-            border-left-color: var(--yellow-400);
+            background: linear-gradient(135deg, var(--yellow-50), var(--amber-50));
+            border: 1px solid var(--yellow-200);
+            border-left: 4px solid var(--yellow-400);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
         }
 
-        .highlight-box h4 {
-            color: var(--blue-800);
-            margin-bottom: 8px;
+        .tips-box h3 {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            color: var(--yellow-900);
+            margin: 0 0 16px 0;
         }
 
-        .warning-box h4 {
-            color: var(--yellow-800);
+        .tips-box h3 svg {
+            width: 32px;
+            height: 32px;
+            flex-shrink: 0;
+        }
+        
+        .highlight-box h4, .warning-box h4, .lesson-box h4, .tips-box h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
             margin-bottom: 8px;
         }
+        
+        .highlight-box h4 { color: var(--blue-800); }
+        .warning-box h4 { color: var(--yellow-800); }
+
 
         /* Code blocks */
         .example-box {
-            background: #0f172a;
-            color: #e2e8f0;
-            border-radius: 8px;
-            padding: 14px;
-            font-family: ui-monospace, Menlo, Consolas, monospace;
-            overflow: auto;
-            margin: 14px 0;
+            background: #f8fafc; /* Lighter background */
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            margin: 20px 0;
+            overflow: hidden; /* To contain the header */
+            box-shadow: 0 2px 8px rgba(0,0,0,.04);
         }
 
-        .example-box code {
-            white-space: pre;
+        .example-box-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--gray-50);
+            padding: 8px 16px;
+            border-bottom: 1px solid var(--gray-200);
         }
+
+        .example-box-title {
+            font-family: ui-monospace, Menlo, Consolas, monospace;
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+        
+        .copy-button {
+            background: var(--gray-200);
+            border: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--gray-700);
+            transition: background .2s;
+            font-family: "Segoe UI", system-ui, sans-serif;
+            font-weight: 500;
+        }
+
+        .copy-button:hover {
+            background: var(--gray-300);
+        }
+
+        .copy-button svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .example-box-content {
+            padding: 16px;
+            font-family: ui-monospace, Menlo, Consolas, monospace;
+            overflow: auto;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        .example-box-content code {
+            white-space: pre;
+            font-size: 0.9rem;
+        }
+        
+        /* Basic syntax highlighting */
+        .sql-comment { color: #6a9955; }
+        .sql-keyword { color: #569cd6; font-weight: 600; }
+        .sql-string { color: #ce9178; }
+        .sql-number { color: #b5cea8; }
+        .sql-function { color: #dcdcaa; }
 
         /* Navigation */
         .nav {
@@ -398,6 +515,7 @@
             background: var(--blue-50);
             border-color: var(--blue-100);
             color: var(--blue-800);
+            font-weight: 600;
         }
 
         .nav a.active .num {
@@ -488,14 +606,14 @@
             place-items: center;
             border: 1px solid var(--gray-200);
             box-shadow: 0 6px 18px rgba(0,0,0,.12);
-            animation: bounce 2s infinite;
             cursor: pointer;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.3s, transform 0.3s;
         }
 
         .scroll-top.visible {
             opacity: 1;
+            animation: pulse 2s infinite;
         }
 
         .scroll-top svg {
@@ -504,18 +622,21 @@
             color: var(--blue-600);
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
+        @keyframes pulse {
+            0% {
+                transform: scale(0.98);
+                box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.7);
             }
-            40% {
-                transform: translateY(-8px);
+            70% {
+                transform: scale(1.02);
+                box-shadow: 0 0 0 10px rgba(2, 132, 199, 0);
             }
-            60% {
-                transform: translateY(-4px);
+            100% {
+                transform: scale(0.98);
+                box-shadow: 0 0 0 0 rgba(2, 132, 199, 0);
             }
         }
-
+        
         /* Responsive design */
         @media (max-width: 768px) {
             .hero h1 {
@@ -593,10 +714,31 @@
             color: var(--gray-800);
         }
 
-        .info-card p {
+        .info-card p, .info-card ul {
             color: var(--gray-600);
             font-size: 0.95rem;
         }
+
+        /* Sidebar tips list */
+        .tips-card-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .tips-card-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        .tips-card-list li svg {
+            width: 20px;
+            height: 20px;
+            color: var(--green-500);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
     </style>
 </head>
 <body id="top">
@@ -608,10 +750,18 @@
                     <h1>Khóa học Oracle 12c DBA qua đối thoại</h1>
                     <p>Từ Developer đến Database Administrator – lộ trình ~100 giờ, thực chiến, học bằng đối thoại Dev & DBA.</p>
                     <div class="badges">
-                        <span class="badge">100 giờ học</span>
-                        <span class="badge">CDB/PDB Multitenant</span>
-                        <span class="badge">Tối ưu & Backup</span>
-                        <span class="badge">Thực chiến thực tế</span>
+                        <span class="badge">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M8.5 2a.5.5 0 0 0-1 0v5.5H2a.5.5 0 0 0 0 1h5.5V14a.5.5 0 0 0 1 0V8.5H14a.5.5 0 0 0 0-1H8.5V2Z" /></svg>
+                            100 giờ học
+                        </span>
+                        <span class="badge">
+                           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 12.5 2h-9ZM3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-9ZM5 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5A.5.5 0 0 1 5 7.5Zm.5 1.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2Z" /></svg>
+                            CDB/PDB Multitenant
+                        </span>
+                        <span class="badge">
+                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M8 1a.5.5 0 0 1 .5.5v1.513a4.502 4.502 0 0 1 3.58 1.417l1.07-1.07a.5.5 0 0 1 .708.708l-1.07 1.07A4.502 4.502 0 0 1 13.987 8H15.5a.5.5 0 0 1 0 1h-1.513a4.502 4.502 0 0 1-1.417 3.58l1.07 1.07a.5.5 0 0 1-.708.708l-1.07-1.07A4.502 4.502 0 0 1 8 13.987V15.5a.5.5 0 0 1-1 0v-1.513a4.502 4.502 0 0 1-3.58-1.417l-1.07 1.07a.5.5 0 0 1-.708-.708l1.07-1.07A4.502 4.502 0 0 1 2.013 9H.5a.5.5 0 0 1 0-1h1.513A4.502 4.502 0 0 1 4.42 4.42L3.35 3.35a.5.5 0 0 1 .708-.708l1.07 1.07A4.502 4.502 0 0 1 8 2.013V.5a.5.5 0 0 1 .5-.5ZM6 8a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z" /></svg>
+                            Tối ưu & Backup
+                        </span>
                     </div>
                 </div>
                 <div class="hero-illustration">
@@ -667,12 +817,12 @@
                         <div class="card-title">Mẹo học tập</div>
                     </div>
                     <div class="card-body">
-                        <ul style="list-style:none;padding-left:0">
-                            <li>✅ Học từng phần, thực hành ngay</li>
-                            <li>✅ Luôn xem execution plan, tránh <code>SELECT *</code></li>
-                            <li>✅ "Backup is Job #1"</li>
-                            <li>✅ Hiểu rõ CDB/PDB & ServiceName khi kết nối</li>
-                            <li>✅ Tư duy như DBA: hiệu năng trước tiên</li>
+                        <ul class="tips-card-list">
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span>Học từng phần, thực hành ngay</span></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span>Luôn xem execution plan, tránh <code>SELECT *</code></span></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span>"Backup is Job #1"</span></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span>Hiểu rõ CDB/PDB & ServiceName khi kết nối</span></li>
+                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span>Tư duy như DBA: hiệu năng trước tiên</span></li>
                         </ul>
                     </div>
                 </div>
@@ -735,8 +885,12 @@
                     </div>
 
                     <div class="highlight-box">
-                        <h4>🎯 Tại sao nên học Oracle DBA?</h4>
-                        <p>Oracle là hệ quản trị CSDL doanh nghiệp phổ biến trong ngân hàng, tài chính, chính phủ. Học qua đối thoại & ví dụ thực chiến giúp đi từ nền tảng đến nâng cao hiệu quả. Với kiến trúc đa tenant mới của 12c, đây là cơ hội tuyệt vời để nắm vững công nghệ tiên tiến.</p>
+                        <h4>Tại sao nên học Oracle DBA?</h4>
+                        <ul class="styled-list">
+                            <li>Oracle là hệ quản trị CSDL doanh nghiệp phổ biến trong ngân hàng, tài chính, chính phủ.</li>
+                            <li>Học qua đối thoại & ví dụ thực chiến giúp đi từ nền tảng đến nâng cao hiệu quả.</li>
+                            <li>Với kiến trúc đa tenant mới của 12c, đây là cơ hội tuyệt vời để nắm vững công nghệ tiên tiến.</li>
+                        </ul>
                     </div>
 
                     <div class="info-grid">
@@ -838,7 +992,7 @@
 
                     <div class="highlight-box">
                         <h4>🔑 Lợi ích của Multitenant Architecture</h4>
-                        <ul>
+                        <ul class="styled-list">
                             <li><strong>Tiết kiệm tài nguyên:</strong> Dùng chung SGA, background processes</li>
                             <li><strong>Quản lý dễ dàng:</strong> Patch, upgrade một lần cho tất cả PDB</li>
                             <li><strong>Cô lập dữ liệu:</strong> Mỗi PDB có schema và dữ liệu riêng biệt</li>
@@ -887,13 +1041,20 @@
                     </div>
 
                     <div class="example-box">
-                        <code>-- Các trạng thái khởi động Oracle
-SQL> STARTUP NOMOUNT;    -- Chỉ khởi tạo instance (SGA + processes)
-SQL> ALTER DATABASE MOUNT;  -- Mount control file
-SQL> ALTER DATABASE OPEN;   -- Mở data files để user truy cập
+                        <div class="example-box-header">
+                            <span class="example-box-title">SQL: Các trạng thái khởi động</span>
+                            <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Các trạng thái khởi động Oracle</span>
+<span class="sql-keyword">SQL></span> <span class="sql-keyword">STARTUP</span> <span class="sql-keyword">NOMOUNT</span>;    <span class="sql-comment">-- Chỉ khởi tạo instance (SGA + processes)</span>
+<span class="sql-keyword">SQL></span> <span class="sql-keyword">ALTER</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">MOUNT</span>;  <span class="sql-comment">-- Mount control file</span>
+<span class="sql-keyword">SQL></span> <span class="sql-keyword">ALTER</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">OPEN</span>;   <span class="sql-comment">-- Mở data files để user truy cập</span>
 
--- Hoặc gọi gộp:
-SQL> STARTUP;  -- Tự động qua 3 giai đoạn trên</code>
+<span class="sql-comment">-- Hoặc gọi gộp:</span>
+<span class="sql-keyword">SQL></span> <span class="sql-keyword">STARTUP</span>;  <span class="sql-comment">-- Tự động qua 3 giai đoạn trên</span></code></div>
                     </div>
 
                     <div class="info-grid">
@@ -946,7 +1107,7 @@ SQL> STARTUP;  -- Tự động qua 3 giai đoạn trên</code>
 
                     <div class="content-section">
                         <h4>📋 1. Chuẩn bị cài đặt</h4>
-                        <ul>
+                        <ul class="styled-list">
                             <li><strong>Hệ điều hành:</strong> Oracle chạy tốt nhất trên Linux/Unix. Bản cho Windows cũng có nhưng ít dùng production. Dev thì có thể cài trên Windows cho tiện học, hoặc dùng máy ảo Linux.</li>
                             <li><strong>Cấu hình máy:</strong> Oracle 12c yêu cầu RAM kha khá (tối thiểu ~2GB để chạy ổn), đĩa vài chục GB trống.</li>
                             <li><strong>Tài khoản Oracle:</strong> Cần có account trên oracle.com để download</li>
@@ -955,7 +1116,7 @@ SQL> STARTUP;  -- Tự động qua 3 giai đoạn trên</code>
 
                     <div class="content-section">
                         <h4>🛠️ 2. Cài đặt phần mềm Oracle</h4>
-                        <ul>
+                        <ul class="styled-list">
                             <li>Tải bộ cài Oracle Database 12c (ví dụ 12.1 hoặc 12.2) từ trang Oracle</li>
                             <li>Giải nén và chạy trình cài đặt (Oracle Universal Installer)</li>
                             <li>Chọn <strong>ORACLE_BASE</strong> (thư mục gốc) và <strong>ORACLE_HOME</strong> (thư mục phần mềm)</li>
@@ -991,7 +1152,7 @@ SQL> STARTUP;  -- Tự động qua 3 giai đoạn trên</code>
 
                     <div class="warning-box">
                         <h4>⚠️ Lưu ý quan trọng khi cài đặt</h4>
-                        <ul>
+                        <ul class="styled-list">
                             <li>Nhớ mật khẩu SYS và SYSTEM - đây là tài khoản admin</li>
                             <li>Ghi nhớ Oracle Home path và SID</li>
                             <li>Listener sẽ được tự động cấu hình trên port 1521</li>
@@ -1005,17 +1166,24 @@ SQL> STARTUP;  -- Tự động qua 3 giai đoạn trên</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Cách 1: Kết nối local với OS Authentication
-sqlplus / as sysdba
+                        <div class="example-box-header">
+                            <span class="example-box-title">SQL: Các kiểu kết nối</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Cách 1: Kết nối local với OS Authentication</span>
+<span class="sql-keyword">sqlplus</span> / <span class="sql-keyword">as</span> sysdba
 
--- Cách 2: Kết nối với username/password
-sqlplus system/password@localhost:1521/ORCL
+<span class="sql-comment">-- Cách 2: Kết nối với username/password</span>
+<span class="sql-keyword">sqlplus</span> system/password@localhost:1521/ORCL
 
--- Cách 3: Kết nối đến PDB trong CDB
-sqlplus hr/password@localhost:1521/PDB1
+<span class="sql-comment">-- Cách 3: Kết nối đến PDB trong CDB</span>
+<span class="sql-keyword">sqlplus</span> hr/password@localhost:1521/PDB1
 
--- Cách 4: Sử dụng Easy Connect
-sqlplus system/password@//hostname:1521/service_name</code>
+<span class="sql-comment">-- Cách 4: Sử dụng Easy Connect</span>
+<span class="sql-keyword">sqlplus</span> system/password@//hostname:1521/service_name</code></div>
                     </div>
 
                     <div class="dialogue">
@@ -1064,17 +1232,24 @@ sqlplus system/password@//hostname:1521/service_name</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Kiểm tra service names hiện có
-SQL> SELECT name, pdb FROM v$services ORDER BY name;
+                        <div class="example-box-header">
+                            <span class="example-box-title">SQL: Lệnh kiểm tra</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Kiểm tra service names hiện có</span>
+<span class="sql-keyword">SQL></span> <span class="sql-keyword">SELECT</span> name, pdb <span class="sql-keyword">FROM</span> v$services <span class="sql-keyword">ORDER BY</span> name;
 
--- Kiểm tra listener status
+<span class="sql-comment">-- Kiểm tra listener status</span>
 $ lsnrctl status
 
--- Kiểm tra instance hiện tại
-SQL> SELECT instance_name, status FROM v$instance;
+<span class="sql-comment">-- Kiểm tra instance hiện tại</span>
+<span class="sql-keyword">SQL></span> <span class="sql-keyword">SELECT</span> instance_name, status <span class="sql-keyword">FROM</span> v$instance;
 
--- Kiểm tra PDBs trong CDB
-SQL> SHOW PDBS;</code>
+<span class="sql-comment">-- Kiểm tra PDBs trong CDB</span>
+<span class="sql-keyword">SQL></span> <span class="sql-keyword">SHOW</span> PDBS;</code></div>
                     </div>
                 </div>
             </section>
@@ -1147,21 +1322,28 @@ SQL> SHOW PDBS;</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Tạo tablespace cho ứng dụng HR
-CREATE TABLESPACE hr_data
-DATAFILE '/u01/app/oracle/oradata/ORCL/hr_data01.dbf'
-SIZE 100M
-AUTOEXTEND ON
-NEXT 10M
-MAXSIZE 1G
-EXTENT MANAGEMENT LOCAL
-UNIFORM SIZE 1M;
+                         <div class="example-box-header">
+                            <span class="example-box-title">SQL: Tạo Tablespace</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Tạo tablespace cho ứng dụng HR</span>
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLESPACE</span> hr_data
+<span class="sql-keyword">DATAFILE</span> <span class="sql-string">'/u01/app/oracle/oradata/ORCL/hr_data01.dbf'</span>
+<span class="sql-keyword">SIZE</span> <span class="sql-number">100</span>M
+<span class="sql-keyword">AUTOEXTEND</span> <span class="sql-keyword">ON</span>
+<span class="sql-keyword">NEXT</span> <span class="sql-number">10</span>M
+<span class="sql-keyword">MAXSIZE</span> <span class="sql-number">1</span>G
+<span class="sql-keyword">EXTENT</span> <span class="sql-keyword">MANAGEMENT</span> <span class="sql-keyword">LOCAL</span>
+<span class="sql-keyword">UNIFORM</span> <span class="sql-keyword">SIZE</span> <span class="sql-number">1</span>M;
 
--- Tạo temporary tablespace
-CREATE TEMPORARY TABLESPACE hr_temp
-TEMPFILE '/u01/app/oracle/oradata/ORCL/hr_temp01.dbf'
-SIZE 50M
-AUTOEXTEND ON;</code>
+<span class="sql-comment">-- Tạo temporary tablespace</span>
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">TEMPORARY</span> <span class="sql-keyword">TABLESPACE</span> hr_temp
+<span class="sql-keyword">TEMPFILE</span> <span class="sql-string">'/u01/app/oracle/oradata/ORCL/hr_temp01.dbf'</span>
+<span class="sql-keyword">SIZE</span> <span class="sql-number">50</span>M
+<span class="sql-keyword">AUTOEXTEND</span> <span class="sql-keyword">ON</span>;</code></div>
                     </div>
 
                     <div class="content-section">
@@ -1169,20 +1351,27 @@ AUTOEXTEND ON;</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Tạo user HR
-CREATE USER hr
-IDENTIFIED BY "HrPassword123"
-DEFAULT TABLESPACE hr_data
-TEMPORARY TABLESPACE hr_temp
-QUOTA UNLIMITED ON hr_data;
+                         <div class="example-box-header">
+                            <span class="example-box-title">SQL: Tạo User</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Tạo user HR</span>
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">USER</span> hr
+<span class="sql-keyword">IDENTIFIED</span> <span class="sql-keyword">BY</span> <span class="sql-string">"HrPassword123"</span>
+<span class="sql-keyword">DEFAULT</span> <span class="sql-keyword">TABLESPACE</span> hr_data
+<span class="sql-keyword">TEMPORARY</span> <span class="sql-keyword">TABLESPACE</span> hr_temp
+<span class="sql-keyword">QUOTA</span> <span class="sql-keyword">UNLIMITED</span> <span class="sql-keyword">ON</span> hr_data;
 
--- Gán quyền cơ bản
-GRANT CONNECT, RESOURCE TO hr;
+<span class="sql-comment">-- Gán quyền cơ bản</span>
+<span class="sql-keyword">GRANT</span> <span class="sql-keyword">CONNECT</span>, <span class="sql-keyword">RESOURCE</span> <span class="sql-keyword">TO</span> hr;
 
--- Kiểm tra user đã tạo
-SELECT username, default_tablespace, temporary_tablespace
-FROM dba_users
-WHERE username = 'HR';</code>
+<span class="sql-comment">-- Kiểm tra user đã tạo</span>
+<span class="sql-keyword">SELECT</span> username, default_tablespace, temporary_tablespace
+<span class="sql-keyword">FROM</span> dba_users
+<span class="sql-keyword">WHERE</span> username = <span class="sql-string">'HR'</span>;</code></div>
                     </div>
 
                     <div class="dialogue">
@@ -1213,7 +1402,7 @@ WHERE username = 'HR';</code>
 
                     <div class="warning-box">
                         <h4>⚠️ Best Practices cho Tablespace</h4>
-                        <ul>
+                        <ul class="styled-list">
                             <li><strong>Tách biệt:</strong> Mỗi ứng dụng nên có tablespace riêng</li>
                             <li><strong>Sizing:</strong> Ước tính kích thước ban đầu và growth rate</li>
                             <li><strong>AUTOEXTEND:</strong> Nên bật với MAXSIZE hợp lý để tránh đầy đĩa</li>
@@ -1227,28 +1416,35 @@ WHERE username = 'HR';</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Xem thông tin tablespace
-SELECT tablespace_name, 
-       ROUND(bytes/1024/1024, 2) AS total_mb,
-       ROUND(maxbytes/1024/1024, 2) AS max_mb,
+                         <div class="example-box-header">
+                            <span class="example-box-title">SQL: Monitoring Tablespace</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Xem thông tin tablespace</span>
+<span class="sql-keyword">SELECT</span> tablespace_name, 
+       <span class="sql-function">ROUND</span>(bytes/<span class="sql-number">1024</span>/<span class="sql-number">1024</span>, <span class="sql-number">2</span>) <span class="sql-keyword">AS</span> total_mb,
+       <span class="sql-function">ROUND</span>(maxbytes/<span class="sql-number">1024</span>/<span class="sql-number">1024</span>, <span class="sql-number">2</span>) <span class="sql-keyword">AS</span> max_mb,
        autoextensible
-FROM dba_data_files
-ORDER BY tablespace_name;
+<span class="sql-keyword">FROM</span> dba_data_files
+<span class="sql-keyword">ORDER</span> <span class="sql-keyword">BY</span> tablespace_name;
 
--- Xem dung lượng sử dụng
-SELECT t.tablespace_name,
-       ROUND(t.total_space/1024/1024, 2) AS total_mb,
-       ROUND(f.free_space/1024/1024, 2) AS free_mb,
-       ROUND((t.total_space - f.free_space)/1024/1024, 2) AS used_mb,
-       ROUND(((t.total_space - f.free_space)/t.total_space)*100, 2) AS pct_used
-FROM (SELECT tablespace_name, SUM(bytes) total_space
-      FROM dba_data_files 
-      GROUP BY tablespace_name) t,
-     (SELECT tablespace_name, SUM(bytes) free_space
-      FROM dba_free_space 
-      GROUP BY tablespace_name) f
-WHERE t.tablespace_name = f.tablespace_name
-ORDER BY pct_used DESC;</code>
+<span class="sql-comment">-- Xem dung lượng sử dụng</span>
+<span class="sql-keyword">SELECT</span> t.tablespace_name,
+       <span class="sql-function">ROUND</span>(t.total_space/<span class="sql-number">1024</span>/<span class="sql-number">1024</span>, <span class="sql-number">2</span>) <span class="sql-keyword">AS</span> total_mb,
+       <span class="sql-function">ROUND</span>(f.free_space/<span class="sql-number">1024</span>/<span class="sql-number">1024</span>, <span class="sql-number">2</span>) <span class="sql-keyword">AS</span> free_mb,
+       <span class="sql-function">ROUND</span>((t.total_space - f.free_space)/<span class="sql-number">1024</span>/<span class="sql-number">1024</span>, <span class="sql-number">2</span>) <span class="sql-keyword">AS</span> used_mb,
+       <span class="sql-function">ROUND</span>(((t.total_space - f.free_space)/t.total_space)*<span class="sql-number">100</span>, <span class="sql-number">2</span>) <span class="sql-keyword">AS</span> pct_used
+<span class="sql-keyword">FROM</span> (<span class="sql-keyword">SELECT</span> tablespace_name, <span class="sql-function">SUM</span>(bytes) total_space
+      <span class="sql-keyword">FROM</span> dba_data_files 
+      <span class="sql-keyword">GROUP</span> <span class="sql-keyword">BY</span> tablespace_name) t,
+     (<span class="sql-keyword">SELECT</span> tablespace_name, <span class="sql-function">SUM</span>(bytes) free_space
+      <span class="sql-keyword">FROM</span> dba_free_space 
+      <span class="sql-keyword">GROUP</span> <span class="sql-keyword">BY</span> tablespace_name) f
+<span class="sql-keyword">WHERE</span> t.tablespace_name = f.tablespace_name
+<span class="sql-keyword">ORDER</span> <span class="sql-keyword">BY</span> pct_used <span class="sql-keyword">DESC</span>;</code></div>
                     </div>
 
                     <div class="info-grid">
@@ -1272,7 +1468,7 @@ ORDER BY pct_used DESC;</code>
 
                     <div class="highlight-box">
                         <h4>💡 Schema Design Tips</h4>
-                        <ul>
+                        <ul class="styled-list">
                             <li><strong>Naming Convention:</strong> Dùng tên schema có ý nghĩa (HR, SALES, FINANCE)</li>
                             <li><strong>Object Privileges:</strong> Grant quyền cụ thể thay vì DBA role</li>
                             <li><strong>Default Tablespace:</strong> Luôn chỉ định tablespace phù hợp</li>
@@ -1326,30 +1522,37 @@ ORDER BY pct_used DESC;</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Cách 1: EXPLAIN PLAN
-EXPLAIN PLAN FOR
-SELECT e.first_name, e.last_name, d.department_name
-FROM employees e
-JOIN departments d ON e.department_id = d.department_id
-WHERE e.salary > 5000;
+                         <div class="example-box-header">
+                            <span class="example-box-title">SQL: Xem Execution Plan</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Cách 1: EXPLAIN PLAN</span>
+<span class="sql-keyword">EXPLAIN</span> <span class="sql-keyword">PLAN</span> <span class="sql-keyword">FOR</span>
+<span class="sql-keyword">SELECT</span> e.first_name, e.last_name, d.department_name
+<span class="sql-keyword">FROM</span> employees e
+<span class="sql-keyword">JOIN</span> departments d <span class="sql-keyword">ON</span> e.department_id = d.department_id
+<span class="sql-keyword">WHERE</span> e.salary > <span class="sql-number">5000</span>;
 
-SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> <span class="sql-function">TABLE</span>(<span class="sql-function">DBMS_XPLAN.DISPLAY</span>);
 
--- Cách 2: Autotrace (hiển thị statistics thực tế)
-SET AUTOTRACE ON
-SELECT e.first_name, e.last_name, d.department_name
-FROM employees e
-JOIN departments d ON e.department_id = d.department_id
-WHERE e.salary > 5000;
+<span class="sql-comment">-- Cách 2: Autotrace (hiển thị statistics thực tế)</span>
+<span class="sql-keyword">SET</span> <span class="sql-keyword">AUTOTRACE</span> <span class="sql-keyword">ON</span>
+<span class="sql-keyword">SELECT</span> e.first_name, e.last_name, d.department_name
+<span class="sql-keyword">FROM</span> employees e
+<span class="sql-keyword">JOIN</span> departments d <span class="sql-keyword">ON</span> e.department_id = d.department_id
+<span class="sql-keyword">WHERE</span> e.salary > <span class="sql-number">5000</span>;
 
--- Cách 3: SQL*Plus với actual execution
-SELECT /*+ GATHER_PLAN_STATISTICS */ 
+<span class="sql-comment">-- Cách 3: SQL*Plus với actual execution</span>
+<span class="sql-keyword">SELECT</span> <span class="sql-comment">/*+ GATHER_PLAN_STATISTICS */</span> 
        e.first_name, e.last_name, d.department_name
-FROM employees e
-JOIN departments d ON e.department_id = d.department_id
-WHERE e.salary > 5000;
+<span class="sql-keyword">FROM</span> employees e
+<span class="sql-keyword">JOIN</span> departments d <span class="sql-keyword">ON</span> e.department_id = d.department_id
+<span class="sql-keyword">WHERE</span> e.salary > <span class="sql-number">5000</span>;
 
-SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(null, null, 'ALLSTATS LAST'));</code>
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> <span class="sql-function">TABLE</span>(<span class="sql-function">DBMS_XPLAN.DISPLAY_CURSOR</span>(null, null, <span class="sql-string">'ALLSTATS LAST'</span>));</code></div>
                     </div>
 
                     <div class="dialogue">
@@ -1391,7 +1594,7 @@ SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(null, null, 'ALLSTATS LAST'));</co
 
                     <div class="warning-box">
                         <h4>⚠️ Những lỗi SQL performance thường gặp</h4>
-                        <ul>
+                        <ul class="styled-list">
                             <li><strong>SELECT *:</strong> Lấy thừa columns, tốn bandwidth và memory</li>
                             <li><strong>Không có WHERE:</strong> Full table scan không cần thiết</li>
                             <li><strong>Function trong WHERE:</strong> UPPER(), TO_CHAR() làm mất index</li>
@@ -1406,34 +1609,41 @@ SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(null, null, 'ALLSTATS LAST'));</co
                     </div>
 
                     <div class="example-box">
-                        <code>-- ❌ BAD: Function trên indexed column
-SELECT * FROM employees 
-WHERE UPPER(last_name) = 'SMITH';
+                         <div class="example-box-header">
+                            <span class="example-box-title">SQL: Good vs Bad Practices</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- ❌ BAD: Function trên indexed column</span>
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> employees 
+<span class="sql-keyword">WHERE</span> <span class="sql-function">UPPER</span>(last_name) = <span class="sql-string">'SMITH'</span>;
 
--- ✅ GOOD: Dùng function-based index hoặc store uppercase
-CREATE INDEX idx_emp_last_name_upper ON employees(UPPER(last_name));
--- Hoặc
-SELECT * FROM employees 
-WHERE last_name = 'SMITH' OR last_name = 'smith';
+<span class="sql-comment">-- ✅ GOOD: Dùng function-based index hoặc store uppercase</span>
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">INDEX</span> idx_emp_last_name_upper <span class="sql-keyword">ON</span> employees(<span class="sql-function">UPPER</span>(last_name));
+<span class="sql-comment">-- Hoặc</span>
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> employees 
+<span class="sql-keyword">WHERE</span> last_name = <span class="sql-string">'SMITH'</span> <span class="sql-keyword">OR</span> last_name = <span class="sql-string">'smith'</span>;
 
--- ❌ BAD: Non-selective condition trước
-SELECT * FROM employees 
-WHERE department_id = 10 
-  AND employee_id = 100;
+<span class="sql-comment">-- ❌ BAD: Non-selective condition trước</span>
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> employees 
+<span class="sql-keyword">WHERE</span> department_id = <span class="sql-number">10</span> 
+  <span class="sql-keyword">AND</span> employee_id = <span class="sql-number">100</span>;
 
--- ✅ GOOD: Selective condition trước  
-SELECT employee_id, first_name, last_name, salary
-FROM employees 
-WHERE employee_id = 100 
-  AND department_id = 10;
+<span class="sql-comment">-- ✅ GOOD: Selective condition trước  </span>
+<span class="sql-keyword">SELECT</span> employee_id, first_name, last_name, salary
+<span class="sql-keyword">FROM</span> employees 
+<span class="sql-keyword">WHERE</span> employee_id = <span class="sql-number">100</span> 
+  <span class="sql-keyword">AND</span> department_id = <span class="sql-number">10</span>;
 
--- ❌ BAD: Implicit conversion
-SELECT * FROM employees 
-WHERE employee_id = '100';  -- String so với number
+<span class="sql-comment">-- ❌ BAD: Implicit conversion</span>
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> employees 
+<span class="sql-keyword">WHERE</span> employee_id = <span class="sql-string">'100'</span>;  <span class="sql-comment">-- String so với number</span>
 
--- ✅ GOOD: Explicit type
-SELECT * FROM employees 
-WHERE employee_id = 100;</code>
+<span class="sql-comment">-- ✅ GOOD: Explicit type</span>
+<span class="sql-keyword">SELECT</span> * <span class="sql-keyword">FROM</span> employees 
+<span class="sql-keyword">WHERE</span> employee_id = <span class="sql-number">100</span>;</code></div>
                     </div>
 
                     <div class="content-section">
@@ -1441,24 +1651,31 @@ WHERE employee_id = 100;</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Tạo index cho WHERE conditions thường dùng
-CREATE INDEX idx_emp_dept_salary ON employees(department_id, salary);
+                         <div class="example-box-header">
+                            <span class="example-box-title">SQL: Index Strategy</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Tạo index cho WHERE conditions thường dùng</span>
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">INDEX</span> idx_emp_dept_salary <span class="sql-keyword">ON</span> employees(department_id, salary);
 
--- Composite index: column order quan trọng
--- Tốt cho: WHERE department_id = ? AND salary > ?
--- Không tốt cho: WHERE salary > ? (không có department_id)
+<span class="sql-comment">-- Composite index: column order quan trọng</span>
+<span class="sql-comment">-- Tốt cho: WHERE department_id = ? AND salary > ?</span>
+<span class="sql-comment">-- Không tốt cho: WHERE salary > ? (không có department_id)</span>
 
--- Index cho JOIN columns (Foreign Keys)
-CREATE INDEX idx_emp_dept_fk ON employees(department_id);
-CREATE INDEX idx_emp_job_fk ON employees(job_id);
+<span class="sql-comment">-- Index cho JOIN columns (Foreign Keys)</span>
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">INDEX</span> idx_emp_dept_fk <span class="sql-keyword">ON</span> employees(department_id);
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">INDEX</span> idx_emp_job_fk <span class="sql-keyword">ON</span> employees(job_id);
 
--- Unique index cho business keys
-CREATE UNIQUE INDEX idx_emp_email ON employees(email);
+<span class="sql-comment">-- Unique index cho business keys</span>
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">UNIQUE</span> <span class="sql-keyword">INDEX</span> idx_emp_email <span class="sql-keyword">ON</span> employees(email);
 
--- Kiểm tra index usage
-SELECT index_name, table_name, uniqueness, status
-FROM user_indexes
-WHERE table_name = 'EMPLOYEES';</code>
+<span class="sql-comment">-- Kiểm tra index usage</span>
+<span class="sql-keyword">SELECT</span> index_name, table_name, uniqueness, status
+<span class="sql-keyword">FROM</span> user_indexes
+<span class="sql-keyword">WHERE</span> table_name = <span class="sql-string">'EMPLOYEES'</span>;</code></div>
                     </div>
 
                     <div class="highlight-box">
@@ -1466,33 +1683,40 @@ WHERE table_name = 'EMPLOYEES';</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Top SQL statements by elapsed time
-SELECT sql_id, 
+                         <div class="example-box-header">
+                            <span class="example-box-title">SQL: Monitoring Performance</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Top SQL statements by elapsed time</span>
+<span class="sql-keyword">SELECT</span> sql_id, 
        child_number,
-       elapsed_time/executions/1000 as avg_elapsed_ms,
+       elapsed_time/executions/<span class="sql-number">1000</span> <span class="sql-keyword">as</span> avg_elapsed_ms,
        executions,
-       SUBSTR(sql_text, 1, 100) as sql_text
-FROM v$sql 
-WHERE executions > 0
-ORDER BY elapsed_time/executions DESC
-FETCH FIRST 10 ROWS ONLY;
+       <span class="sql-function">SUBSTR</span>(sql_text, <span class="sql-number">1</span>, <span class="sql-number">100</span>) <span class="sql-keyword">as</span> sql_text
+<span class="sql-keyword">FROM</span> v$sql 
+<span class="sql-keyword">WHERE</span> executions > <span class="sql-number">0</span>
+<span class="sql-keyword">ORDER</span> <span class="sql-keyword">BY</span> elapsed_time/executions <span class="sql-keyword">DESC</span>
+<span class="sql-keyword">FETCH</span> <span class="sql-keyword">FIRST</span> <span class="sql-number">10</span> <span class="sql-keyword">ROWS</span> <span class="sql-keyword">ONLY</span>;
 
--- Table không có index (full table scans nhiều)
-SELECT owner, table_name, num_rows
-FROM dba_tables
-WHERE table_name NOT IN (
-  SELECT table_name 
-  FROM dba_indexes 
-  WHERE table_owner = owner
+<span class="sql-comment">-- Table không có index (full table scans nhiều)</span>
+<span class="sql-keyword">SELECT</span> owner, table_name, num_rows
+<span class="sql-keyword">FROM</span> dba_tables
+<span class="sql-keyword">WHERE</span> table_name <span class="sql-keyword">NOT</span> <span class="sql-keyword">IN</span> (
+  <span class="sql-keyword">SELECT</span> table_name 
+  <span class="sql-keyword">FROM</span> dba_indexes 
+  <span class="sql-keyword">WHERE</span> table_owner = owner
 )
-AND num_rows > 1000
-ORDER BY num_rows DESC;
+<span class="sql-keyword">AND</span> num_rows > <span class="sql-number">1000</span>
+<span class="sql-keyword">ORDER</span> <span class="sql-keyword">BY</span> num_rows <span class="sql-keyword">DESC</span>;
 
--- Session đang chờ gì
-SELECT sid, event, wait_time, seconds_in_wait
-FROM v$session_wait
-WHERE wait_time = 0
-ORDER BY seconds_in_wait DESC;</code>
+<span class="sql-comment">-- Session đang chờ gì</span>
+<span class="sql-keyword">SELECT</span> sid, event, wait_time, seconds_in_wait
+<span class="sql-keyword">FROM</span> v$session_wait
+<span class="sql-keyword">WHERE</span> wait_time = <span class="sql-number">0</span>
+<span class="sql-keyword">ORDER</span> <span class="sql-keyword">BY</span> seconds_in_wait <span class="sql-keyword">DESC</span>;</code></div>
                     </div>
 
                     <div class="info-grid">
@@ -1529,16 +1753,23 @@ ORDER BY seconds_in_wait DESC;</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Update statistics cho table
-EXEC DBMS_STATS.GATHER_TABLE_STATS('HR', 'EMPLOYEES');
+                         <div class="example-box-header">
+                            <span class="example-box-title">SQL: Gather Statistics</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Update statistics cho table</span>
+<span class="sql-keyword">EXEC</span> <span class="sql-function">DBMS_STATS.GATHER_TABLE_STATS</span>(<span class="sql-string">'HR'</span>, <span class="sql-string">'EMPLOYEES'</span>);
 
--- Update statistics cho toàn schema
-EXEC DBMS_STATS.GATHER_SCHEMA_STATS('HR');
+<span class="sql-comment">-- Update statistics cho toàn schema</span>
+<span class="sql-keyword">EXEC</span> <span class="sql-function">DBMS_STATS.GATHER_SCHEMA_STATS</span>(<span class="sql-string">'HR'</span>);
 
--- Xem thông tin statistics
-SELECT table_name, num_rows, blocks, last_analyzed
-FROM user_tables
-WHERE table_name = 'EMPLOYEES';</code>
+<span class="sql-comment">-- Xem thông tin statistics</span>
+<span class="sql-keyword">SELECT</span> table_name, num_rows, blocks, last_analyzed
+<span class="sql-keyword">FROM</span> user_tables
+<span class="sql-keyword">WHERE</span> table_name = <span class="sql-string">'EMPLOYEES'</span>;</code></div>
                     </div>
                 </div>
             </section>
@@ -1587,7 +1818,7 @@ WHERE table_name = 'EMPLOYEES';</code>
 
                     <div class="warning-box">
                         <h4>⚠️ ARCHIVELOG vs NOARCHIVELOG</h4>
-                        <ul>
+                        <ul class="styled-list">
                             <li><strong>NOARCHIVELOG:</strong> Chỉ recovery đến thời điểm backup cuối, mất data giữa các backup</li>
                             <li><strong>ARCHIVELOG:</strong> Recovery đến bất kỳ thời điểm nào, zero data loss (với đủ archive logs)</li>
                             <li><strong>Production database PHẢI dùng ARCHIVELOG mode!</strong></li>
@@ -1595,22 +1826,29 @@ WHERE table_name = 'EMPLOYEES';</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Kiểm tra archive log mode
-SELECT log_mode FROM v$database;
+                         <div class="example-box-header">
+                            <span class="example-box-title">SQL: Archive Log Mode</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Kiểm tra archive log mode</span>
+<span class="sql-keyword">SELECT</span> log_mode <span class="sql-keyword">FROM</span> v$database;
 
--- Enable archive log mode
-SHUTDOWN IMMEDIATE;
-STARTUP MOUNT;
-ALTER DATABASE ARCHIVELOG;
-ALTER DATABASE OPEN;
+<span class="sql-comment">-- Enable archive log mode</span>
+<span class="sql-keyword">SHUTDOWN</span> <span class="sql-keyword">IMMEDIATE</span>;
+<span class="sql-keyword">STARTUP</span> <span class="sql-keyword">MOUNT</span>;
+<span class="sql-keyword">ALTER</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">ARCHIVELOG</span>;
+<span class="sql-keyword">ALTER</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">OPEN</span>;
 
--- Kiểm tra archive log destination
-SHOW PARAMETER LOG_ARCHIVE_DEST_1;
+<span class="sql-comment">-- Kiểm tra archive log destination</span>
+<span class="sql-keyword">SHOW</span> <span class="sql-keyword">PARAMETER</span> LOG_ARCHIVE_DEST_1;
 
--- Xem archive log files
-SELECT name, sequence#, first_time, next_time
-FROM v$archived_log
-ORDER BY sequence# DESC;</code>
+<span class="sql-comment">-- Xem archive log files</span>
+<span class="sql-keyword">SELECT</span> name, sequence#, first_time, next_time
+<span class="sql-keyword">FROM</span> v$archived_log
+<span class="sql-keyword">ORDER</span> <span class="sql-keyword">BY</span> sequence# <span class="sql-keyword">DESC</span>;</code></div>
                     </div>
 
                     <div class="content-section">
@@ -1655,29 +1893,36 @@ ORDER BY sequence# DESC;</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Connect to RMAN
+                         <div class="example-box-header">
+                            <span class="example-box-title">RMAN: Backup Commands</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Connect to RMAN</span>
 $ rman target /
 
--- Full database backup
-RMAN> BACKUP DATABASE PLUS ARCHIVELOG;
+<span class="sql-comment">-- Full database backup</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">BACKUP</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">PLUS</span> <span class="sql-keyword">ARCHIVELOG</span>;
 
--- Incremental backup (chỉ backup blocks thay đổi)
-RMAN> BACKUP INCREMENTAL LEVEL 0 DATABASE;  -- Base backup
-RMAN> BACKUP INCREMENTAL LEVEL 1 DATABASE;  -- Changes since level 0
+<span class="sql-comment">-- Incremental backup (chỉ backup blocks thay đổi)</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">BACKUP</span> <span class="sql-keyword">INCREMENTAL</span> <span class="sql-keyword">LEVEL</span> <span class="sql-number">0</span> <span class="sql-keyword">DATABASE</span>;  <span class="sql-comment">-- Base backup</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">BACKUP</span> <span class="sql-keyword">INCREMENTAL</span> <span class="sql-keyword">LEVEL</span> <span class="sql-number">1</span> <span class="sql-keyword">DATABASE</span>;  <span class="sql-comment">-- Changes since level 0</span>
 
--- Backup specific tablespace
-RMAN> BACKUP TABLESPACE users;
+<span class="sql-comment">-- Backup specific tablespace</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">BACKUP</span> <span class="sql-keyword">TABLESPACE</span> users;
 
--- Backup to specific location with compression
-RMAN> BACKUP AS COMPRESSED BACKUPSET 
-      DATABASE 
-      FORMAT '/backup/db_%d_%s_%p_%T.bkp';
+<span class="sql-comment">-- Backup to specific location with compression</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">BACKUP</span> <span class="sql-keyword">AS</span> <span class="sql-keyword">COMPRESSED</span> <span class="sql-keyword">BACKUPSET</span> 
+      <span class="sql-keyword">DATABASE</span> 
+      <span class="sql-keyword">FORMAT</span> <span class="sql-string">'/backup/db_%d_%s_%p_%T.bkp'</span>;
 
--- List backups
-RMAN> LIST BACKUP SUMMARY;
+<span class="sql-comment">-- List backups</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">LIST</span> <span class="sql-keyword">BACKUP</span> <span class="sql-keyword">SUMMARY</span>;
 
--- Validate backup (kiểm tra corruption)
-RMAN> VALIDATE BACKUPSET 123;</code>
+<span class="sql-comment">-- Validate backup (kiểm tra corruption)</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">VALIDATE</span> <span class="sql-keyword">BACKUPSET</span> <span class="sql-number">123</span>;</code></div>
                     </div>
 
                     <div class="content-section">
@@ -1685,35 +1930,42 @@ RMAN> VALIDATE BACKUPSET 123;</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Complete database recovery (sau hardware failure)
-RMAN> STARTUP MOUNT;
-RMAN> RESTORE DATABASE;
-RMAN> RECOVER DATABASE;
-RMAN> ALTER DATABASE OPEN;
+                         <div class="example-box-header">
+                            <span class="example-box-title">RMAN: Recovery Scenarios</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Complete database recovery (sau hardware failure)</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">STARTUP</span> <span class="sql-keyword">MOUNT</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">RESTORE</span> <span class="sql-keyword">DATABASE</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">RECOVER</span> <span class="sql-keyword">DATABASE</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">ALTER</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">OPEN</span>;
 
--- Point-in-time recovery (rollback đến thời điểm cụ thể)
-RMAN> STARTUP MOUNT;
-RMAN> SET UNTIL TIME "TO_DATE('2023-12-01 14:30:00','YYYY-MM-DD HH24:MI:SS')";
-RMAN> RESTORE DATABASE;
-RMAN> RECOVER DATABASE;
-RMAN> ALTER DATABASE OPEN RESETLOGS;
+<span class="sql-comment">-- Point-in-time recovery (rollback đến thời điểm cụ thể)</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">STARTUP</span> <span class="sql-keyword">MOUNT</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">SET</span> <span class="sql-keyword">UNTIL</span> <span class="sql-keyword">TIME</span> <span class="sql-string">"TO_DATE('2023-12-01 14:30:00','YYYY-MM-DD HH24:MI:SS')"</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">RESTORE</span> <span class="sql-keyword">DATABASE</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">RECOVER</span> <span class="sql-keyword">DATABASE</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">ALTER</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">OPEN</span> <span class="sql-keyword">RESETLOGS</span>;
 
--- Tablespace recovery (database vẫn chạy)
-RMAN> SQL "ALTER TABLESPACE users OFFLINE IMMEDIATE";
-RMAN> RESTORE TABLESPACE users;
-RMAN> RECOVER TABLESPACE users;
-RMAN> SQL "ALTER TABLESPACE users ONLINE";
+<span class="sql-comment">-- Tablespace recovery (database vẫn chạy)</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">SQL</span> <span class="sql-string">"ALTER TABLESPACE users OFFLINE IMMEDIATE"</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">RESTORE</span> <span class="sql-keyword">TABLESPACE</span> users;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">RECOVER</span> <span class="sql-keyword">TABLESPACE</span> users;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">SQL</span> <span class="sql-string">"ALTER TABLESPACE users ONLINE"</span>;
 
--- Datafile recovery
-RMAN> SQL "ALTER DATABASE DATAFILE ''/path/to/datafile'' OFFLINE";
-RMAN> RESTORE DATAFILE ''/path/to/datafile'';
-RMAN> RECOVER DATAFILE ''/path/to/datafile'';
-RMAN> SQL "ALTER DATABASE DATAFILE ''/path/to/datafile'' ONLINE";</code>
+<span class="sql-comment">-- Datafile recovery</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">SQL</span> <span class="sql-string">"ALTER DATABASE DATAFILE ''/path/to/datafile'' OFFLINE"</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">RESTORE</span> <span class="sql-keyword">DATAFILE</span> <span class="sql-string">''/path/to/datafile''</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">RECOVER</span> <span class="sql-keyword">DATAFILE</span> <span class="sql-string">''/path/to/datafile''</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">SQL</span> <span class="sql-string">"ALTER DATABASE DATAFILE ''/path/to/datafile'' ONLINE"</span>;</code></div>
                     </div>
 
                     <div class="highlight-box">
                         <h4>🎯 RMAN Best Practices</h4>
-                        <ul>
+                        <ul class="styled-list">
                             <li><strong>Regular backups:</strong> Full backup hàng tuần, incremental backup hàng ngày</li>
                             <li><strong>Test recovery:</strong> Định kỳ test restore procedures trên môi trường khác</li>
                             <li><strong>Archive log management:</strong> Tự động delete archived logs sau khi backup</li>
@@ -1727,30 +1979,37 @@ RMAN> SQL "ALTER DATABASE DATAFILE ''/path/to/datafile'' ONLINE";</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Daily incremental backup script
-#!/bin/bash
-export ORACLE_SID=ORCL
-export ORACLE_HOME=/u01/app/oracle/product/12.2.0/dbhome_1
-export PATH=$ORACLE_HOME/bin:$PATH
+                         <div class="example-box-header">
+                            <span class="example-box-title">BASH: Backup Script</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Daily incremental backup script</span>
+<span class="sql-keyword">#!/bin/bash</span>
+<span class="sql-keyword">export</span> ORACLE_SID=ORCL
+<span class="sql-keyword">export</span> ORACLE_HOME=/u01/app/oracle/product/12.2.0/dbhome_1
+<span class="sql-keyword">export</span> PATH=$ORACLE_HOME/bin:$PATH
 
 rman target / <<EOF
-CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 30 DAYS;
-CONFIGURE BACKUP OPTIMIZATION ON;
-CONFIGURE DEFAULT DEVICE TYPE TO DISK;
-CONFIGURE CONTROLFILE AUTOBACKUP ON;
+<span class="sql-keyword">CONFIGURE</span> RETENTION POLICY <span class="sql-keyword">TO</span> RECOVERY WINDOW <span class="sql-keyword">OF</span> 30 DAYS;
+<span class="sql-keyword">CONFIGURE</span> BACKUP OPTIMIZATION <span class="sql-keyword">ON</span>;
+<span class="sql-keyword">CONFIGURE</span> DEFAULT DEVICE TYPE <span class="sql-keyword">TO</span> DISK;
+<span class="sql-keyword">CONFIGURE</span> CONTROLFILE AUTOBACKUP <span class="sql-keyword">ON</span>;
 
-BACKUP INCREMENTAL LEVEL 1 DATABASE PLUS ARCHIVELOG;
-DELETE NOPROMPT OBSOLETE;
-EXIT;
+<span class="sql-keyword">BACKUP</span> INCREMENTAL <span class="sql-keyword">LEVEL</span> 1 <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">PLUS</span> ARCHIVELOG;
+<span class="sql-keyword">DELETE</span> NOPROMPT OBSOLETE;
+<span class="sql-keyword">EXIT</span>;
 EOF
 
--- Weekly full backup
-BACKUP AS COMPRESSED BACKUPSET 
-INCREMENTAL LEVEL 0 
-DATABASE 
-PLUS ARCHIVELOG 
-TAG 'WEEKLY_FULL'
-FORMAT '/backup/weekly_full_%d_%T_%s_%p.bkp';</code>
+<span class="sql-comment">-- Weekly full backup</span>
+<span class="sql-keyword">BACKUP</span> <span class="sql-keyword">AS</span> COMPRESSED BACKUPSET 
+<span class="sql-keyword">INCREMENTAL</span> <span class="sql-keyword">LEVEL</span> 0 
+<span class="sql-keyword">DATABASE</span> 
+<span class="sql-keyword">PLUS</span> ARCHIVELOG 
+<span class="sql-keyword">TAG</span> <span class="sql-string">'WEEKLY_FULL'</span>
+<span class="sql-keyword">FORMAT</span> <span class="sql-string">'/backup/weekly_full_%d_%T_%s_%p.bkp'</span>;</code></div>
                     </div>
 
                     <div class="dialogue">
@@ -1772,19 +2031,26 @@ FORMAT '/backup/weekly_full_%d_%T_%s_%p.bkp';</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Test backup integrity
-RMAN> RESTORE DATABASE VALIDATE;
+                         <div class="example-box-header">
+                            <span class="example-box-title">RMAN: Validation</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Test backup integrity</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">RESTORE</span> <span class="sql-keyword">DATABASE</span> <span class="sql-keyword">VALIDATE</span>;
 
--- Test specific backup piece
-RMAN> RESTORE BACKUPSET 123 VALIDATE;
+<span class="sql-comment">-- Test specific backup piece</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">RESTORE</span> <span class="sql-keyword">BACKUPSET</span> <span class="sql-number">123</span> <span class="sql-keyword">VALIDATE</span>;
 
--- Crosscheck backups (kiểm tra files còn tồn tại)
-RMAN> CROSSCHECK BACKUP;
-RMAN> DELETE EXPIRED BACKUP;
+<span class="sql-comment">-- Crosscheck backups (kiểm tra files còn tồn tại)</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">CROSSCHECK</span> <span class="sql-keyword">BACKUP</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">DELETE</span> <span class="sql-keyword">EXPIRED</span> <span class="sql-keyword">BACKUP</span>;
 
--- Report backup summary
-RMAN> REPORT SCHEMA;
-RMAN> REPORT NEED BACKUP DAYS 7;</code>
+<span class="sql-comment">-- Report backup summary</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">REPORT</span> <span class="sql-keyword">SCHEMA</span>;
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">REPORT</span> <span class="sql-keyword">NEED</span> <span class="sql-keyword">BACKUP</span> <span class="sql-keyword">DAYS</span> <span class="sql-number">7</span>;</code></div>
                     </div>
                 </div>
             </section>
@@ -1826,7 +2092,7 @@ RMAN> REPORT NEED BACKUP DAYS 7;</code>
                     <div class="info-grid">
                         <div class="info-card" style="border-left: 4px solid var(--blue-400);">
                             <h4>👨‍💻 Developer Mindset</h4>
-                            <ul style="margin: 8px 0; padding-left: 16px;">
+                            <ul class="styled-list" style="margin: 8px 0; padding-left: 0;">
                                 <li>Feature-driven development</li>
                                 <li>Fast iteration, ship quickly</li>
                                 <li>"Make it work first"</li>
@@ -1836,7 +2102,7 @@ RMAN> REPORT NEED BACKUP DAYS 7;</code>
                         </div>
                         <div class="info-card" style="border-left: 4px solid var(--green-400);">
                             <h4>🛡️ DBA Mindset</h4>
-                            <ul style="margin: 8px 0; padding-left: 16px;">
+                            <ul class="styled-list" style="margin: 8px 0; padding-left: 0;">
                                 <li>Stability & reliability first</li>
                                 <li>Performance & scalability</li>
                                 <li>"Prevent problems before they happen"</li>
@@ -1870,37 +2136,44 @@ RMAN> REPORT NEED BACKUP DAYS 7;</code>
                     </div>
 
                     <div class="example-box">
-                        <code>-- Dev proposal: Simple design
-CREATE TABLE user_activities (
-    id NUMBER PRIMARY KEY,
-    user_id NUMBER,
-    activity_type VARCHAR2(50),
-    activity_data CLOB,
-    created_date DATE
+                         <div class="example-box-header">
+                            <span class="example-box-title">SQL: Dev vs DBA Schema Design</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Dev proposal: Simple design</span>
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> user_activities (
+    id <span class="sql-keyword">NUMBER</span> <span class="sql-keyword">PRIMARY</span> <span class="sql-keyword">KEY</span>,
+    user_id <span class="sql-keyword">NUMBER</span>,
+    activity_type <span class="sql-keyword">VARCHAR2</span>(<span class="sql-number">50</span>),
+    activity_data <span class="sql-keyword">CLOB</span>,
+    created_date <span class="sql-keyword">DATE</span>
 );
 
--- DBA feedback: Performance & scalability improvements
-CREATE TABLE user_activities (
-    id NUMBER PRIMARY KEY,
-    user_id NUMBER NOT NULL,
-    activity_type_id NUMBER NOT NULL,  -- FK to lookup table
-    activity_data CLOB,
-    created_date DATE DEFAULT SYSDATE,
-    -- Partitioning for large tables
-    CONSTRAINT fk_user_activities_user 
-        FOREIGN KEY (user_id) REFERENCES users(id),
-    CONSTRAINT fk_user_activities_type 
-        FOREIGN KEY (activity_type_id) REFERENCES activity_types(id)
+<span class="sql-comment">-- DBA feedback: Performance & scalability improvements</span>
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">TABLE</span> user_activities (
+    id <span class="sql-keyword">NUMBER</span> <span class="sql-keyword">PRIMARY</span> <span class="sql-keyword">KEY</span>,
+    user_id <span class="sql-keyword">NUMBER</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span>,
+    activity_type_id <span class="sql-keyword">NUMBER</span> <span class="sql-keyword">NOT</span> <span class="sql-keyword">NULL</span>,  <span class="sql-comment">-- FK to lookup table</span>
+    activity_data <span class="sql-keyword">CLOB</span>,
+    created_date <span class="sql-keyword">DATE</span> <span class="sql-keyword">DEFAULT</span> <span class="sql-function">SYSDATE</span>,
+    <span class="sql-comment">-- Partitioning for large tables</span>
+    <span class="sql-keyword">CONSTRAINT</span> fk_user_activities_user 
+        <span class="sql-keyword">FOREIGN</span> <span class="sql-keyword">KEY</span> (user_id) <span class="sql-keyword">REFERENCES</span> users(id),
+    <span class="sql-keyword">CONSTRAINT</span> fk_user_activities_type 
+        <span class="sql-keyword">FOREIGN</span> <span class="sql-keyword">KEY</span> (activity_type_id) <span class="sql-keyword">REFERENCES</span> activity_types(id)
 )
-PARTITION BY RANGE (created_date) 
-INTERVAL (NUMTOYMINTERVAL(1,'MONTH'))
-(PARTITION p_initial VALUES LESS THAN (DATE '2023-01-01'));
+<span class="sql-keyword">PARTITION</span> <span class="sql-keyword">BY</span> <span class="sql-keyword">RANGE</span> (created_date) 
+<span class="sql-keyword">INTERVAL</span> (<span class="sql-function">NUMTOYMINTERVAL</span>(<span class="sql-number">1</span>,<span class="sql-string">'MONTH'</span>))
+(<span class="sql-keyword">PARTITION</span> p_initial <span class="sql-keyword">VALUES</span> <span class="sql-keyword">LESS</span> <span class="sql-keyword">THAN</span> (<span class="sql-keyword">DATE</span> <span class="sql-string">'2023-01-01'</span>));
 
--- Indexes for common queries
-CREATE INDEX idx_user_activities_user_date 
-    ON user_activities(user_id, created_date);
-CREATE INDEX idx_user_activities_type_date 
-    ON user_activities(activity_type_id, created_date);</code>
+<span class="sql-comment">-- Indexes for common queries</span>
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">INDEX</span> idx_user_activities_user_date 
+    <span class="sql-keyword">ON</span> user_activities(user_id, created_date);
+<span class="sql-keyword">CREATE</span> <span class="sql-keyword">INDEX</span> idx_user_activities_type_date 
+    <span class="sql-keyword">ON</span> user_activities(activity_type_id, created_date);</code></div>
                     </div>
 
                     <div class="content-section">
@@ -1909,7 +2182,7 @@ CREATE INDEX idx_user_activities_type_date
 
                     <div class="warning-box">
                         <h4>🚫 Common SQL Anti-patterns (DBA sẽ reject)</h4>
-                        <ul>
+                        <ul class="styled-list">
                             <li><strong>SELECT * FROM large_table:</strong> Unnecessary data transfer</li>
                             <li><strong>Missing WHERE clause:</strong> Full table scans</li>
                             <li><strong>N+1 queries:</strong> Loop trong code gọi SQL nhiều lần</li>
@@ -1919,21 +2192,28 @@ CREATE INDEX idx_user_activities_type_date
                     </div>
 
                     <div class="example-box">
-                        <code>-- ❌ Dev code: N+1 problem
-for user in users:
-    activities = query("SELECT * FROM user_activities WHERE user_id = " + user.id)
+                         <div class="example-box-header">
+                            <span class="example-box-title">Code: N+1 Problem & Solution</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- ❌ Dev code: N+1 problem (Python example)</span>
+<span class="sql-keyword">for</span> user <span class="sql-keyword">in</span> users:
+    activities = query(<span class="sql-string">"SELECT * FROM user_activities WHERE user_id = "</span> + user.id)
     process(activities)
 
--- ✅ DBA suggestion: Batch processing
-user_ids = [user.id for user in users]
-all_activities = query("""
+<span class="sql-comment">-- ✅ DBA suggestion: Batch processing</span>
+user_ids = [user.id <span class="sql-keyword">for</span> user <span class="sql-keyword">in</span> users]
+all_activities = query(<span class="sql-string">"""
     SELECT user_id, activity_type, activity_data, created_date
     FROM user_activities 
     WHERE user_id IN ({})
     ORDER BY user_id, created_date
-""".format(','.join(map(str, user_ids))))
+"""</span>.<span class="sql-function">format</span>(<span class="sql-string">','</span>.join(<span class="sql-function">map</span>(str, user_ids))))
 
--- Group by user_id and process</code>
+<span class="sql-comment">-- Group by user_id and process</span></code></div>
                     </div>
 
                     <div class="content-section">
@@ -1966,25 +2246,32 @@ all_activities = query("""
                     </div>
 
                     <div class="example-box">
-                        <code>-- Pre-deployment checklist
--- DBA reviews:
+                         <div class="example-box-header">
+                            <span class="example-box-title">Checklist</span>
+                             <button class="copy-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Pre-deployment checklist</span>
+<span class="sql-comment">-- DBA reviews:</span>
 ✓ Schema changes (DDL scripts)
 ✓ Index creation strategy (online vs offline)
 ✓ Rollback procedures
 ✓ Expected performance impact
 ✓ Backup status verification
 
--- Dev responsibilities:
+<span class="sql-comment">-- Dev responsibilities:</span>
 ✓ Test scripts on staging with production-like data volume
 ✓ Provide execution plans for new queries
 ✓ Document expected load patterns
 ✓ Prepare monitoring dashboards
 
--- Deployment day:
+<span class="sql-comment">-- Deployment day:</span>
 ✓ DBA performs schema changes during maintenance window
 ✓ Dev deploys application code
 ✓ Joint monitoring for first 24 hours
-✓ Performance validation & rollback readiness</code>
+✓ Performance validation & rollback readiness</code></div>
                     </div>
 
                     <div class="dialogue">
@@ -2015,12 +2302,12 @@ all_activities = query("""
 
                     <div class="tips-box">
                         <h3>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke-width="2">
                                 <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                             </svg>
                             Lời khuyên cuối từ DBA
                         </h3>
-                        <ul>
+                        <ul class="styled-list">
                             <li><strong>Học không ngừng:</strong> Oracle luôn phát triển, follow Oracle blogs & communities</li>
                             <li><strong>Thực hành nhiều:</strong> Setup lab environment, break things & fix them</li>
                             <li><strong>Network with DBAs:</strong> Join Oracle user groups, conferences</li>
@@ -2072,6 +2359,35 @@ all_activities = query("""
     </div>
 
     <script>
+        // Copy to clipboard for code blocks
+        function initializeCopyButtons() {
+            const copyButtons = document.querySelectorAll('.copy-button');
+
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const contentWrapper = button.closest('.example-box').querySelector('.example-box-content');
+                    if (!contentWrapper) return;
+                    
+                    const code = contentWrapper.querySelector('code').innerText;
+                    
+                    navigator.clipboard.writeText(code).then(() => {
+                        const originalContent = button.innerHTML;
+                        button.innerHTML = `
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>
+                            <span>Đã chép!</span>
+                        `;
+                        
+                        setTimeout(() => {
+                            button.innerHTML = originalContent;
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Không thể sao chép: ', err);
+                        button.querySelector('span').textContent = 'Lỗi!';
+                    });
+                });
+            });
+        }
+    
         // Navigation and progress tracking
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav a[href^="#"]');
@@ -2138,24 +2454,10 @@ all_activities = query("""
             // Scroll event listener
             window.addEventListener('scroll', updateNavigation);
             
-            // Initial call
-            updateNavigation();
-        });
-
-        // Scroll to top function
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
-
-        // Add some interactive elements
-        document.addEventListener('DOMContentLoaded', function() {
             // Add click handlers to dialogue items for better interaction
             const dialogueItems = document.querySelectorAll('.dialogue-item');
-            
             dialogueItems.forEach(item => {
+                item.style.transition = 'transform 0.2s ease';
                 item.addEventListener('click', function() {
                     this.style.transform = 'scale(1.02)';
                     setTimeout(() => {
@@ -2167,6 +2469,7 @@ all_activities = query("""
             // Add hover effects to cards
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => {
+                card.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
                 card.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-2px)';
                     this.style.boxShadow = '0 8px 25px rgba(0,0,0,.1)';
@@ -2177,37 +2480,19 @@ all_activities = query("""
                     this.style.boxShadow = '0 4px 20px rgba(0,0,0,.06)';
                 });
             });
+
+            // Initial calls
+            updateNavigation();
+            initializeCopyButtons();
         });
 
-        // Add CSS transitions for smooth animations
-        document.head.insertAdjacentHTML('beforeend', `
-            <style>
-                .dialogue-item, .card {
-                    transition: transform 0.2s ease, box-shadow 0.2s ease;
-                }
-                
-                .dialogue-item:hover {
-                    transform: translateX(4px);
-                }
-                
-                .example-box {
-                    position: relative;
-                }
-                
-                .example-box::before {
-                    content: "SQL";
-                    position: absolute;
-                    top: 8px;
-                    right: 12px;
-                    background: rgba(255, 255, 255, 0.1);
-                    color: rgba(255, 255, 255, 0.7);
-                    padding: 2px 6px;
-                    border-radius: 4px;
-                    font-size: 0.75rem;
-                    font-weight: 500;
-                }
-            </style>
-        `);
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
     </script>
 </body>
 </html>
