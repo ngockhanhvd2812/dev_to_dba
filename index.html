@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khóa học Oracle 12c DBA – Đối thoại Dev & DBA (Interactive)</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230284c7'><path d='M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z'/></svg>">
+    <style>
+        :root {
+            --blue-50: #f0f9ff;
+            --blue-100: #e0f2fe;
+            --blue-200: #bae6fd;
+            --blue-300: #7dd3fc;
+            --blue-400: #38bdf8;
+            --blue-500: #0ea5e9;
+            --blue-600: #0284c7;
+            --blue-700: #0369a1;
+            --blue-800: #075985;
+            --blue-900: #0c4a6e;
+            --indigo-50: #eef2ff;
+            --indigo-100: #e0e7ff;
+            --indigo-200: #c7d2fe;
+            --indigo-300: #a5b4fc;
+            --indigo-400: #818cf8;
+            --indigo-500: #6366f1;
+            --indigo-600: #4f46e5;
+            --indigo-700: #4338ca;
+            --indigo-800: #3730a3;
+            --indigo-900: #312e81;
+            --green-50: #f0fdf4;
+            --green-100: #dcfce7;
+            --green-200: #bbf7d0;
+            --green-300: #86efac;
+            --green-400: #4ade80;
+            --green-500: #22c55e;
+            --green-600: #16a34a;
+            --green-700: #15803d;
+            --green-800: #166534;
+            --green-900: #14532d;
+            --yellow-50: #fffbeb;
+            --yellow-100: #fef3c7;
+            --yellow-200: #fde68a;
+            --yellow-300: #fcd34d;
+            --yellow-400: #fbbf24;
+            --yellow-500: #f59e0b;
+            --yellow-600: #d97706;
+            --yellow-700: #b45309;
+            --yellow-800: #92400e;
+            --yellow-900: #78350f;
+            --red-50: #fef2f2;
+            --red-100: #fee2e2;
+            --red-200: #fecaca;
+            --red-300: #fca5a5;
+            --red-400: #f87171;
+            --red-500: #ef4444;
+            --red-600: #dc2626;
+            --red-700: #b91c1c;
+            --red-800: #991b1b;
+            --red-900: #7f1d1d;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --amber-50: #fff7ed;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #374151;
+            background: linear-gradient(180deg, #f9fafb, #fff);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(90deg, var(--blue-600), var(--indigo-700));
+            color: #fff;
+            padding: 64px 0 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero:before {
+            content: "";
+            position: absolute;
+            inset: -40% -20% auto auto;
+            width: 70vw;
+            height: 70vw;
+            background: radial-gradient(closest-side, rgba(255,255,255,.15), transparent 70%);
+            filter: blur(30px);
+            transform: rotate(25deg);
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            letter-spacing: .2px;
+        }
+
+        .hero p {
+            opacity: .95;
+            font-size: 1.15rem;
+            margin-top: .5rem;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .badge {
+            background: rgba(255,255,255,.2);
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-size: .9rem;
+        }
+
+        .hero-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .hero-text {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .hero-illustration {
+            flex: 1;
+            min-width: 260px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .db-card {
+            background: linear-gradient(135deg, var(--blue-500), var(--indigo-600));
+            border-radius: 16px;
+            width: 200px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 16px 40px rgba(0,0,0,.25);
+        }
+
+        .db-card svg {
+            width: 64px;
+            height: 64px;
+            color: #fff;
+        }
+
+        .db-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .db-sub {
+            opacity: .9;
+        }
+
+        /* Main Layout */
+        .main {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            padding: 36px 0;
+        }
+
+        .sidebar {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .content {
+            flex: 2;
+            min-width: 300px;
+        }
+
+        /* Cards */
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,.06);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: linear-gradient(90deg, var(--blue-50), var(--indigo-50));
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .card-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--blue-100);
+            color: var(--blue-700);
+            flex-shrink: 0;
+        }
+
+        .card-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--gray-900);
+        }
+
+        .card-body {
+            padding: 22px;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--gray-900);
+            border-bottom: 2px solid var(--blue-100);
+            padding-bottom: .5rem;
+            margin-bottom: 1rem;
+        }
+
+        .content-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .content-section p {
+            margin: .75rem 0;
+            font-size: 1.05rem;
+        }
+
+        /* Dialogue Styling */
+        .dialogue {
+            margin: 1.5rem 0;
+        }
+
+        .dialogue-item {
+            margin-bottom: 1rem;
+            padding: 12px 16px;
+            border-radius: 8px;
+        }
+
+        .dev-speech {
+            background: var(--blue-50);
+            border-left: 4px solid var(--blue-400);
+        }
+
+        .dba-speech {
+            background: var(--green-50);
+            border-left: 4px solid var(--green-400);
+        }
+
+        .speaker {
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--gray-800);
+        }
+
+        .dev-speech .speaker {
+            color: var(--blue-700);
+        }
+
+        .dba-speech .speaker {
+            color: var(--green-700);
+        }
+
+        .speech-content {
+            color: var(--gray-700);
+            line-height: 1.6;
+        }
+
+        .speech-content em {
+            font-style: italic;
+            color: var(--gray-600);
+        }
+
+        /* Highlight boxes */
+        .highlight-box, .warning-box, .lesson-box, .tips-box {
+            border-left: 4px solid var(--blue-400);
+            background: var(--blue-50);
+            padding: 12px 14px;
+            border-radius: 0 8px 8px 0;
+            margin: 14px 0;
+        }
+
+        .warning-box {
+            border-left-color: var(--yellow-400);
+            background: var(--yellow-50);
+        }
+
+        .lesson-box {
+            border-left-color: var(--yellow-400);
+            background: var(--yellow-50);
+        }
+
+        .tips-box {
+            background: linear-gradient(90deg, var(--yellow-50), var(--amber-50));
+            border-left-color: var(--yellow-400);
+        }
+
+        .highlight-box h4 {
+            color: var(--blue-800);
+            margin-bottom: 8px;
+        }
+
+        .warning-box h4 {
+            color: var(--yellow-800);
+            margin-bottom: 8px;
+        }
+
+        /* Code blocks */
+        .example-box {
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 8px;
+            padding: 14px;
+            font-family: ui-monospace, Menlo, Consolas, monospace;
+            overflow: auto;
+            margin: 14px 0;
+        }
+
+        .example-box code {
+            white-space: pre;
+        }
+
+        /* Navigation */
+        .nav {
+            list-style: none;
+            margin: 0;
+            padding: 12px;
+        }
+
+        .nav a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            color: var(--gray-700);
+            text-decoration: none;
+            transition: all .2s;
+            border: 1px solid transparent;
+        }
+
+        .nav a:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-200);
+            transform: translateX(2px);
+        }
+
+        .nav .num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 999px;
+            background: var(--gray-100);
+            color: var(--gray-600);
+            font-weight: 600;
+            flex: 0 0 28px;
+        }
+
+        .nav a.active {
+            background: var(--blue-50);
+            border-color: var(--blue-100);
+            color: var(--blue-800);
+        }
+
+        .nav a.active .num {
+            background: var(--blue-100);
+            color: var(--blue-600);
+        }
+
+        /* Progress bar */
+        .progress {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            border-top: 1px solid var(--gray-200);
+            background: var(--gray-50);
+        }
+
+        .progress .bar {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: 999px;
+            overflow: hidden;
+            width: 58%;
+        }
+
+        .progress .fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--blue-500), var(--indigo-500));
+            width: 14%;
+            transition: width .5s ease;
+        }
+
+        /* Sticky sidebar */
+        .sidebar-sticky {
+            position: sticky;
+            top: 18px;
+        }
+
+        /* Target highlight */
+        :target .card-header {
+            background: linear-gradient(90deg, var(--green-50), var(--blue-50));
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-200);
+            padding: 28px 0;
+            margin-top: 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-brand svg {
+            width: 22px;
+            height: 22px;
+            color: var(--blue-600);
+        }
+
+        .footer-text {
+            color: var(--gray-600);
+            font-size: .9rem;
+        }
+
+        /* Scroll to top */
+        .scroll-top {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            background: rgba(255,255,255,.9);
+            backdrop-filter: blur(6px);
+            width: 44px;
+            height: 44px;
+            border-radius: 999px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 6px 18px rgba(0,0,0,.12);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+        }
+
+        .scroll-top svg {
+            width: 20px;
+            height: 20px;
+            color: var(--blue-600);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-8px);
+            }
+            60% {
+                transform: translateY(-4px);
+            }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .section-title {
+                font-size: 1.2rem;
+            }
+            .main {
+                flex-direction: column;
+            }
+            .sidebar {
+                order: 2;
+            }
+            .content {
+                order: 1;
+            }
+        }
+
+        /* Architecture diagram */
+        .architecture-diagram {
+            background: #fff;
+            border: 2px dashed var(--gray-200);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .arch-component {
+            display: inline-block;
+            background: var(--blue-100);
+            color: var(--blue-800);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .arch-container {
+            background: var(--indigo-100);
+            color: var(--indigo-800);
+        }
+
+        .arch-process {
+            background: var(--green-100);
+            color: var(--green-800);
+        }
+
+        .arch-file {
+            background: var(--yellow-100);
+            color: var(--yellow-800);
+        }
+
+        /* Info grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 14px;
+            margin: 1rem 0;
+        }
+
+        .info-card {
+            background: #fff;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,.04);
+        }
+
+        .info-card h4 {
+            font-weight: 700;
+            margin-bottom: .4rem;
+            color: var(--gray-800);
+        }
+
+        .info-card p {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body id="top">
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-wrap">
+                <div class="hero-text">
+                    <h1>Khóa học Oracle 12c DBA qua đối thoại</h1>
+                    <p>Từ Developer đến Database Administrator – lộ trình ~100 giờ, thực chiến, học bằng đối thoại Dev & DBA.</p>
+                    <div class="badges">
+                        <span class="badge">100 giờ học</span>
+                        <span class="badge">CDB/PDB Multitenant</span>
+                        <span class="badge">Tối ưu & Backup</span>
+                        <span class="badge">Thực chiến thực tế</span>
+                    </div>
+                </div>
+                <div class="hero-illustration">
+                    <div class="db-card" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
+                        </svg>
+                        <div class="db-title">Oracle 12c</div>
+                        <div class="db-sub">DBA Master</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container main">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-sticky">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 6.253v13m0-13C10.8 5.5 9.25 5 7.5 5S4.2 5.5 3 6.25v13C4.2 18.5 5.75 18 7.5 18s3.3.5 4.5 1.25m0-13C13.2 5.5 14.75 5 16.5 5c1.75 0 3.3.5 4.5 1.25v13C19.8 18.5 18.25 18 16.5 18c-1.75 0-3.3.5-4.5 1.25"/>
+                            </svg>
+                        </div>
+                        <div class="card-title">Nội dung khóa học</div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav" id="toc">
+                            <li><a href="#s1" data-section="1"><span class="num">1</span> Giới thiệu & Mở đầu</a></li>
+                            <li><a href="#s2" data-section="2"><span class="num">2</span> Kiến trúc Oracle 12c</a></li>
+                            <li><a href="#s3" data-section="3"><span class="num">3</span> Cài đặt & Kết nối</a></li>
+                            <li><a href="#s4" data-section="4"><span class="num">4</span> Schema & Tablespace</a></li>
+                            <li><a href="#s5" data-section="5"><span class="num">5</span> Tối ưu SQL & Performance</a></li>
+                            <li><a href="#s6" data-section="6"><span class="num">6</span> Backup & Recovery</a></li>
+                            <li><a href="#s7" data-section="7"><span class="num">7</span> Tư duy Dev vs DBA</a></li>
+                        </ul>
+                    </div>
+                    <div class="progress">
+                        <div class="label">Tiến độ: <strong id="progress-percent">14%</strong></div>
+                        <div class="bar"><div class="fill" id="progress-bar"></div></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                        </div>
+                        <div class="card-title">Mẹo học tập</div>
+                    </div>
+                    <div class="card-body">
+                        <ul style="list-style:none;padding-left:0">
+                            <li>✅ Học từng phần, thực hành ngay</li>
+                            <li>✅ Luôn xem execution plan, tránh <code>SELECT *</code></li>
+                            <li>✅ "Backup is Job #1"</li>
+                            <li>✅ Hiểu rõ CDB/PDB & ServiceName khi kết nối</li>
+                            <li>✅ Tư duy như DBA: hiệu năng trước tiên</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CONTENT -->
+        <main class="content">
+            <!-- S1: Giới thiệu & Mở đầu -->
+            <section class="card" id="s1">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 6.253v13M7.5 5C5.75 5 4.17 5.48 3 6.25v13C4.17 18.48 5.75 18 7.5 18s3.33.48 4.5 1.25"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">1. Giới thiệu & Mở đầu</div>
+                </div>
+                <div class="card-body">
+                    <p>Chào mừng bạn đến với <strong style="color:var(--blue-700)">Oracle 12c DBA qua đối thoại</strong> – trình bày dưới dạng trò chuyện giữa Dev và một DBA nhiều kinh nghiệm. Mục tiêu: tư duy như DBA và nắm vững từ kiến trúc, cài đặt/kết nối, quản trị schema/tablespace, tối ưu SQL, đến backup & recovery và hợp tác Dev–DBA.</p>
+                    
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">
+                                <em>(Háo hức)</em> Em chào anh! Em là lập trình viên nhưng đang muốn chuyển hướng sang làm DBA Oracle 12c. Nghe nói phải học nhiều lắm, chắc tầm vài tuần?
+                            </div>
+                        </div>
+                        
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                <em>(Cười)</em> Chào em. Ừ, hành trình trở thành DBA không ngắn đâu – khóa học này dự kiến khoảng <strong>100 giờ</strong> đấy!
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">100 giờ lận ạ?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Đúng rồi, làm DBA không dễ đâu em. Chúng ta phải đi từ những khái niệm nền tảng nhất đến các kỹ thuật nâng cao. Nhưng đừng lo, anh sẽ hướng dẫn từng bước, kiểu trò chuyện thoải mái. Em cứ hình dung như nghe podcast giữa hai anh em mình vậy.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Ngon quá, dạng trao đổi thế này dễ tiếp thu hơn hẳn. Em sẵn sàng rồi anh ơi!</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Tốt. Mục tiêu của khóa này là giúp em <strong>tư duy như một DBA</strong>, hiểu rõ Oracle 12c từ gốc đến ngọn: từ <strong>kiến trúc, cài đặt, kết nối, vận hành, đến quản lý schema, quyền hạn, tablespace, rồi tối ưu truy vấn, sao lưu & phục hồi, điều chỉnh hiệu năng</strong>. Đồng thời anh sẽ chỉ ra sự khác biệt giữa cách nghĩ của Dev và DBA, cũng như những lỗi "kinh điển" mà dev hay mắc phải.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>🎯 Tại sao nên học Oracle DBA?</h4>
+                        <p>Oracle là hệ quản trị CSDL doanh nghiệp phổ biến trong ngân hàng, tài chính, chính phủ. Học qua đối thoại & ví dụ thực chiến giúp đi từ nền tảng đến nâng cao hiệu quả. Với kiến trúc đa tenant mới của 12c, đây là cơ hội tuyệt vời để nắm vững công nghệ tiên tiến.</p>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>🚀 Lộ trình học tập</h4>
+                            <p>7 chương từ cơ bản đến nâng cao, mỗi chương có thực hành và bài tập thực tế</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>⏱️ Thời lượng</h4>
+                            <p>~100 giờ học tập, bao gồm lý thuyết, thực hành và giải đáp thắc mắc</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🎯 Đối tượng</h4>
+                            <p>Developer muốn chuyển DBA, DBA junior cần nâng cao, sysadmin làm việc với Oracle</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>📋 Yêu cầu</h4>
+                            <p>Biết SQL cơ bản, hiểu khái niệm database, có tinh thần học hỏi và kiên nhẫn</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- S2: Kiến trúc Oracle 12c -->
+            <section class="card" id="s2">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 7l9-4 9 4-9 4-9-4zM3 7v10l9 4 9-4V7"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">2. Kiến trúc Oracle 12c: Từ đơn nhân đến đa tenant</div>
+                </div>
+                <div class="card-body">
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">
+                                Trước giờ em làm web với MySQL, thường mỗi ứng dụng một database đơn giản. Oracle 12c nghe nói kiến trúc khác hẳn, có cả "container" gì đó? Anh giải thích giúp em với.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Đúng rồi. Oracle 12c giới thiệu một <strong>kiến trúc hoàn toàn mới gọi là Multitenant (đa tenant)</strong> – thay đổi lớn nhất kể từ Oracle 8i luôn. Thay vì mỗi cơ sở dữ liệu (CSDL) là một thực thể độc lập hoàn toàn với <strong>một instance riêng</strong> (instance = bộ nhớ SGA + các process nền), từ 12c ta có thể tạo CSDL dạng <strong>"đa tenant"</strong>. Nôm na là một <strong>Container Database (CDB)</strong> chứa nhiều <strong>Pluggable Database (PDB)</strong> bên trong.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Container với Pluggable? Nó khác gì so với cách cũ anh?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Để anh so sánh: Ở các phiên bản cũ (như 11g trở về trước), nếu em muốn chạy 2 CSDL trên một máy thì phải khởi tạo 2 instance riêng, mỗi cái có đủ bộ nhớ SGA, tiến trình nền (DBWR, LGWR, v.v.). Tài nguyên bị chia nhỏ ra và nhiều thành phần trùng lặp. 12c giải quyết bằng cách cho nhiều <strong>"CSDL con" (PDB)</strong> chạy trong cùng một <strong>CSDL cha (CDB)</strong> dùng chung instance.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">À, ví dụ hay đó anh – nhiều người đi chơi thay vì đi 5 xe thì gộp đi 1 xe 16 chỗ cho tiết kiệm.</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Chính xác. Với kiến trúc mới:<br><br>
+                                • <strong>CDB</strong> có các thành phần chung: SGA (bộ nhớ), background processes, datafile chung cho metadata của container (gọi là dictionary chung).<br>
+                                • <strong>Mỗi PDB</strong> chứa dữ liệu ứng dụng riêng, có datafiles riêng, nhưng <strong>dùng chung</strong> tài nguyên CDB.<br><br>
+                                Nghĩa là thay vì 5 CSDL độc lập tranh giành tài nguyên, giờ chỉ 1 instance "kéo" cả 5 PDB, giảm bớt trùng lặp (ví dụ chỉ có một DBWR, một LGWR dùng chung). <strong>Việc quản trị</strong> cũng nhẹ nhàng hơn: vá lỗi, nâng cấp chỉ làm trên CDB là các PDB hưởng hết, khỏi lặp lại 5 lần.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="architecture-diagram">
+                        <h4 style="margin-bottom: 16px;">Kiến trúc Oracle 12c Multitenant</h4>
+                        <div style="margin-bottom: 12px;">
+                            <span class="arch-component arch-container">CDB Root</span>
+                            <span class="arch-component arch-container">PDB$SEED</span>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <span class="arch-component">PDB1 (HR_APP)</span>
+                            <span class="arch-component">PDB2 (SALES_APP)</span>
+                            <span class="arch-component">PDB3 (FINANCE_APP)</span>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <span class="arch-component arch-process">SGA (Shared)</span>
+                            <span class="arch-component arch-process">Background Processes</span>
+                        </div>
+                        <div>
+                            <span class="arch-component arch-file">Control Files</span>
+                            <span class="arch-component arch-file">Redo Logs</span>
+                            <span class="arch-component arch-file">Data Files</span>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>🔑 Lợi ích của Multitenant Architecture</h4>
+                        <ul>
+                            <li><strong>Tiết kiệm tài nguyên:</strong> Dùng chung SGA, background processes</li>
+                            <li><strong>Quản lý dễ dàng:</strong> Patch, upgrade một lần cho tất cả PDB</li>
+                            <li><strong>Cô lập dữ liệu:</strong> Mỗi PDB có schema và dữ liệu riêng biệt</li>
+                            <li><strong>Khả năng mở rộng:</strong> Có thể tạo, xóa, di chuyển PDB linh hoạt</li>
+                        </ul>
+                    </div>
+
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Vậy 12c có 2 chế độ: non-CDB (kiểu cũ) và CDB (đa tenant)?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Đúng. Khi cài đặt Oracle 12c em có thể chọn tạo database kiểu cũ (non-CDB) hoặc dạng CDB có PDB. Thực tế Oracle định hướng multitenant là tương lai.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Ngoài vụ multitenant, kiến trúc Oracle chắc còn nhiều thứ khác? Anh nói qua giúp em hệ thống nó gồm những phần gì với.</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Oke. Kiến trúc Oracle gồm 2 thành phần chính: <strong>Instance</strong> và <strong>Database</strong>.<br><br>
+                                <strong>Instance:</strong> là phần chạy trong memory (RAM), gồm <strong>SGA (System Global Area)</strong> và các <strong>background process</strong>. SGA chứa các vùng nhớ dùng chung (như buffer cache để cache dữ liệu, shared pool cache câu lệnh SQL, v.v.), các process nền thì bao gồm: DBWR (ghi buffer cache xuống đĩa), LGWR (ghi nhật ký giao dịch – redo log), CKPT (đánh dấu checkpoint), SMON, PMON (quản lý session, recovery...), v.v.<br><br>
+                                <strong>Database (CSDL):</strong> là tập hợp các tệp tin vật lý trên đĩa: bao gồm <strong>data files</strong> (chứa dữ liệu bảng, index), <strong>control file</strong> (lưu thông tin cấu trúc CSDL, checkpoint, v.v.), <strong>redo log files</strong> (nhật ký giao dịch để khôi phục khi cần). Oracle lưu mọi thứ quan trọng vào các file này. Khi instance hoạt động, nó mở các file đó lên.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Vậy instance + data files = một database hoạt động.</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Đúng. Đó là khái niệm cơ bản: <strong>Instance (SGA+process) mount database (mở các file)</strong>. Khi em lệnh <strong>startup</strong>, Oracle sẽ khởi tạo instance (<strong>nomount</strong>), sau đó mount controlfile (<strong>mount</strong>), rồi open datafiles (<strong>open</strong>).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Các trạng thái khởi động Oracle
+SQL> STARTUP NOMOUNT;    -- Chỉ khởi tạo instance (SGA + processes)
+SQL> ALTER DATABASE MOUNT;  -- Mount control file
+SQL> ALTER DATABASE OPEN;   -- Mở data files để user truy cập
+
+-- Hoặc gọi gộp:
+SQL> STARTUP;  -- Tự động qua 3 giai đoạn trên</code>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>🧠 SGA (System Global Area)</h4>
+                            <p>Vùng nhớ dùng chung cho tất cả processes: Buffer Cache, Shared Pool, Java Pool, Large Pool</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>👤 PGA (Program Global Area)</h4>
+                            <p>Vùng nhớ riêng cho mỗi server process: Sort Area, Session Memory, Private SQL Area</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>⚙️ Background Processes</h4>
+                            <p>DBWR (Database Writer), LGWR (Log Writer), CKPT (Checkpoint), SMON, PMON</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>💾 Physical Files</h4>
+                            <p>Data Files (dữ liệu), Control Files (cấu trúc), Redo Log Files (transaction log)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- S3: Cài đặt & Kết nối -->
+            <section class="card" id="s3">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10 20l4-16m-4 4h4"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">3. Hướng dẫn cài đặt Oracle 12c và cách kết nối cơ bản</div>
+                </div>
+                <div class="card-body">
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">
+                                Anh ơi, cài Oracle chắc phức tạp hơn cài MySQL nhỉ? Em cài MySQL phát là chạy, còn nhớ lần trước thử cài Oracle mà rối quá, nào là Oracle Home, Listener loạn cả.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                <em>(Cười)</em> Đúng là Oracle "nặng đô" hơn. Để anh hướng dẫn từng bước:
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>📋 1. Chuẩn bị cài đặt</h4>
+                        <ul>
+                            <li><strong>Hệ điều hành:</strong> Oracle chạy tốt nhất trên Linux/Unix. Bản cho Windows cũng có nhưng ít dùng production. Dev thì có thể cài trên Windows cho tiện học, hoặc dùng máy ảo Linux.</li>
+                            <li><strong>Cấu hình máy:</strong> Oracle 12c yêu cầu RAM kha khá (tối thiểu ~2GB để chạy ổn), đĩa vài chục GB trống.</li>
+                            <li><strong>Tài khoản Oracle:</strong> Cần có account trên oracle.com để download</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>🛠️ 2. Cài đặt phần mềm Oracle</h4>
+                        <ul>
+                            <li>Tải bộ cài Oracle Database 12c (ví dụ 12.1 hoặc 12.2) từ trang Oracle</li>
+                            <li>Giải nén và chạy trình cài đặt (Oracle Universal Installer)</li>
+                            <li>Chọn <strong>ORACLE_BASE</strong> (thư mục gốc) và <strong>ORACLE_HOME</strong> (thư mục phần mềm)</li>
+                            <li>Chọn tạo Database mới luôn với DBCA (Database Configuration Assistant)</li>
+                        </ul>
+                    </div>
+
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Lúc trước em thấy có bước đặt SID nữa?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Đúng. <strong>SID (System Identifier)</strong> là tên định danh instance. Em đặt tên SID (ví dụ ORCL). Nếu chạy nhiều Oracle instance trên một máy, mỗi cái phải có SID khác nhau.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Vậy sau khi cài xong, Oracle sẽ chạy luôn ạ?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Thường lúc cài xong, nó tạo xong database và mở instance luôn. Em sẽ có một database mẫu (ví dụ ORCL) với các user mặc định (SYS, SYSTEM...).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>⚠️ Lưu ý quan trọng khi cài đặt</h4>
+                        <ul>
+                            <li>Nhớ mật khẩu SYS và SYSTEM - đây là tài khoản admin</li>
+                            <li>Ghi nhớ Oracle Home path và SID</li>
+                            <li>Listener sẽ được tự động cấu hình trên port 1521</li>
+                            <li>Kiểm tra firewall nếu kết nối từ xa</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>🔌 3. Kết nối đến Oracle Database</h4>
+                        <p>Có nhiều cách để kết nối đến Oracle:</p>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Cách 1: Kết nối local với OS Authentication
+sqlplus / as sysdba
+
+-- Cách 2: Kết nối với username/password
+sqlplus system/password@localhost:1521/ORCL
+
+-- Cách 3: Kết nối đến PDB trong CDB
+sqlplus hr/password@localhost:1521/PDB1
+
+-- Cách 4: Sử dụng Easy Connect
+sqlplus system/password@//hostname:1521/service_name</code>
+                    </div>
+
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Anh ơi, em thấy có nhiều cách kết nối quá. Cái nào dùng nhiều nhất vậy?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Trong thực tế, DBA thường dùng <strong>sqlplus / as sysdba</strong> để quản trị local. Còn application thì dùng connection string với TNS hoặc Easy Connect. Quan trọng là phải hiểu service name và SID khác nhau như thế nào.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Service name với SID khác gì anh?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                <strong>SID</strong> là tên instance (ví dụ ORCL), còn <strong>Service Name</strong> là tên logic của database service. Trong 12c với CDB/PDB, service name quan trọng hơn vì nó xác định em kết nối vào CDB hay PDB nào. Ví dụ: SID=ORCL nhưng có service name là ORCL (cho CDB) và PDB1 (cho pluggable database).
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>🏠 ORACLE_HOME</h4>
+                            <p>Thư mục chứa phần mềm Oracle: binaries, libraries, admin utilities</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>📁 ORACLE_BASE</h4>
+                            <p>Thư mục gốc chứa tất cả: software, databases, logs, admin files</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🔊 TNS Listener</h4>
+                            <p>Process lắng nghe kết nối từ client, mặc định port 1521</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🌐 Service Name</h4>
+                            <p>Tên logic của database service, quan trọng trong môi trường CDB/PDB</p>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Kiểm tra service names hiện có
+SQL> SELECT name, pdb FROM v$services ORDER BY name;
+
+-- Kiểm tra listener status
+$ lsnrctl status
+
+-- Kiểm tra instance hiện tại
+SQL> SELECT instance_name, status FROM v$instance;
+
+-- Kiểm tra PDBs trong CDB
+SQL> SHOW PDBS;</code>
+                    </div>
+                </div>
+            </section>
+
+            <!-- S4: Schema & Tablespace -->
+            <section class="card" id="s4">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3h18v18H3zM9 9h6v6H9z"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">4. Quản lý Schema & Tablespace</div>
+                </div>
+                <div class="card-body">
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">
+                                Anh ơi, em hiểu database và table rồi, nhưng Schema và Tablespace trong Oracle là gì vậy? Nghe lạ quá.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Đây là hai khái niệm quan trọng mà dev chuyển DBA phải nắm rõ:<br><br>
+                                <strong>Schema</strong> là tập hợp các object (bảng, view, index, procedure...) thuộc về một user. Trong Oracle, khi tạo user thì tự động có schema cùng tên. Ví dụ user HR thì có schema HR chứa các bảng EMPLOYEES, DEPARTMENTS...<br><br>
+                                <strong>Tablespace</strong> là nơi lưu trữ vật lý của dữ liệu. Nó gồm một hoặc nhiều data files trên đĩa. Khi tạo bảng, em phải chỉ định bảng đó thuộc tablespace nào.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">À, hiểu rồi. Schema = logic (object của user), Tablespace = physical (file trên đĩa).</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Đúng! Em nắm rất nhanh. Relationship là: User → Schema → Objects → Tablespace → Data Files.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="architecture-diagram">
+                        <h4 style="margin-bottom: 16px;">Mối quan hệ Schema - Tablespace - Data Files</h4>
+                        <div style="margin-bottom: 12px;">
+                            <span class="arch-component">USER: HR</span>
+                            <span style="margin: 0 8px;">→</span>
+                            <span class="arch-component">SCHEMA: HR</span>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <span class="arch-component">TABLES: EMPLOYEES, DEPARTMENTS</span>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <span style="margin: 0 8px;">↓</span>
+                        </div>
+                        <div style="margin-bottom: 12px;">
+                            <span class="arch-component arch-file">TABLESPACE: USERS</span>
+                        </div>
+                        <div>
+                            <span class="arch-component arch-file">DATA FILE: /u01/app/oracle/oradata/ORCL/users01.dbf</span>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>🏗️ Tạo Tablespace</h4>
+                        <p>Trước khi tạo user và schema, DBA thường tạo tablespace riêng cho ứng dụng:</p>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Tạo tablespace cho ứng dụng HR
+CREATE TABLESPACE hr_data
+DATAFILE '/u01/app/oracle/oradata/ORCL/hr_data01.dbf'
+SIZE 100M
+AUTOEXTEND ON
+NEXT 10M
+MAXSIZE 1G
+EXTENT MANAGEMENT LOCAL
+UNIFORM SIZE 1M;
+
+-- Tạo temporary tablespace
+CREATE TEMPORARY TABLESPACE hr_temp
+TEMPFILE '/u01/app/oracle/oradata/ORCL/hr_temp01.dbf'
+SIZE 50M
+AUTOEXTEND ON;</code>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>👤 Tạo User và gán Tablespace</h4>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Tạo user HR
+CREATE USER hr
+IDENTIFIED BY "HrPassword123"
+DEFAULT TABLESPACE hr_data
+TEMPORARY TABLESPACE hr_temp
+QUOTA UNLIMITED ON hr_data;
+
+-- Gán quyền cơ bản
+GRANT CONNECT, RESOURCE TO hr;
+
+-- Kiểm tra user đã tạo
+SELECT username, default_tablespace, temporary_tablespace
+FROM dba_users
+WHERE username = 'HR';</code>
+                    </div>
+
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Sao lại có cả temporary tablespace nữa vậy anh?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Khi Oracle thực hiện các thao tác cần nhiều memory như sort, join lớn, group by... mà RAM không đủ, nó sẽ dùng temporary tablespace để ghi tạm. Đây là disk space dành riêng cho việc này, không lưu dữ liệu thực của bảng.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">QUOTA UNLIMITED là sao anh?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Đó là giới hạn dung lượng user được phép dùng trong tablespace. UNLIMITED nghĩa là không giới hạn (trong phạm vi tablespace). Em cũng có thể set cụ thể như QUOTA 500M ON hr_data.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>⚠️ Best Practices cho Tablespace</h4>
+                        <ul>
+                            <li><strong>Tách biệt:</strong> Mỗi ứng dụng nên có tablespace riêng</li>
+                            <li><strong>Sizing:</strong> Ước tính kích thước ban đầu và growth rate</li>
+                            <li><strong>AUTOEXTEND:</strong> Nên bật với MAXSIZE hợp lý để tránh đầy đĩa</li>
+                            <li><strong>Multiple datafiles:</strong> Tablespace lớn nên có nhiều datafile để phân tải I/O</li>
+                            <li><strong>Monitoring:</strong> Theo dõi dung lượng sử dụng thường xuyên</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>📊 Monitoring Tablespace</h4>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Xem thông tin tablespace
+SELECT tablespace_name, 
+       ROUND(bytes/1024/1024, 2) AS total_mb,
+       ROUND(maxbytes/1024/1024, 2) AS max_mb,
+       autoextensible
+FROM dba_data_files
+ORDER BY tablespace_name;
+
+-- Xem dung lượng sử dụng
+SELECT t.tablespace_name,
+       ROUND(t.total_space/1024/1024, 2) AS total_mb,
+       ROUND(f.free_space/1024/1024, 2) AS free_mb,
+       ROUND((t.total_space - f.free_space)/1024/1024, 2) AS used_mb,
+       ROUND(((t.total_space - f.free_space)/t.total_space)*100, 2) AS pct_used
+FROM (SELECT tablespace_name, SUM(bytes) total_space
+      FROM dba_data_files 
+      GROUP BY tablespace_name) t,
+     (SELECT tablespace_name, SUM(bytes) free_space
+      FROM dba_free_space 
+      GROUP BY tablespace_name) f
+WHERE t.tablespace_name = f.tablespace_name
+ORDER BY pct_used DESC;</code>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>🗂️ SYSTEM Tablespace</h4>
+                            <p>Chứa data dictionary, system objects. Không nên tạo user objects ở đây</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🔄 SYSAUX Tablespace</h4>
+                            <p>Auxiliary tablespace cho SYSTEM, chứa các components như AWR, Stats</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>⏰ TEMP Tablespace</h4>
+                            <p>Dành cho temporary operations: sorting, hashing, temp tables</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🔄 UNDO Tablespace</h4>
+                            <p>Chứa undo data cho transaction rollback và read consistency</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>💡 Schema Design Tips</h4>
+                        <ul>
+                            <li><strong>Naming Convention:</strong> Dùng tên schema có ý nghĩa (HR, SALES, FINANCE)</li>
+                            <li><strong>Object Privileges:</strong> Grant quyền cụ thể thay vì DBA role</li>
+                            <li><strong>Default Tablespace:</strong> Luôn chỉ định tablespace phù hợp</li>
+                            <li><strong>Resource Limits:</strong> Thiết lập quota và profile limits</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- S5: Tối ưu SQL & Performance -->
+            <section class="card" id="s5">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">5. Tối ưu SQL & Performance Tuning</div>
+                </div>
+                <div class="card-body">
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">
+                                Anh ơi, đây chính là phần em quan tâm nhất! SQL của em chạy chậm, anh DBA cũ hay chửi "lại SELECT * nữa rồi", "execution plan thế này mà không biết optimize". Em muốn hiểu làm sao để viết SQL nhanh và biết đọc execution plan.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                <em>(Cười)</em> Aha, đây là "cuộc chiến" kinh điển giữa dev và DBA đây. Để anh chỉ em cách tư duy như DBA về performance. Nguyên tắc số 1: <strong>Oracle Optimizer quyết định execution plan dựa trên statistics và cost</strong>. Nhiệm vụ của ta là viết SQL giúp Optimizer chọn plan tối ưu.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Cost là gì vậy anh?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                <strong>Cost</strong> là ước tính của Oracle về "độ đắt" của một operation, tính theo CPU time và I/O operations. Oracle Optimizer sẽ chọn plan có total cost thấp nhất. Vì vậy để SQL nhanh, ta phải hiểu Oracle đang "nghĩ" gì qua execution plan.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>🔍 Cách xem Execution Plan</h4>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Cách 1: EXPLAIN PLAN
+EXPLAIN PLAN FOR
+SELECT e.first_name, e.last_name, d.department_name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+WHERE e.salary > 5000;
+
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY);
+
+-- Cách 2: Autotrace (hiển thị statistics thực tế)
+SET AUTOTRACE ON
+SELECT e.first_name, e.last_name, d.department_name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+WHERE e.salary > 5000;
+
+-- Cách 3: SQL*Plus với actual execution
+SELECT /*+ GATHER_PLAN_STATISTICS */ 
+       e.first_name, e.last_name, d.department_name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+WHERE e.salary > 5000;
+
+SELECT * FROM TABLE(DBMS_XPLAN.DISPLAY_CURSOR(null, null, 'ALLSTATS LAST'));</code>
+                    </div>
+
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Plan đọc như thế nào anh? Em thấy toàn chữ lạ: TABLE ACCESS FULL, INDEX RANGE SCAN...</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Quan trọng nhất là hiểu các loại access method:<br><br>
+                                • <strong>TABLE ACCESS FULL:</strong> Quét toàn bộ bảng từ đầu đến cuối<br>
+                                • <strong>INDEX RANGE SCAN:</strong> Dùng index để tìm data, rất nhanh<br>
+                                • <strong>INDEX UNIQUE SCAN:</strong> Tìm 1 record duy nhất qua unique index<br>
+                                • <strong>NESTED LOOPS:</strong> Join method - vòng lặp lồng nhau<br>
+                                • <strong>HASH JOIN:</strong> Join bằng hash table, tốt cho large data sets<br><br>
+                                Nguyên tắc: INDEX SCAN > FULL TABLE SCAN với bảng lớn.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Vậy làm sao để Oracle dùng index thay vì full table scan anh?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Đây là câu hỏi then chốt! Có vài điều kiện:<br>
+                                1. <strong>Phải có index</strong> trên cột WHERE<br>
+                                2. <strong>Condition phải selective</strong> - tức là lọc được nhiều record<br>
+                                3. <strong>Statistics phải up-to-date</strong><br>
+                                4. <strong>Không dùng function</strong> trên cột index trong WHERE<br><br>
+                                Ví dụ WHERE UPPER(name) = 'JOHN' sẽ không dùng index trên cột name.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>⚠️ Những lỗi SQL performance thường gặp</h4>
+                        <ul>
+                            <li><strong>SELECT *:</strong> Lấy thừa columns, tốn bandwidth và memory</li>
+                            <li><strong>Không có WHERE:</strong> Full table scan không cần thiết</li>
+                            <li><strong>Function trong WHERE:</strong> UPPER(), TO_CHAR() làm mất index</li>
+                            <li><strong>Wrong join order:</strong> Join bảng lớn trước bảng nhỏ</li>
+                            <li><strong>Missing indexes:</strong> Không có index trên FK và search columns</li>
+                            <li><strong>Stale statistics:</strong> Statistics cũ làm Optimizer chọn sai plan</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>📈 SQL Tuning Techniques</h4>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- ❌ BAD: Function trên indexed column
+SELECT * FROM employees 
+WHERE UPPER(last_name) = 'SMITH';
+
+-- ✅ GOOD: Dùng function-based index hoặc store uppercase
+CREATE INDEX idx_emp_last_name_upper ON employees(UPPER(last_name));
+-- Hoặc
+SELECT * FROM employees 
+WHERE last_name = 'SMITH' OR last_name = 'smith';
+
+-- ❌ BAD: Non-selective condition trước
+SELECT * FROM employees 
+WHERE department_id = 10 
+  AND employee_id = 100;
+
+-- ✅ GOOD: Selective condition trước  
+SELECT employee_id, first_name, last_name, salary
+FROM employees 
+WHERE employee_id = 100 
+  AND department_id = 10;
+
+-- ❌ BAD: Implicit conversion
+SELECT * FROM employees 
+WHERE employee_id = '100';  -- String so với number
+
+-- ✅ GOOD: Explicit type
+SELECT * FROM employees 
+WHERE employee_id = 100;</code>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>🎯 Index Strategy</h4>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Tạo index cho WHERE conditions thường dùng
+CREATE INDEX idx_emp_dept_salary ON employees(department_id, salary);
+
+-- Composite index: column order quan trọng
+-- Tốt cho: WHERE department_id = ? AND salary > ?
+-- Không tốt cho: WHERE salary > ? (không có department_id)
+
+-- Index cho JOIN columns (Foreign Keys)
+CREATE INDEX idx_emp_dept_fk ON employees(department_id);
+CREATE INDEX idx_emp_job_fk ON employees(job_id);
+
+-- Unique index cho business keys
+CREATE UNIQUE INDEX idx_emp_email ON employees(email);
+
+-- Kiểm tra index usage
+SELECT index_name, table_name, uniqueness, status
+FROM user_indexes
+WHERE table_name = 'EMPLOYEES';</code>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>💡 Performance Monitoring Queries</h4>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Top SQL statements by elapsed time
+SELECT sql_id, 
+       child_number,
+       elapsed_time/executions/1000 as avg_elapsed_ms,
+       executions,
+       SUBSTR(sql_text, 1, 100) as sql_text
+FROM v$sql 
+WHERE executions > 0
+ORDER BY elapsed_time/executions DESC
+FETCH FIRST 10 ROWS ONLY;
+
+-- Table không có index (full table scans nhiều)
+SELECT owner, table_name, num_rows
+FROM dba_tables
+WHERE table_name NOT IN (
+  SELECT table_name 
+  FROM dba_indexes 
+  WHERE table_owner = owner
+)
+AND num_rows > 1000
+ORDER BY num_rows DESC;
+
+-- Session đang chờ gì
+SELECT sid, event, wait_time, seconds_in_wait
+FROM v$session_wait
+WHERE wait_time = 0
+ORDER BY seconds_in_wait DESC;</code>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>🔍 B-Tree Index</h4>
+                            <p>Mặc định, tốt cho equality và range scans. Không index NULL values</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🎯 Bitmap Index</h4>
+                            <p>Tốt cho low-cardinality columns (gender, status) trong data warehouses</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>⚡ Function-Based Index</h4>
+                            <p>Index trên expressions: UPPER(name), TO_CHAR(date), complex calculations</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>📊 Statistics</h4>
+                            <p>Gather regularly với DBMS_STATS để Optimizer có thông tin chính xác</p>
+                        </div>
+                    </div>
+
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Anh ơi, statistics này update thế nào? Có tự động không?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Oracle có job tự động gather stats, nhưng DBA nên chủ động update sau khi load data lớn. Lệnh quan trọng là DBMS_STATS.GATHER_TABLE_STATS.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Update statistics cho table
+EXEC DBMS_STATS.GATHER_TABLE_STATS('HR', 'EMPLOYEES');
+
+-- Update statistics cho toàn schema
+EXEC DBMS_STATS.GATHER_SCHEMA_STATS('HR');
+
+-- Xem thông tin statistics
+SELECT table_name, num_rows, blocks, last_analyzed
+FROM user_tables
+WHERE table_name = 'EMPLOYEES';</code>
+                    </div>
+                </div>
+            </section>
+
+            <!-- S6: Backup & Recovery -->
+            <section class="card" id="s6">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <path d="M14 2v6h6"/>
+                            <path d="M12 18v-6"/>
+                            <path d="M9 15l3 3 3-3"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">6. Backup & Recovery - "Job #1 của DBA"</div>
+                </div>
+                <div class="card-body">
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">
+                                Anh ơi, sếp em nói "backup is job #1", em hiểu tầm quan trọng. Nhưng Oracle backup phức tạp quá, nghe nói có RMAN, hot backup, cold backup... Em chóng mặt luôn.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                <em>(Nghiêm túc)</em> Sếp em nói đúng! DBA có thể làm sai nhiều thứ, nhưng không backup được thì... <strong>toi</strong>. Để anh giải thích từ cơ bản: Oracle có 2 chế độ archive log và 3 loại backup chính.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Archive log là gì anh?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Oracle ghi mọi thay đổi vào <strong>redo log files</strong>. Khi redo log đầy, Oracle chuyển sang file khác. Trong <strong>NOARCHIVELOG mode</strong>, file cũ bị ghi đè. Trong <strong>ARCHIVELOG mode</strong>, Oracle copy file cũ thành archived log trước khi ghi đè. Chế độ này cho phép recovery đến bất kỳ thời điểm nào!
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>⚠️ ARCHIVELOG vs NOARCHIVELOG</h4>
+                        <ul>
+                            <li><strong>NOARCHIVELOG:</strong> Chỉ recovery đến thời điểm backup cuối, mất data giữa các backup</li>
+                            <li><strong>ARCHIVELOG:</strong> Recovery đến bất kỳ thời điểm nào, zero data loss (với đủ archive logs)</li>
+                            <li><strong>Production database PHẢI dùng ARCHIVELOG mode!</strong></li>
+                        </ul>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Kiểm tra archive log mode
+SELECT log_mode FROM v$database;
+
+-- Enable archive log mode
+SHUTDOWN IMMEDIATE;
+STARTUP MOUNT;
+ALTER DATABASE ARCHIVELOG;
+ALTER DATABASE OPEN;
+
+-- Kiểm tra archive log destination
+SHOW PARAMETER LOG_ARCHIVE_DEST_1;
+
+-- Xem archive log files
+SELECT name, sequence#, first_time, next_time
+FROM v$archived_log
+ORDER BY sequence# DESC;</code>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>🎯 Ba loại Backup Strategy</h4>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>❄️ Cold Backup</h4>
+                            <p>Shutdown database → Copy tất cả files → Startup. Đơn giản nhưng downtime cao</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🔥 Hot Backup</h4>
+                            <p>Backup khi database đang chạy. Cần ARCHIVELOG mode. Phức tạp nhưng zero downtime</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>🤖 RMAN Backup</h4>
+                            <p>Oracle Recovery Manager - tool chính thức, tự động, nén, kiểm tra corruption</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>📸 Data Pump</h4>
+                            <p>Logical backup - export/import objects, không thể point-in-time recovery</p>
+                        </div>
+                    </div>
+
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Thực tế nên dùng loại nào anh?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Production system <strong>PHẢI dùng RMAN</strong>. Nó có compression, block-level backup, automatic corruption detection, catalog management. Cold/Hot backup chỉ dùng trong trường hợp đặc biệt hoặc học tập.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>🤖 RMAN Backup Examples</h4>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Connect to RMAN
+$ rman target /
+
+-- Full database backup
+RMAN> BACKUP DATABASE PLUS ARCHIVELOG;
+
+-- Incremental backup (chỉ backup blocks thay đổi)
+RMAN> BACKUP INCREMENTAL LEVEL 0 DATABASE;  -- Base backup
+RMAN> BACKUP INCREMENTAL LEVEL 1 DATABASE;  -- Changes since level 0
+
+-- Backup specific tablespace
+RMAN> BACKUP TABLESPACE users;
+
+-- Backup to specific location with compression
+RMAN> BACKUP AS COMPRESSED BACKUPSET 
+      DATABASE 
+      FORMAT '/backup/db_%d_%s_%p_%T.bkp';
+
+-- List backups
+RMAN> LIST BACKUP SUMMARY;
+
+-- Validate backup (kiểm tra corruption)
+RMAN> VALIDATE BACKUPSET 123;</code>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>🔄 Recovery Scenarios</h4>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Complete database recovery (sau hardware failure)
+RMAN> STARTUP MOUNT;
+RMAN> RESTORE DATABASE;
+RMAN> RECOVER DATABASE;
+RMAN> ALTER DATABASE OPEN;
+
+-- Point-in-time recovery (rollback đến thời điểm cụ thể)
+RMAN> STARTUP MOUNT;
+RMAN> SET UNTIL TIME "TO_DATE('2023-12-01 14:30:00','YYYY-MM-DD HH24:MI:SS')";
+RMAN> RESTORE DATABASE;
+RMAN> RECOVER DATABASE;
+RMAN> ALTER DATABASE OPEN RESETLOGS;
+
+-- Tablespace recovery (database vẫn chạy)
+RMAN> SQL "ALTER TABLESPACE users OFFLINE IMMEDIATE";
+RMAN> RESTORE TABLESPACE users;
+RMAN> RECOVER TABLESPACE users;
+RMAN> SQL "ALTER TABLESPACE users ONLINE";
+
+-- Datafile recovery
+RMAN> SQL "ALTER DATABASE DATAFILE ''/path/to/datafile'' OFFLINE";
+RMAN> RESTORE DATAFILE ''/path/to/datafile'';
+RMAN> RECOVER DATAFILE ''/path/to/datafile'';
+RMAN> SQL "ALTER DATABASE DATAFILE ''/path/to/datafile'' ONLINE";</code>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>🎯 RMAN Best Practices</h4>
+                        <ul>
+                            <li><strong>Regular backups:</strong> Full backup hàng tuần, incremental backup hàng ngày</li>
+                            <li><strong>Test recovery:</strong> Định kỳ test restore procedures trên môi trường khác</li>
+                            <li><strong>Archive log management:</strong> Tự động delete archived logs sau khi backup</li>
+                            <li><strong>Catalog database:</strong> Dùng recovery catalog thay vì control file</li>
+                            <li><strong>Offsite backup:</strong> Copy backup files to remote location</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>📋 Backup Schedule Example</h4>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Daily incremental backup script
+#!/bin/bash
+export ORACLE_SID=ORCL
+export ORACLE_HOME=/u01/app/oracle/product/12.2.0/dbhome_1
+export PATH=$ORACLE_HOME/bin:$PATH
+
+rman target / <<EOF
+CONFIGURE RETENTION POLICY TO RECOVERY WINDOW OF 30 DAYS;
+CONFIGURE BACKUP OPTIMIZATION ON;
+CONFIGURE DEFAULT DEVICE TYPE TO DISK;
+CONFIGURE CONTROLFILE AUTOBACKUP ON;
+
+BACKUP INCREMENTAL LEVEL 1 DATABASE PLUS ARCHIVELOG;
+DELETE NOPROMPT OBSOLETE;
+EXIT;
+EOF
+
+-- Weekly full backup
+BACKUP AS COMPRESSED BACKUPSET 
+INCREMENTAL LEVEL 0 
+DATABASE 
+PLUS ARCHIVELOG 
+TAG 'WEEKLY_FULL'
+FORMAT '/backup/weekly_full_%d_%T_%s_%p.bkp';</code>
+                    </div>
+
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Anh ơi, trong thực tế bao lâu backup một lần? Và làm sao biết backup có work không?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Tùy business requirement, nhưng thông thường:<br>
+                                • <strong>Full backup:</strong> Weekly<br>
+                                • <strong>Incremental backup:</strong> Daily<br>
+                                • <strong>Archive log backup:</strong> Mỗi 15-30 phút<br><br>
+                                Để verify backup, em phải <strong>test restore thường xuyên</strong>. Backup không test = không có backup! Nhiều DBA đã khóc vì backup corrupt khi cần recovery.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Test backup integrity
+RMAN> RESTORE DATABASE VALIDATE;
+
+-- Test specific backup piece
+RMAN> RESTORE BACKUPSET 123 VALIDATE;
+
+-- Crosscheck backups (kiểm tra files còn tồn tại)
+RMAN> CROSSCHECK BACKUP;
+RMAN> DELETE EXPIRED BACKUP;
+
+-- Report backup summary
+RMAN> REPORT SCHEMA;
+RMAN> REPORT NEED BACKUP DAYS 7;</code>
+                    </div>
+                </div>
+            </section>
+
+            <!-- S7: Tư duy Dev vs DBA -->
+            <section class="card" id="s7">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">7. Tư duy Dev vs DBA - Hợp tác để thành công</div>
+                </div>
+                <div class="card-body">
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">
+                                Qua mấy chương vừa rồi, em hiểu tại sao các anh DBA hay "khó tính" với code SQL của dev rồi. Giờ em muốn biết làm sao để dev và DBA hợp tác tốt hơn, không cãi nhau nữa.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                <em>(Mỉm cười)</em> Tốt, em đã "thấu hiểu" DBA rồi đấy! Thực ra xung đột Dev-DBA thường đến từ <strong>khác biệt về priorities và perspectives</strong>. Dev focus vào feature và deadline, DBA focus vào stability và performance. Cả hai đều đúng, chỉ cần hiểu nhau.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>⚖️ Sự khác biệt tư duy</h4>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card" style="border-left: 4px solid var(--blue-400);">
+                            <h4>👨‍💻 Developer Mindset</h4>
+                            <ul style="margin: 8px 0; padding-left: 16px;">
+                                <li>Feature-driven development</li>
+                                <li>Fast iteration, ship quickly</li>
+                                <li>"Make it work first"</li>
+                                <li>Individual application focus</li>
+                                <li>Code reusability & maintainability</li>
+                            </ul>
+                        </div>
+                        <div class="info-card" style="border-left: 4px solid var(--green-400);">
+                            <h4>🛡️ DBA Mindset</h4>
+                            <ul style="margin: 8px 0; padding-left: 16px;">
+                                <li>Stability & reliability first</li>
+                                <li>Performance & scalability</li>
+                                <li>"Prevent problems before they happen"</li>
+                                <li>Whole system perspective</li>
+                                <li>Data integrity & security</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Em thấy đúng quá! Dev như em thường nghĩ "chạy được rồi ship thôi", còn DBA lại lo "chạy được hôm nay, mai mốt có chết không?"</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Chính xác! DBA phải nghĩ long-term. Một câu SQL chạy nhanh với 1000 records hôm nay có thể làm chết server với 1 triệu records sau 6 tháng. Đó là lý do tại sao DBA "khó tính" về performance từ đầu.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>🤝 Best Practices cho Dev-DBA Collaboration</h4>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>1. 📋 Database Design Review</h4>
+                        <p>DBA nên tham gia từ giai đoạn thiết kế database schema, không chỉ khi production có vấn đề.</p>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Dev proposal: Simple design
+CREATE TABLE user_activities (
+    id NUMBER PRIMARY KEY,
+    user_id NUMBER,
+    activity_type VARCHAR2(50),
+    activity_data CLOB,
+    created_date DATE
+);
+
+-- DBA feedback: Performance & scalability improvements
+CREATE TABLE user_activities (
+    id NUMBER PRIMARY KEY,
+    user_id NUMBER NOT NULL,
+    activity_type_id NUMBER NOT NULL,  -- FK to lookup table
+    activity_data CLOB,
+    created_date DATE DEFAULT SYSDATE,
+    -- Partitioning for large tables
+    CONSTRAINT fk_user_activities_user 
+        FOREIGN KEY (user_id) REFERENCES users(id),
+    CONSTRAINT fk_user_activities_type 
+        FOREIGN KEY (activity_type_id) REFERENCES activity_types(id)
+)
+PARTITION BY RANGE (created_date) 
+INTERVAL (NUMTOYMINTERVAL(1,'MONTH'))
+(PARTITION p_initial VALUES LESS THAN (DATE '2023-01-01'));
+
+-- Indexes for common queries
+CREATE INDEX idx_user_activities_user_date 
+    ON user_activities(user_id, created_date);
+CREATE INDEX idx_user_activities_type_date 
+    ON user_activities(activity_type_id, created_date);</code>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>2. 🔍 SQL Code Review Process</h4>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>🚫 Common SQL Anti-patterns (DBA sẽ reject)</h4>
+                        <ul>
+                            <li><strong>SELECT * FROM large_table:</strong> Unnecessary data transfer</li>
+                            <li><strong>Missing WHERE clause:</strong> Full table scans</li>
+                            <li><strong>N+1 queries:</strong> Loop trong code gọi SQL nhiều lần</li>
+                            <li><strong>No connection pooling:</strong> Tạo/đóng connection liên tục</li>
+                            <li><strong>Hard-coded values:</strong> Không dùng bind variables</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- ❌ Dev code: N+1 problem
+for user in users:
+    activities = query("SELECT * FROM user_activities WHERE user_id = " + user.id)
+    process(activities)
+
+-- ✅ DBA suggestion: Batch processing
+user_ids = [user.id for user in users]
+all_activities = query("""
+    SELECT user_id, activity_type, activity_data, created_date
+    FROM user_activities 
+    WHERE user_id IN ({})
+    ORDER BY user_id, created_date
+""".format(','.join(map(str, user_ids))))
+
+-- Group by user_id and process</code>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>3. 📊 Monitoring & Alerting Collaboration</h4>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>🚨 Dev Responsibilities</h4>
+                            <ul style="font-size: 0.9rem; padding-left: 16px;">
+                                <li>Application-level monitoring</li>
+                                <li>Error logging & notification</li>
+                                <li>Business metrics tracking</li>
+                                <li>Connection pool monitoring</li>
+                            </ul>
+                        </div>
+                        <div class="info-card">
+                            <h4>📈 DBA Responsibilities</h4>
+                            <ul style="font-size: 0.9rem; padding-left: 16px;">
+                                <li>Database performance monitoring</li>
+                                <li>Resource utilization alerts</li>
+                                <li>Backup/recovery verification</li>
+                                <li>Security & compliance auditing</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="content-section">
+                        <h4>4. 🚀 Production Deployment Protocol</h4>
+                    </div>
+
+                    <div class="example-box">
+                        <code>-- Pre-deployment checklist
+-- DBA reviews:
+✓ Schema changes (DDL scripts)
+✓ Index creation strategy (online vs offline)
+✓ Rollback procedures
+✓ Expected performance impact
+✓ Backup status verification
+
+-- Dev responsibilities:
+✓ Test scripts on staging with production-like data volume
+✓ Provide execution plans for new queries
+✓ Document expected load patterns
+✓ Prepare monitoring dashboards
+
+-- Deployment day:
+✓ DBA performs schema changes during maintenance window
+✓ Dev deploys application code
+✓ Joint monitoring for first 24 hours
+✓ Performance validation & rollback readiness</code>
+                    </div>
+
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Nghe có vẻ process khá nặng đó anh. Trong startup nhỏ có cần nghiêm ngặt thế không?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Tùy stage của công ty. Startup giai đoạn đầu thì <strong>"move fast and break things"</strong> cũng được. Nhưng khi có customer trả tiền và reputation quan trọng thì phải có process. <strong>Tốt nhất là build habit từ sớm</strong> - viết SQL tốt, review code, backup đều đặn.
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speaker">Dev:</div>
+                            <div class="speech-content">Em hiểu. Vậy anh có lời khuyên cuối cùng cho em không?</div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speaker">DBA:</div>
+                            <div class="speech-content">
+                                Chuyển từ Dev sang DBA không dễ, nhưng em có advantage: <strong>hiểu được nhu cầu thực tế của development</strong>. Dùng cái đó để build bridge giữa dev team và operations. Remember: <strong>DBA's job is to enable developers, not block them</strong>. Và cuối cùng - <em>always have a backup plan</em>! 😄
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tips-box">
+                        <h3>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                            </svg>
+                            Lời khuyên cuối từ DBA
+                        </h3>
+                        <ul>
+                            <li><strong>Học không ngừng:</strong> Oracle luôn phát triển, follow Oracle blogs & communities</li>
+                            <li><strong>Thực hành nhiều:</strong> Setup lab environment, break things & fix them</li>
+                            <li><strong>Network with DBAs:</strong> Join Oracle user groups, conferences</li>
+                            <li><strong>Understand business:</strong> DBA tốt phải hiểu business requirements</li>
+                            <li><strong>Document everything:</strong> Procedures, configurations, lessons learned</li>
+                            <li><strong>Stay humble:</strong> Oracle có thể surprise em bất cứ lúc nào! 😅</li>
+                        </ul>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>🎓 Chúc mừng bạn đã hoàn thành khóa học!</h4>
+                        <p>
+                            Từ một Developer, giờ bạn đã có foundation vững chắc để trở thành Oracle DBA. 
+                            Hành trình 100 giờ học tập không dễ dàng, nhưng bạn đã vượt qua! 
+                            Hãy tiếp tục thực hành, học hỏi và remember: <strong>"Backup is Job #1"</strong> và 
+                            <strong>"Always explain your execution plans"</strong>! 
+                        </p>
+                        <p>
+                            <em>Good luck trên con đường DBA! 🚀</em>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
+                    </svg>
+                    <span>Oracle 12c DBA Course</span>
+                </div>
+                <div class="footer-text">
+                    © 2024 Interactive Oracle 12c DBA Course - Dialogue-based Learning
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </div>
+
+    <script>
+        // Navigation and progress tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+            const sections = document.querySelectorAll('.content section[id]');
+            const progressBar = document.getElementById('progress-bar');
+            const progressPercent = document.getElementById('progress-percent');
+            const scrollTopBtn = document.getElementById('scrollTop');
+
+            // Update active navigation and progress
+            function updateNavigation() {
+                let current = '';
+                const scrollPosition = window.scrollY + 100;
+
+                sections.forEach((section) => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                // Update active nav link
+                navLinks.forEach((link) => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // Update progress bar
+                if (current) {
+                    const sectionNumber = parseInt(current.replace('s', ''));
+                    const progress = (sectionNumber / sections.length) * 100;
+                    progressBar.style.width = `${progress}%`;
+                    progressPercent.textContent = `${Math.round(progress)}%`;
+                }
+
+                // Show/hide scroll to top button
+                if (window.scrollY > 500) {
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            }
+
+            // Smooth scroll for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 20;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Scroll event listener
+            window.addEventListener('scroll', updateNavigation);
+            
+            // Initial call
+            updateNavigation();
+        });
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click handlers to dialogue items for better interaction
+            const dialogueItems = document.querySelectorAll('.dialogue-item');
+            
+            dialogueItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                });
+            });
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 8px 25px rgba(0,0,0,.1)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 20px rgba(0,0,0,.06)';
+                });
+            });
+        });
+
+        // Add CSS transitions for smooth animations
+        document.head.insertAdjacentHTML('beforeend', `
+            <style>
+                .dialogue-item, .card {
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;
+                }
+                
+                .dialogue-item:hover {
+                    transform: translateX(4px);
+                }
+                
+                .example-box {
+                    position: relative;
+                }
+                
+                .example-box::before {
+                    content: "SQL";
+                    position: absolute;
+                    top: 8px;
+                    right: 12px;
+                    background: rgba(255, 255, 255, 0.1);
+                    color: rgba(255, 255, 255, 0.7);
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                    font-size: 0.75rem;
+                    font-weight: 500;
+                }
+            </style>
+        `);
+    </script>
+</body>
+</html>
