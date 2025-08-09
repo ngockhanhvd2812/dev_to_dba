@@ -1,2 +1,2 @@
 [![🌐 Xem Website 1](https://img.shields.io/badge/Live_Demo_1-Click_Here-orange?style=for-the-badge&logo=firefox-browser&logoColor=white)](https://preview--oracle-dba-buddy-36.lovable.app)  
-[![🌐 Xem Website 2](https://img.shields.io/badge/Live_Demo_2-Click_Here-orange?style=for-the-badge&logo=firefox-browser&logoColor=white)](https://611d7dad-3853-478a-a6d5-43810a5989cb-00-2115s7peo7ewq.worf.replit.dev/)
+[![🌐 Xem Website 2](https://img.shields.io/badge/Live_Demo_2-Click_Here-orange?style=for-the-badge&logo=firefox-browser&logoColor=white)](https://ngockhanhvd2812.github.io/dev_to_dba/)
