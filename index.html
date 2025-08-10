@@ -265,49 +265,80 @@
             font-size: 1.05rem;
         }
 
-        /* Dialogue Styling */
+        /* --- DIALOGUE STYLING - CHAT INTERFACE --- */
         .dialogue {
-            margin: 1.5rem 0;
+            margin: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
-
         .dialogue-item {
-            margin-bottom: 1rem;
-            padding: 12px 16px;
-            border-radius: 8px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-end;
+            max-width: 85%;
         }
-
+        .dialogue-item::before {
+            content: '';
+            display: grid;
+            place-items: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            font-weight: 600;
+            color: #fff;
+            font-size: 1rem;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        .dialogue-item .speech-wrap {
+            padding: 14px 20px;
+            border-radius: 18px;
+            position: relative;
+        }
         .dev-speech {
-            background: var(--blue-50);
-            border-left: 4px solid var(--blue-400);
+            align-self: flex-start;
         }
-
+        /* Ghi đè để dùng Avatar Icon SVG */
+        .dev-speech::before {
+          content: ""; /* Xóa text cũ */
+          background-color: #e0f2fe;
+          background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='%230284c7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='16 18 22 12 16 6'/><polyline points='8 6 2 12 8 18'/></svg>");
+          background-size: 55%;
+          background-repeat: no-repeat;
+          background-position: center;
+        }
+        .dev-speech .speech-wrap {
+            background: var(--blue-100);
+            border-radius: 5px 18px 18px 18px;
+        }
         .dba-speech {
-            background: var(--green-50);
-            border-left: 4px solid var(--green-400);
+            align-self: flex-end;
+            flex-direction: row-reverse;
         }
-
-        .speaker {
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: var(--gray-800);
+        /* Ghi đè để dùng Avatar Icon SVG */
+        .dba-speech::before {
+          content: ""; /* Xóa text cũ */
+          background-color: #dcfce7;
+          background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none' stroke='%2315803d' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><ellipse cx='12' cy='5' rx='9' ry='3'/><path d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3'/><path d='M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'/></svg>");
+          background-size: 55%;
+          background-repeat: no-repeat;
+          background-position: center;
         }
-
-        .dev-speech .speaker {
-            color: var(--blue-700);
+        .dba-speech .speech-wrap {
+            background: var(--green-100);
+            border-radius: 18px 5px 18px 18px;
         }
-
-        .dba-speech .speaker {
-            color: var(--green-700);
-        }
-
         .speech-content {
-            color: var(--gray-700);
+            color: var(--gray-800);
             line-height: 1.6;
         }
-
         .speech-content em {
             font-style: italic;
             color: var(--gray-600);
+        }
+        .speaker {
+            display: none; /* Ẩn đi để không ảnh hưởng */
         }
         
         /* Custom List Styling */
@@ -691,6 +722,23 @@
             background: var(--yellow-100);
             color: var(--yellow-800);
         }
+        
+        /* --- RECTANGLE BOX STYLING --- */
+        .rect-box{
+          display:inline-block;
+          padding:8px 12px;
+          border:1px solid #e5e7eb;
+          background:#fff;
+          border-radius:8px;
+          font-weight:600;
+          box-shadow:0 1px 3px rgba(0,0,0,.05);
+          margin:4px;
+          font-size: 0.9rem;
+        }
+        .rect-box--blue{ background:#e0f2fe; color:#075985; border-color:#bae6fd; }
+        .rect-box--indigo{ background:#e0e7ff; color:#3730a3; border-color:#c7d2fe; }
+        .rect-box--green{ background:#dcfce7; color:#166534; border-color:#bbf7d0; }
+        .rect-box--yellow{ background:#fef3c7; color:#92400e; border-color:#fde68a; }
 
         /* Info grid */
         .info-grid {
@@ -846,40 +894,46 @@
                     
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">
-                                <em>(Háo hức)</em> Em chào anh! Em là lập trình viên nhưng đang muốn chuyển hướng sang làm DBA Oracle 12c. Nghe nói phải học nhiều lắm, chắc tầm vài tuần?
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    <em>(Háo hức)</em> Em chào anh! Em là lập trình viên nhưng đang muốn chuyển hướng sang làm DBA Oracle 12c. Nghe nói phải học nhiều lắm, chắc tầm vài tuần?
+                                </div>
                             </div>
                         </div>
                         
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                <em>(Cười)</em> Chào em. Ừ, hành trình trở thành DBA không ngắn đâu – khóa học này dự kiến khoảng <strong>100 giờ</strong> đấy!
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    <em>(Cười)</em> Chào em. Ừ, hành trình trở thành DBA không ngắn đâu – khóa học này dự kiến khoảng <strong>100 giờ</strong> đấy!
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">100 giờ lận ạ?</div>
+                            <div class="speech-wrap">
+                                <div class="speech-content">100 giờ lận ạ?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Đúng rồi, làm DBA không dễ đâu em. Chúng ta phải đi từ những khái niệm nền tảng nhất đến các kỹ thuật nâng cao. Nhưng đừng lo, anh sẽ hướng dẫn từng bước, kiểu trò chuyện thoải mái. Em cứ hình dung như nghe podcast giữa hai anh em mình vậy.
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Đúng rồi, làm DBA không dễ đâu em. Chúng ta phải đi từ những khái niệm nền tảng nhất đến các kỹ thuật nâng cao. Nhưng đừng lo, anh sẽ hướng dẫn từng bước, kiểu trò chuyện thoải mái. Em cứ hình dung như nghe podcast giữa hai anh em mình vậy.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Ngon quá, dạng trao đổi thế này dễ tiếp thu hơn hẳn. Em sẵn sàng rồi anh ơi!</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Ngon quá, dạng trao đổi thế này dễ tiếp thu hơn hẳn. Em sẵn sàng rồi anh ơi!</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Tốt. Mục tiêu của khóa này là giúp em <strong>tư duy như một DBA</strong>, hiểu rõ Oracle 12c từ gốc đến ngọn: từ <strong>kiến trúc, cài đặt, kết nối, vận hành, đến quản lý schema, quyền hạn, tablespace, rồi tối ưu truy vấn, sao lưu & phục hồi, điều chỉnh hiệu năng</strong>. Đồng thời anh sẽ chỉ ra sự khác biệt giữa cách nghĩ của Dev và DBA, cũng như những lỗi "kinh điển" mà dev hay mắc phải.
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Tốt. Mục tiêu của khóa này là giúp em <strong>tư duy như một DBA</strong>, hiểu rõ Oracle 12c từ gốc đến ngọn: từ <strong>kiến trúc, cài đặt, kết nối, vận hành, đến quản lý schema, quyền hạn, tablespace, rồi tối ưu truy vấn, sao lưu & phục hồi, điều chỉnh hiệu năng</strong>. Đồng thời anh sẽ chỉ ra sự khác biệt giữa cách nghĩ của Dev và DBA, cũng như những lỗi "kinh điển" mà dev hay mắc phải.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -927,67 +981,73 @@
                 <div class="card-body">
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">
-                                Trước giờ em làm web với MySQL, thường mỗi ứng dụng một database đơn giản. Oracle 12c nghe nói kiến trúc khác hẳn, có cả "container" gì đó? Anh giải thích giúp em với.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Trước giờ em làm web với MySQL, thường mỗi ứng dụng một database đơn giản. Oracle 12c nghe nói kiến trúc khác hẳn, có cả "container" gì đó? Anh giải thích giúp em với.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Đúng rồi. Oracle 12c giới thiệu một <strong>kiến trúc hoàn toàn mới gọi là Multitenant (đa tenant)</strong> – thay đổi lớn nhất kể từ Oracle 8i luôn. Thay vì mỗi cơ sở dữ liệu (CSDL) là một thực thể độc lập hoàn toàn với <strong>một instance riêng</strong> (instance = bộ nhớ SGA + các process nền), từ 12c ta có thể tạo CSDL dạng <strong>"đa tenant"</strong>. Nôm na là một <strong>Container Database (CDB)</strong> chứa nhiều <strong>Pluggable Database (PDB)</strong> bên trong.
-                            </div>
-                        </div>
-
-                        <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Container với Pluggable? Nó khác gì so với cách cũ anh?</div>
-                        </div>
-
-                        <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Để anh so sánh: Ở các phiên bản cũ (như 11g trở về trước), nếu em muốn chạy 2 CSDL trên một máy thì phải khởi tạo 2 instance riêng, mỗi cái có đủ bộ nhớ SGA, tiến trình nền (DBWR, LGWR, v.v.). Tài nguyên bị chia nhỏ ra và nhiều thành phần trùng lặp. 12c giải quyết bằng cách cho nhiều <strong>"CSDL con" (PDB)</strong> chạy trong cùng một <strong>CSDL cha (CDB)</strong> dùng chung instance.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Đúng rồi. Oracle 12c giới thiệu một <strong>kiến trúc hoàn toàn mới gọi là Multitenant (đa tenant)</strong> – thay đổi lớn nhất kể từ Oracle 8i luôn. Thay vì mỗi cơ sở dữ liệu (CSDL) là một thực thể độc lập hoàn toàn với <strong>một instance riêng</strong> (instance = bộ nhớ SGA + các process nền), từ 12c ta có thể tạo CSDL dạng <strong>"đa tenant"</strong>. Nôm na là một <strong>Container Database (CDB)</strong> chứa nhiều <strong>Pluggable Database (PDB)</strong> bên trong.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">À, ví dụ hay đó anh – nhiều người đi chơi thay vì đi 5 xe thì gộp đi 1 xe 16 chỗ cho tiết kiệm.</div>
+                            <div class="speech-wrap">
+                                <div class="speech-content">Container với Pluggable? Nó khác gì so với cách cũ anh?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Chính xác. Với kiến trúc mới:<br><br>
-                                • <strong>CDB</strong> có các thành phần chung: SGA (bộ nhớ), background processes, datafile chung cho metadata của container (gọi là dictionary chung).<br>
-                                • <strong>Mỗi PDB</strong> chứa dữ liệu ứng dụng riêng, có datafiles riêng, nhưng <strong>dùng chung</strong> tài nguyên CDB.<br><br>
-                                Nghĩa là thay vì 5 CSDL độc lập tranh giành tài nguyên, giờ chỉ 1 instance "kéo" cả 5 PDB, giảm bớt trùng lặp (ví dụ chỉ có một DBWR, một LGWR dùng chung). <strong>Việc quản trị</strong> cũng nhẹ nhàng hơn: vá lỗi, nâng cấp chỉ làm trên CDB là các PDB hưởng hết, khỏi lặp lại 5 lần.
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Để anh so sánh: Ở các phiên bản cũ (như 11g trở về trước), nếu em muốn chạy 2 CSDL trên một máy thì phải khởi tạo 2 instance riêng, mỗi cái có đủ bộ nhớ SGA, tiến trình nền (DBWR, LGWR, v.v.). Tài nguyên bị chia nhỏ ra và nhiều thành phần trùng lặp. 12c giải quyết bằng cách cho nhiều <strong>"CSDL con" (PDB)</strong> chạy trong cùng một <strong>CSDL cha (CDB)</strong> dùng chung instance.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                             <div class="speech-wrap">
+                                <div class="speech-content">À, ví dụ hay đó anh – nhiều người đi chơi thay vì đi 5 xe thì gộp đi 1 xe 16 chỗ cho tiết kiệm.</div>
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Chính xác. Với kiến trúc mới:<br><br>
+                                    • <strong>CDB</strong> có các thành phần chung: SGA (bộ nhớ), background processes, datafile chung cho metadata của container (gọi là dictionary chung).<br>
+                                    • <strong>Mỗi PDB</strong> chứa dữ liệu ứng dụng riêng, có datafiles riêng, nhưng <strong>dùng chung</strong> tài nguyên CDB.<br><br>
+                                    Nghĩa là thay vì 5 CSDL độc lập tranh giành tài nguyên, giờ chỉ 1 instance "kéo" cả 5 PDB, giảm bớt trùng lặp (ví dụ chỉ có một DBWR, một LGWR dùng chung). <strong>Việc quản trị</strong> cũng nhẹ nhàng hơn: vá lỗi, nâng cấp chỉ làm trên CDB là các PDB hưởng hết, khỏi lặp lại 5 lần.
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="architecture-diagram">
                         <h4 style="margin-bottom: 16px;">Kiến trúc Oracle 12c Multitenant</h4>
-                        <div style="margin-bottom: 12px;">
-                            <span class="arch-component arch-container">CDB Root</span>
-                            <span class="arch-component arch-container">PDB$SEED</span>
-                        </div>
-                        <div style="margin-bottom: 12px;">
-                            <span class="arch-component">PDB1 (HR_APP)</span>
-                            <span class="arch-component">PDB2 (SALES_APP)</span>
-                            <span class="arch-component">PDB3 (FINANCE_APP)</span>
-                        </div>
-                        <div style="margin-bottom: 12px;">
-                            <span class="arch-component arch-process">SGA (Shared)</span>
-                            <span class="arch-component arch-process">Background Processes</span>
-                        </div>
-                        <div>
-                            <span class="arch-component arch-file">Control Files</span>
-                            <span class="arch-component arch-file">Redo Logs</span>
-                            <span class="arch-component arch-file">Data Files</span>
-                        </div>
+<div style="margin-bottom: 12px;">
+    <span class="rect-box rect-box--indigo">CDB Root</span>
+    <span class="rect-box rect-box--indigo">PDB$SEED</span>
+</div>
+<div style="margin-bottom: 12px;">
+    <span class="rect-box rect-box--blue">PDB1 (HR_APP)</span>
+    <span class="rect-box rect-box--blue">PDB2 (SALES_APP)</span>
+    <span class="rect-box rect-box--blue">PDB3 (FINANCE_APP)</span>
+</div>
+<div style="margin-bottom: 12px;">
+    <span class="rect-box rect-box--green">SGA (Shared)</span>
+    <span class="rect-box rect-box--green">Background Processes</span>
+</div>
+<div>
+    <span class="rect-box rect-box--yellow">Control Files</span>
+    <span class="rect-box rect-box--yellow">Redo Logs</span>
+    <span class="rect-box rect-box--yellow">Data Files</span>
+</div>
                     </div>
 
                     <div class="highlight-box">
@@ -1002,40 +1062,46 @@
 
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Vậy 12c có 2 chế độ: non-CDB (kiểu cũ) và CDB (đa tenant)?</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Vậy 12c có 2 chế độ: non-CDB (kiểu cũ) và CDB (đa tenant)?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Đúng. Khi cài đặt Oracle 12c em có thể chọn tạo database kiểu cũ (non-CDB) hoặc dạng CDB có PDB. Thực tế Oracle định hướng multitenant là tương lai.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Đúng. Khi cài đặt Oracle 12c em có thể chọn tạo database kiểu cũ (non-CDB) hoặc dạng CDB có PDB. Thực tế Oracle định hướng multitenant là tương lai.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Ngoài vụ multitenant, kiến trúc Oracle chắc còn nhiều thứ khác? Anh nói qua giúp em hệ thống nó gồm những phần gì với.</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Ngoài vụ multitenant, kiến trúc Oracle chắc còn nhiều thứ khác? Anh nói qua giúp em hệ thống nó gồm những phần gì với.</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Oke. Kiến trúc Oracle gồm 2 thành phần chính: <strong>Instance</strong> và <strong>Database</strong>.<br><br>
-                                <strong>Instance:</strong> là phần chạy trong memory (RAM), gồm <strong>SGA (System Global Area)</strong> và các <strong>background process</strong>. SGA chứa các vùng nhớ dùng chung (như buffer cache để cache dữ liệu, shared pool cache câu lệnh SQL, v.v.), các process nền thì bao gồm: DBWR (ghi buffer cache xuống đĩa), LGWR (ghi nhật ký giao dịch – redo log), CKPT (đánh dấu checkpoint), SMON, PMON (quản lý session, recovery...), v.v.<br><br>
-                                <strong>Database (CSDL):</strong> là tập hợp các tệp tin vật lý trên đĩa: bao gồm <strong>data files</strong> (chứa dữ liệu bảng, index), <strong>control file</strong> (lưu thông tin cấu trúc CSDL, checkpoint, v.v.), <strong>redo log files</strong> (nhật ký giao dịch để khôi phục khi cần). Oracle lưu mọi thứ quan trọng vào các file này. Khi instance hoạt động, nó mở các file đó lên.
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Oke. Kiến trúc Oracle gồm 2 thành phần chính: <strong>Instance</strong> và <strong>Database</strong>.<br><br>
+                                    <strong>Instance:</strong> là phần chạy trong memory (RAM), gồm <strong>SGA (System Global Area)</strong> và các <strong>background process</strong>. SGA chứa các vùng nhớ dùng chung (như buffer cache để cache dữ liệu, shared pool cache câu lệnh SQL, v.v.), các process nền thì bao gồm: DBWR (ghi buffer cache xuống đĩa), LGWR (ghi nhật ký giao dịch – redo log), CKPT (đánh dấu checkpoint), SMON, PMON (quản lý session, recovery...), v.v.<br><br>
+                                    <strong>Database (CSDL):</strong> là tập hợp các tệp tin vật lý trên đĩa: bao gồm <strong>data files</strong> (chứa dữ liệu bảng, index), <strong>control file</strong> (lưu thông tin cấu trúc CSDL, checkpoint, v.v.), <strong>redo log files</strong> (nhật ký giao dịch để khôi phục khi cần). Oracle lưu mọi thứ quan trọng vào các file này. Khi instance hoạt động, nó mở các file đó lên.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Vậy instance + data files = một database hoạt động.</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Vậy instance + data files = một database hoạt động.</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Đúng. Đó là khái niệm cơ bản: <strong>Instance (SGA+process) mount database (mở các file)</strong>. Khi em lệnh <strong>startup</strong>, Oracle sẽ khởi tạo instance (<strong>nomount</strong>), sau đó mount controlfile (<strong>mount</strong>), rồi open datafiles (<strong>open</strong>).
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Đúng. Đó là khái niệm cơ bản: <strong>Instance (SGA+process) mount database (mở các file)</strong>. Khi em lệnh <strong>startup</strong>, Oracle sẽ khởi tạo instance (<strong>nomount</strong>), sau đó mount controlfile (<strong>mount</strong>), rồi open datafiles (<strong>open</strong>).
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1044,7 +1110,7 @@
                         <div class="example-box-header">
                             <span class="example-box-title">SQL: Các trạng thái khởi động</span>
                             <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1091,16 +1157,18 @@
                 <div class="card-body">
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">
-                                Anh ơi, cài Oracle chắc phức tạp hơn cài MySQL nhỉ? Em cài MySQL phát là chạy, còn nhớ lần trước thử cài Oracle mà rối quá, nào là Oracle Home, Listener loạn cả.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Anh ơi, cài Oracle chắc phức tạp hơn cài MySQL nhỉ? Em cài MySQL phát là chạy, còn nhớ lần trước thử cài Oracle mà rối quá, nào là Oracle Home, Listener loạn cả.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                <em>(Cười)</em> Đúng là Oracle "nặng đô" hơn. Để anh hướng dẫn từng bước:
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    <em>(Cười)</em> Đúng là Oracle "nặng đô" hơn. Để anh hướng dẫn từng bước:
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1126,26 +1194,30 @@
 
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Lúc trước em thấy có bước đặt SID nữa?</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Lúc trước em thấy có bước đặt SID nữa?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Đúng. <strong>SID (System Identifier)</strong> là tên định danh instance. Em đặt tên SID (ví dụ ORCL). Nếu chạy nhiều Oracle instance trên một máy, mỗi cái phải có SID khác nhau.
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Đúng. <strong>SID (System Identifier)</strong> là tên định danh instance. Em đặt tên SID (ví dụ ORCL). Nếu chạy nhiều Oracle instance trên một máy, mỗi cái phải có SID khác nhau.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Vậy sau khi cài xong, Oracle sẽ chạy luôn ạ?</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Vậy sau khi cài xong, Oracle sẽ chạy luôn ạ?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Thường lúc cài xong, nó tạo xong database và mở instance luôn. Em sẽ có một database mẫu (ví dụ ORCL) với các user mặc định (SYS, SYSTEM...).
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Thường lúc cài xong, nó tạo xong database và mở instance luôn. Em sẽ có một database mẫu (ví dụ ORCL) với các user mặc định (SYS, SYSTEM...).
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1169,7 +1241,7 @@
                         <div class="example-box-header">
                             <span class="example-box-title">SQL: Các kiểu kết nối</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1188,26 +1260,30 @@
 
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Anh ơi, em thấy có nhiều cách kết nối quá. Cái nào dùng nhiều nhất vậy?</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Anh ơi, em thấy có nhiều cách kết nối quá. Cái nào dùng nhiều nhất vậy?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Trong thực tế, DBA thường dùng <strong>sqlplus / as sysdba</strong> để quản trị local. Còn application thì dùng connection string với TNS hoặc Easy Connect. Quan trọng là phải hiểu service name và SID khác nhau như thế nào.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Trong thực tế, DBA thường dùng <strong>sqlplus / as sysdba</strong> để quản trị local. Còn application thì dùng connection string với TNS hoặc Easy Connect. Quan trọng là phải hiểu service name và SID khác nhau như thế nào.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Service name với SID khác gì anh?</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Service name với SID khác gì anh?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                <strong>SID</strong> là tên instance (ví dụ ORCL), còn <strong>Service Name</strong> là tên logic của database service. Trong 12c với CDB/PDB, service name quan trọng hơn vì nó xác định em kết nối vào CDB hay PDB nào. Ví dụ: SID=ORCL nhưng có service name là ORCL (cho CDB) và PDB1 (cho pluggable database).
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    <strong>SID</strong> là tên instance (ví dụ ORCL), còn <strong>Service Name</strong> là tên logic của database service. Trong 12c với CDB/PDB, service name quan trọng hơn vì nó xác định em kết nối vào CDB hay PDB nào. Ví dụ: SID=ORCL nhưng có service name là ORCL (cho CDB) và PDB1 (cho pluggable database).
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1235,7 +1311,7 @@
                         <div class="example-box-header">
                             <span class="example-box-title">SQL: Lệnh kiểm tra</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1267,30 +1343,34 @@ $ lsnrctl status
                 <div class="card-body">
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">
-                                Anh ơi, em hiểu database và table rồi, nhưng Schema và Tablespace trong Oracle là gì vậy? Nghe lạ quá.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Anh ơi, em hiểu database và table rồi, nhưng Schema và Tablespace trong Oracle là gì vậy? Nghe lạ quá.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Đây là hai khái niệm quan trọng mà dev chuyển DBA phải nắm rõ:<br><br>
-                                <strong>Schema</strong> là tập hợp các object (bảng, view, index, procedure...) thuộc về một user. Trong Oracle, khi tạo user thì tự động có schema cùng tên. Ví dụ user HR thì có schema HR chứa các bảng EMPLOYEES, DEPARTMENTS...<br><br>
-                                <strong>Tablespace</strong> là nơi lưu trữ vật lý của dữ liệu. Nó gồm một hoặc nhiều data files trên đĩa. Khi tạo bảng, em phải chỉ định bảng đó thuộc tablespace nào.
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Đây là hai khái niệm quan trọng mà dev chuyển DBA phải nắm rõ:<br><br>
+                                    <strong>Schema</strong> là tập hợp các object (bảng, view, index, procedure...) thuộc về một user. Trong Oracle, khi tạo user thì tự động có schema cùng tên. Ví dụ user HR thì có schema HR chứa các bảng EMPLOYEES, DEPARTMENTS...<br><br>
+                                    <strong>Tablespace</strong> là nơi lưu trữ vật lý của dữ liệu. Nó gồm một hoặc nhiều data files trên đĩa. Khi tạo bảng, em phải chỉ định bảng đó thuộc tablespace nào.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">À, hiểu rồi. Schema = logic (object của user), Tablespace = physical (file trên đĩa).</div>
+                            <div class="speech-wrap">
+                                <div class="speech-content">À, hiểu rồi. Schema = logic (object của user), Tablespace = physical (file trên đĩa).</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Đúng! Em nắm rất nhanh. Relationship là: User → Schema → Objects → Tablespace → Data Files.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Đúng! Em nắm rất nhanh. Relationship là: User → Schema → Objects → Tablespace → Data Files.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1325,7 +1405,7 @@ $ lsnrctl status
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Tạo Tablespace</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1354,7 +1434,7 @@ $ lsnrctl status
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Tạo User</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1376,26 +1456,30 @@ $ lsnrctl status
 
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Sao lại có cả temporary tablespace nữa vậy anh?</div>
+                            <div class="speech-wrap">
+                                <div class="speech-content">Sao lại có cả temporary tablespace nữa vậy anh?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Khi Oracle thực hiện các thao tác cần nhiều memory như sort, join lớn, group by... mà RAM không đủ, nó sẽ dùng temporary tablespace để ghi tạm. Đây là disk space dành riêng cho việc này, không lưu dữ liệu thực của bảng.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Khi Oracle thực hiện các thao tác cần nhiều memory như sort, join lớn, group by... mà RAM không đủ, nó sẽ dùng temporary tablespace để ghi tạm. Đây là disk space dành riêng cho việc này, không lưu dữ liệu thực của bảng.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">QUOTA UNLIMITED là sao anh?</div>
+                            <div class="speech-wrap">
+                                <div class="speech-content">QUOTA UNLIMITED là sao anh?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Đó là giới hạn dung lượng user được phép dùng trong tablespace. UNLIMITED nghĩa là không giới hạn (trong phạm vi tablespace). Em cũng có thể set cụ thể như QUOTA 500M ON hr_data.
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Đó là giới hạn dung lượng user được phép dùng trong tablespace. UNLIMITED nghĩa là không giới hạn (trong phạm vi tablespace). Em cũng có thể set cụ thể như QUOTA 500M ON hr_data.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1419,7 +1503,7 @@ $ lsnrctl status
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Monitoring Tablespace</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1491,28 +1575,32 @@ $ lsnrctl status
                 <div class="card-body">
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">
-                                Anh ơi, đây chính là phần em quan tâm nhất! SQL của em chạy chậm, anh DBA cũ hay chửi "lại SELECT * nữa rồi", "execution plan thế này mà không biết optimize". Em muốn hiểu làm sao để viết SQL nhanh và biết đọc execution plan.
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Anh ơi, đây chính là phần em quan tâm nhất! SQL của em chạy chậm, anh DBA cũ hay chửi "lại SELECT * nữa rồi", "execution plan thế này mà không biết optimize". Em muốn hiểu làm sao để viết SQL nhanh và biết đọc execution plan.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                <em>(Cười)</em> Aha, đây là "cuộc chiến" kinh điển giữa dev và DBA đây. Để anh chỉ em cách tư duy như DBA về performance. Nguyên tắc số 1: <strong>Oracle Optimizer quyết định execution plan dựa trên statistics và cost</strong>. Nhiệm vụ của ta là viết SQL giúp Optimizer chọn plan tối ưu.
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    <em>(Cười)</em> Aha, đây là "cuộc chiến" kinh điển giữa dev và DBA đây. Để anh chỉ em cách tư duy như DBA về performance. Nguyên tắc số 1: <strong>Oracle Optimizer quyết định execution plan dựa trên statistics và cost</strong>. Nhiệm vụ của ta là viết SQL giúp Optimizer chọn plan tối ưu.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Cost là gì vậy anh?</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Cost là gì vậy anh?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                <strong>Cost</strong> là ước tính của Oracle về "độ đắt" của một operation, tính theo CPU time và I/O operations. Oracle Optimizer sẽ chọn plan có total cost thấp nhất. Vì vậy để SQL nhanh, ta phải hiểu Oracle đang "nghĩ" gì qua execution plan.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    <strong>Cost</strong> là ước tính của Oracle về "độ đắt" của một operation, tính theo CPU time và I/O operations. Oracle Optimizer sẽ chọn plan có total cost thấp nhất. Vì vậy để SQL nhanh, ta phải hiểu Oracle đang "nghĩ" gì qua execution plan.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1525,7 +1613,7 @@ $ lsnrctl status
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Xem Execution Plan</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1557,37 +1645,41 @@ $ lsnrctl status
 
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Plan đọc như thế nào anh? Em thấy toàn chữ lạ: TABLE ACCESS FULL, INDEX RANGE SCAN...</div>
+                            <div class="speech-wrap">
+                                <div class="speech-content">Plan đọc như thế nào anh? Em thấy toàn chữ lạ: TABLE ACCESS FULL, INDEX RANGE SCAN...</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Quan trọng nhất là hiểu các loại access method:<br><br>
-                                • <strong>TABLE ACCESS FULL:</strong> Quét toàn bộ bảng từ đầu đến cuối<br>
-                                • <strong>INDEX RANGE SCAN:</strong> Dùng index để tìm data, rất nhanh<br>
-                                • <strong>INDEX UNIQUE SCAN:</strong> Tìm 1 record duy nhất qua unique index<br>
-                                • <strong>NESTED LOOPS:</strong> Join method - vòng lặp lồng nhau<br>
-                                • <strong>HASH JOIN:</strong> Join bằng hash table, tốt cho large data sets<br><br>
-                                Nguyên tắc: INDEX SCAN > FULL TABLE SCAN với bảng lớn.
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Quan trọng nhất là hiểu các loại access method:<br><br>
+                                    • <strong>TABLE ACCESS FULL:</strong> Quét toàn bộ bảng từ đầu đến cuối<br>
+                                    • <strong>INDEX RANGE SCAN:</strong> Dùng index để tìm data, rất nhanh<br>
+                                    • <strong>INDEX UNIQUE SCAN:</strong> Tìm 1 record duy nhất qua unique index<br>
+                                    • <strong>NESTED LOOPS:</strong> Join method - vòng lặp lồng nhau<br>
+                                    • <strong>HASH JOIN:</strong> Join bằng hash table, tốt cho large data sets<br><br>
+                                    Nguyên tắc: INDEX SCAN > FULL TABLE SCAN với bảng lớn.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Vậy làm sao để Oracle dùng index thay vì full table scan anh?</div>
+                            <div class="speech-wrap">
+                                <div class="speech-content">Vậy làm sao để Oracle dùng index thay vì full table scan anh?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Đây là câu hỏi then chốt! Có vài điều kiện:<br>
-                                1. <strong>Phải có index</strong> trên cột WHERE<br>
-                                2. <strong>Condition phải selective</strong> - tức là lọc được nhiều record<br>
-                                3. <strong>Statistics phải up-to-date</strong><br>
-                                4. <strong>Không dùng function</strong> trên cột index trong WHERE<br><br>
-                                Ví dụ WHERE UPPER(name) = 'JOHN' sẽ không dùng index trên cột name.
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Đây là câu hỏi then chốt! Có vài điều kiện:<br>
+                                    1. <strong>Phải có index</strong> trên cột WHERE<br>
+                                    2. <strong>Condition phải selective</strong> - tức là lọc được nhiều record<br>
+                                    3. <strong>Statistics phải up-to-date</strong><br>
+                                    4. <strong>Không dùng function</strong> trên cột index trong WHERE<br><br>
+                                    Ví dụ WHERE UPPER(name) = 'JOHN' sẽ không dùng index trên cột name.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1612,7 +1704,7 @@ $ lsnrctl status
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Good vs Bad Practices</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1654,7 +1746,7 @@ $ lsnrctl status
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Index Strategy</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1686,7 +1778,7 @@ $ lsnrctl status
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Monitoring Performance</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1740,14 +1832,16 @@ $ lsnrctl status
 
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Anh ơi, statistics này update thế nào? Có tự động không?</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Anh ơi, statistics này update thế nào? Có tự động không?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Oracle có job tự động gather stats, nhưng DBA nên chủ động update sau khi load data lớn. Lệnh quan trọng là DBMS_STATS.GATHER_TABLE_STATS.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Oracle có job tự động gather stats, nhưng DBA nên chủ động update sau khi load data lớn. Lệnh quan trọng là DBMS_STATS.GATHER_TABLE_STATS.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1756,7 +1850,7 @@ $ lsnrctl status
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Gather Statistics</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1790,28 +1884,32 @@ $ lsnrctl status
                 <div class="card-body">
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">
-                                Anh ơi, sếp em nói "backup is job #1", em hiểu tầm quan trọng. Nhưng Oracle backup phức tạp quá, nghe nói có RMAN, hot backup, cold backup... Em chóng mặt luôn.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Anh ơi, sếp em nói "backup is job #1", em hiểu tầm quan trọng. Nhưng Oracle backup phức tạp quá, nghe nói có RMAN, hot backup, cold backup... Em chóng mặt luôn.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                <em>(Nghiêm túc)</em> Sếp em nói đúng! DBA có thể làm sai nhiều thứ, nhưng không backup được thì... <strong>toi</strong>. Để anh giải thích từ cơ bản: Oracle có 2 chế độ archive log và 3 loại backup chính.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    <em>(Nghiêm túc)</em> Sếp em nói đúng! DBA có thể làm sai nhiều thứ, nhưng không backup được thì... <strong>toi</strong>. Để anh giải thích từ cơ bản: Oracle có 2 chế độ archive log và 3 loại backup chính.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Archive log là gì anh?</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Archive log là gì anh?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Oracle ghi mọi thay đổi vào <strong>redo log files</strong>. Khi redo log đầy, Oracle chuyển sang file khác. Trong <strong>NOARCHIVELOG mode</strong>, file cũ bị ghi đè. Trong <strong>ARCHIVELOG mode</strong>, Oracle copy file cũ thành archived log trước khi ghi đè. Chế độ này cho phép recovery đến bất kỳ thời điểm nào!
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Oracle ghi mọi thay đổi vào <strong>redo log files</strong>. Khi redo log đầy, Oracle chuyển sang file khác. Trong <strong>NOARCHIVELOG mode</strong>, file cũ bị ghi đè. Trong <strong>ARCHIVELOG mode</strong>, Oracle copy file cũ thành archived log trước khi ghi đè. Chế độ này cho phép recovery đến bất kỳ thời điểm nào!
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1829,12 +1927,12 @@ $ lsnrctl status
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Archive Log Mode</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
                         <div class="example-box-content"><code><span class="sql-comment">-- Kiểm tra archive log mode</span>
-<span class="sql-keyword">SELECT</span> log_mode <span class="sql-keyword">FROM</span> v$database;
+<span class="sql-keyword">SQL></span> <span class="sql-keyword">SELECT</span> log_mode <span class="sql-keyword">FROM</span> v$database;
 
 <span class="sql-comment">-- Enable archive log mode</span>
 <span class="sql-keyword">SHUTDOWN</span> <span class="sql-keyword">IMMEDIATE</span>;
@@ -1876,14 +1974,16 @@ $ lsnrctl status
 
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Thực tế nên dùng loại nào anh?</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Thực tế nên dùng loại nào anh?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Production system <strong>PHẢI dùng RMAN</strong>. Nó có compression, block-level backup, automatic corruption detection, catalog management. Cold/Hot backup chỉ dùng trong trường hợp đặc biệt hoặc học tập.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Production system <strong>PHẢI dùng RMAN</strong>. Nó có compression, block-level backup, automatic corruption detection, catalog management. Cold/Hot backup chỉ dùng trong trường hợp đặc biệt hoặc học tập.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1896,7 +1996,7 @@ $ lsnrctl status
                          <div class="example-box-header">
                             <span class="example-box-title">RMAN: Backup Commands</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1933,7 +2033,7 @@ $ rman target /
                          <div class="example-box-header">
                             <span class="example-box-title">RMAN: Recovery Scenarios</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -1982,7 +2082,7 @@ $ rman target /
                          <div class="example-box-header">
                             <span class="example-box-title">BASH: Backup Script</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -2014,18 +2114,20 @@ EOF
 
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Anh ơi, trong thực tế bao lâu backup một lần? Và làm sao biết backup có work không?</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Anh ơi, trong thực tế bao lâu backup một lần? Và làm sao biết backup có work không?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Tùy business requirement, nhưng thông thường:<br>
-                                • <strong>Full backup:</strong> Weekly<br>
-                                • <strong>Incremental backup:</strong> Daily<br>
-                                • <strong>Archive log backup:</strong> Mỗi 15-30 phút<br><br>
-                                Để verify backup, em phải <strong>test restore thường xuyên</strong>. Backup không test = không có backup! Nhiều DBA đã khóc vì backup corrupt khi cần recovery.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Tùy business requirement, nhưng thông thường:<br>
+                                    • <strong>Full backup:</strong> Weekly<br>
+                                    • <strong>Incremental backup:</strong> Daily<br>
+                                    • <strong>Archive log backup:</strong> Mỗi 15-30 phút<br><br>
+                                    Để verify backup, em phải <strong>test restore thường xuyên</strong>. Backup không test = không có backup! Nhiều DBA đã khóc vì backup corrupt khi cần recovery.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2034,7 +2136,7 @@ EOF
                          <div class="example-box-header">
                             <span class="example-box-title">RMAN: Validation</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -2071,16 +2173,18 @@ EOF
                 <div class="card-body">
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">
-                                Qua mấy chương vừa rồi, em hiểu tại sao các anh DBA hay "khó tính" với code SQL của dev rồi. Giờ em muốn biết làm sao để dev và DBA hợp tác tốt hơn, không cãi nhau nữa.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Qua mấy chương vừa rồi, em hiểu tại sao các anh DBA hay "khó tính" với code SQL của dev rồi. Giờ em muốn biết làm sao để dev và DBA hợp tác tốt hơn, không cãi nhau nữa.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                <em>(Mỉm cười)</em> Tốt, em đã "thấu hiểu" DBA rồi đấy! Thực ra xung đột Dev-DBA thường đến từ <strong>khác biệt về priorities và perspectives</strong>. Dev focus vào feature và deadline, DBA focus vào stability và performance. Cả hai đều đúng, chỉ cần hiểu nhau.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    <em>(Mỉm cười)</em> Tốt, em đã "thấu hiểu" DBA rồi đấy! Thực ra xung đột Dev-DBA thường đến từ <strong>khác biệt về priorities và perspectives</strong>. Dev focus vào feature và deadline, DBA focus vào stability và performance. Cả hai đều đúng, chỉ cần hiểu nhau.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2114,14 +2218,16 @@ EOF
 
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Em thấy đúng quá! Dev như em thường nghĩ "chạy được rồi ship thôi", còn DBA lại lo "chạy được hôm nay, mai mốt có chết không?"</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Em thấy đúng quá! Dev như em thường nghĩ "chạy được rồi ship thôi", còn DBA lại lo "chạy được hôm nay, mai mốt có chết không?"</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Chính xác! DBA phải nghĩ long-term. Một câu SQL chạy nhanh với 1000 records hôm nay có thể làm chết server với 1 triệu records sau 6 tháng. Đó là lý do tại sao DBA "khó tính" về performance từ đầu.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Chính xác! DBA phải nghĩ long-term. Một câu SQL chạy nhanh với 1000 records hôm nay có thể làm chết server với 1 triệu records sau 6 tháng. Đó là lý do tại sao DBA "khó tính" về performance từ đầu.
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2139,7 +2245,7 @@ EOF
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Dev vs DBA Schema Design</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -2195,7 +2301,7 @@ EOF
                          <div class="example-box-header">
                             <span class="example-box-title">Code: N+1 Problem & Solution</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -2249,7 +2355,7 @@ all_activities = query(<span class="sql-string">"""
                          <div class="example-box-header">
                             <span class="example-box-title">Checklist</span>
                              <button class="copy-button">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
                         </div>
@@ -2276,26 +2382,30 @@ all_activities = query(<span class="sql-string">"""
 
                     <div class="dialogue">
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Nghe có vẻ process khá nặng đó anh. Trong startup nhỏ có cần nghiêm ngặt thế không?</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Nghe có vẻ process khá nặng đó anh. Trong startup nhỏ có cần nghiêm ngặt thế không?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Tùy stage của công ty. Startup giai đoạn đầu thì <strong>"move fast and break things"</strong> cũng được. Nhưng khi có customer trả tiền và reputation quan trọng thì phải có process. <strong>Tốt nhất là build habit từ sớm</strong> - viết SQL tốt, review code, backup đều đặn.
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Tùy stage của công ty. Startup giai đoạn đầu thì <strong>"move fast and break things"</strong> cũng được. Nhưng khi có customer trả tiền và reputation quan trọng thì phải có process. <strong>Tốt nhất là build habit từ sớm</strong> - viết SQL tốt, review code, backup đều đặn.
+                                </div>
                             </div>
                         </div>
 
                         <div class="dialogue-item dev-speech">
-                            <div class="speaker">Dev:</div>
-                            <div class="speech-content">Em hiểu. Vậy anh có lời khuyên cuối cùng cho em không?</div>
+                             <div class="speech-wrap">
+                                <div class="speech-content">Em hiểu. Vậy anh có lời khuyên cuối cùng cho em không?</div>
+                            </div>
                         </div>
 
                         <div class="dialogue-item dba-speech">
-                            <div class="speaker">DBA:</div>
-                            <div class="speech-content">
-                                Chuyển từ Dev sang DBA không dễ, nhưng em có advantage: <strong>hiểu được nhu cầu thực tế của development</strong>. Dùng cái đó để build bridge giữa dev team và operations. Remember: <strong>DBA's job is to enable developers, not block them</strong>. Và cuối cùng - <em>always have a backup plan</em>! 😄
+                             <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Chuyển từ Dev sang DBA không dễ, nhưng em có advantage: <strong>hiểu được nhu cầu thực tế của development</strong>. Dùng cái đó để build bridge giữa dev team và operations. Remember: <strong>DBA's job is to enable developers, not block them</strong>. Và cuối cùng - <em>always have a backup plan</em>! 😄
+                                </div>
                             </div>
                         </div>
                     </div>
