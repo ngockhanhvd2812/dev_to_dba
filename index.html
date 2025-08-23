@@ -6,6 +6,7 @@
     <title>Khóa học Oracle 12c DBA – Đối thoại Dev & DBA (Interactive)</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230284c7'><path d='M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z'/></svg>">
     <style>
+        /* Enhanced variables for better theming */
         :root {
             --blue-50: #f0f9ff;
             --blue-100: #e0f2fe;
@@ -623,6 +624,313 @@
             font-size: .9rem;
         }
 
+        /* Enhanced search functionality */
+        .search-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 16px 12px 45px;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: #fff;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--blue-400);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-400);
+            width: 20px;
+            height: 20px;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+
+        .search-result-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--gray-100);
+            transition: background 0.2s;
+        }
+
+        .search-result-item:hover {
+            background: var(--blue-50);
+        }
+
+        .search-result-title {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .search-result-content {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            line-height: 1.4;
+        }
+
+        /* Enhanced progress indicator */
+        .progress-circle {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+        }
+
+        .progress-circle svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle-bg {
+            fill: none;
+            stroke: var(--gray-200);
+            stroke-width: 4;
+        }
+
+        .progress-circle-fill {
+            fill: none;
+            stroke: var(--blue-500);
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 157;
+            stroke-dashoffset: 135;
+            transition: stroke-dashoffset 0.6s ease;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--blue-600);
+        }
+
+        /* Dark mode support */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--gray-200);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            background: var(--blue-50);
+            border-color: var(--blue-200);
+        }
+
+        body.dark-mode {
+            --gray-50: #1f2937;
+            --gray-100: #374151;
+            --gray-200: #4b5563;
+            --gray-300: #6b7280;
+            --gray-400: #9ca3af;
+            --gray-500: #d1d5db;
+            --gray-600: #e5e7eb;
+            --gray-700: #f3f4f6;
+            --gray-800: #f9fafb;
+            --gray-900: #ffffff;
+            background: #111827;
+            color: #f9fafb;
+        }
+
+        body.dark-mode .card {
+            background: #1f2937;
+            border: 1px solid #374151;
+        }
+
+        body.dark-mode .search-box {
+            background: #1f2937;
+            color: #f9fafb;
+            border-color: #4b5563;
+        }
+
+        body.dark-mode .search-results {
+            background: #1f2937;
+            border-color: #4b5563;
+        }
+
+        /* Enhanced interactive elements */
+        .interactive-demo {
+            background: linear-gradient(135deg, var(--blue-50), var(--indigo-50));
+            border: 2px dashed var(--blue-200);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 20px 0;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .interactive-demo:hover {
+            background: linear-gradient(135deg, var(--blue-100), var(--indigo-100));
+            border-color: var(--blue-300);
+            transform: translateY(-2px);
+        }
+
+        .demo-button {
+            background: var(--blue-600);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 8px;
+        }
+
+        .demo-button:hover {
+            background: var(--blue-700);
+            transform: translateY(-1px);
+        }
+
+        /* Loading animations */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--gray-300);
+            border-radius: 50%;
+            border-top-color: var(--blue-600);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Floating action buttons */
+        .fab-container {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            z-index: 1000;
+        }
+
+        .fab {
+            width: 56px;
+            height: 56px;
+            background: var(--blue-600);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fab:hover {
+            background: var(--blue-700);
+            transform: scale(1.1);
+        }
+
+        .fab.scroll-top {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .fab.scroll-top.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Enhanced tooltips */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltip-text {
+            visibility: hidden;
+            width: 200px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px 12px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .tooltip .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Improved code syntax highlighting */
+        .sql-keyword { color: #0969da; font-weight: 600; }
+        .sql-string { color: #032f62; }
+        .sql-comment { color: #6a737d; font-style: italic; }
+        .sql-number { color: #005cc5; }
+        .sql-function { color: #6f42c1; }
+
+        body.dark-mode .sql-keyword { color: #79c0ff; }
+        body.dark-mode .sql-string { color: #a5d6ff; }
+        body.dark-mode .sql-comment { color: #8b949e; }
+        body.dark-mode .sql-number { color: #79c0ff; }
+        body.dark-mode .sql-function { color: #d2a8ff; }
+
         /* Scroll to top */
         .scroll-top {
             position: fixed;
@@ -668,22 +976,72 @@
             }
         }
         
-        /* Responsive design */
+        /* Enhanced responsive design */
+        @media (max-width: 1024px) {
+            .hero-wrap {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-illustration {
+                margin-top: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             .section-title {
                 font-size: 1.2rem;
             }
             .main {
                 flex-direction: column;
+                padding: 20px 0;
             }
             .sidebar {
                 order: 2;
             }
             .content {
                 order: 1;
+            }
+            .theme-toggle {
+                top: 10px;
+                right: 10px;
+                width: 44px;
+                height: 44px;
+            }
+            .fab-container {
+                right: 15px;
+                bottom: 15px;
+            }
+            .fab {
+                width: 48px;
+                height: 48px;
+            }
+            .search-container {
+                margin-bottom: 15px;
+            }
+            .dialogue-item {
+                max-width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 15px;
+            }
+            .hero {
+                padding: 40px 0 30px;
+            }
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .badges {
+                justify-content: center;
+            }
+            .badge {
+                font-size: 0.8rem;
+                padding: 6px 10px;
             }
         }
 
@@ -790,6 +1148,12 @@
     </style>
 </head>
 <body id="top">
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+        <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </div>
     <!-- HERO -->
     <section class="hero">
         <div class="container">
@@ -839,18 +1203,34 @@
                         <div class="card-title">Nội dung khóa học</div>
                     </div>
                     <div class="card-body">
+                        <!-- Search functionality -->
+                        <div class="search-container">
+                            <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                            <input type="text" class="search-box" placeholder="Tìm kiếm nội dung..." id="searchInput" oninput="searchContent()">
+                            <div class="search-results" id="searchResults"></div>
+                        </div>
+                        
                         <ul class="nav" id="toc">
-                            <li><a href="#s1" data-section="1"><span class="num">1</span> Giới thiệu & Mở đầu</a></li>
-                            <li><a href="#s2" data-section="2"><span class="num">2</span> Kiến trúc Oracle 12c</a></li>
-                            <li><a href="#s3" data-section="3"><span class="num">3</span> Cài đặt & Kết nối</a></li>
-                            <li><a href="#s4" data-section="4"><span class="num">4</span> Schema & Tablespace</a></li>
-                            <li><a href="#s5" data-section="5"><span class="num">5</span> Tối ưu SQL & Performance</a></li>
-                            <li><a href="#s6" data-section="6"><span class="num">6</span> Backup & Recovery</a></li>
-                            <li><a href="#s7" data-section="7"><span class="num">7</span> Tư duy Dev vs DBA</a></li>
+                            <li><a href="#s1" data-section="1" onclick="updateProgress(1)"><span class="num">1</span> Giới thiệu & Mở đầu</a></li>
+                            <li><a href="#s2" data-section="2" onclick="updateProgress(2)"><span class="num">2</span> Kiến trúc Oracle 12c</a></li>
+                            <li><a href="#s3" data-section="3" onclick="updateProgress(3)"><span class="num">3</span> Cài đặt & Kết nối</a></li>
+                            <li><a href="#s4" data-section="4" onclick="updateProgress(4)"><span class="num">4</span> Schema & Tablespace</a></li>
+                            <li><a href="#s5" data-section="5" onclick="updateProgress(5)"><span class="num">5</span> Tối ưu SQL & Performance</a></li>
+                            <li><a href="#s6" data-section="6" onclick="updateProgress(6)"><span class="num">6</span> Backup & Recovery</a></li>
+                            <li><a href="#s7" data-section="7" onclick="updateProgress(7)"><span class="num">7</span> Tư duy Dev vs DBA</a></li>
                         </ul>
                     </div>
                     <div class="progress">
-                        <div class="label">Tiến độ: <strong id="progress-percent">14%</strong></div>
+                        <div class="progress-circle">
+                            <svg>
+                                <circle class="progress-circle-bg" cx="30" cy="30" r="25"></circle>
+                                <circle class="progress-circle-fill" cx="30" cy="30" r="25" id="progressCircle"></circle>
+                            </svg>
+                            <div class="progress-text" id="progress-percent">14%</div>
+                        </div>
+                        <div class="label">Tiến độ học tập</div>
                         <div class="bar"><div class="fill" id="progress-bar"></div></div>
                     </div>
                 </div>
@@ -963,6 +1343,22 @@
                         <div class="info-card">
                             <h4>📋 Yêu cầu</h4>
                             <p>Biết SQL cơ bản, hiểu khái niệm database, có tinh thần học hỏi và kiên nhẫn</p>
+                        </div>
+                    </div>
+
+                    <div class="interactive-demo">
+                        <h4>🎮 Thử ngay trình mô phỏng Oracle</h4>
+                        <p>Trải nghiệm các lệnh Oracle 12c trực tiếp trên trình duyệt</p>
+                        <div style="margin-top: 15px;">
+                            <button class="demo-button" onclick="showDemo('architecture')">
+                                🏢 Kiến trúc CDB/PDB
+                            </button>
+                            <button class="demo-button" onclick="showDemo('sql')">
+                                📊 SQL Performance
+                            </button>
+                            <button class="demo-button" onclick="showDemo('backup')">
+                                💾 Backup & Recovery
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1109,7 +1505,7 @@
                     <div class="example-box">
                         <div class="example-box-header">
                             <span class="example-box-title">SQL: Các trạng thái khởi động</span>
-                            <button class="copy-button">
+                            <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -1240,7 +1636,7 @@
                     <div class="example-box">
                         <div class="example-box-header">
                             <span class="example-box-title">SQL: Các kiểu kết nối</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -1310,7 +1706,7 @@
                     <div class="example-box">
                         <div class="example-box-header">
                             <span class="example-box-title">SQL: Lệnh kiểm tra</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -1404,7 +1800,7 @@ $ lsnrctl status
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Tạo Tablespace</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -1433,7 +1829,7 @@ $ lsnrctl status
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Tạo User</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -1502,7 +1898,7 @@ $ lsnrctl status
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Monitoring Tablespace</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -1612,7 +2008,7 @@ $ lsnrctl status
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Xem Execution Plan</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -1703,7 +2099,7 @@ $ lsnrctl status
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Good vs Bad Practices</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -1745,7 +2141,7 @@ $ lsnrctl status
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Index Strategy</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -1777,7 +2173,7 @@ $ lsnrctl status
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Monitoring Performance</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -1849,7 +2245,7 @@ $ lsnrctl status
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Gather Statistics</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -1926,7 +2322,7 @@ $ lsnrctl status
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Archive Log Mode</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -1995,7 +2391,7 @@ $ lsnrctl status
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">RMAN: Backup Commands</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -2032,7 +2428,7 @@ $ rman target /
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">RMAN: Recovery Scenarios</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -2081,7 +2477,7 @@ $ rman target /
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">BASH: Backup Script</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -2135,7 +2531,7 @@ EOF
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">RMAN: Validation</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -2244,7 +2640,7 @@ EOF
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">SQL: Dev vs DBA Schema Design</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -2300,7 +2696,7 @@ EOF
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">Code: N+1 Problem & Solution</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -2354,7 +2750,7 @@ all_activities = query(<span class="sql-string">"""
                     <div class="example-box">
                          <div class="example-box-header">
                             <span class="example-box-title">Checklist</span>
-                             <button class="copy-button">
+                             <button class="copy-button" onclick="copyCode(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
                                 <span>Sao chép</span>
                             </button>
@@ -2409,6 +2805,180 @@ all_activities = query(<span class="sql-string">"""
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- S6: Backup & Recovery -->
+            <section class="card" id="s6">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
+                            <polyline points="10,9 9,9 8,9"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">6. Backup & Recovery - "Job #1" của DBA</div>
+                </div>
+                <div class="card-body">
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Anh ơi, anh hay nói "Backup is Job #1". Vậy backup trong Oracle phức tạp không? Em từng backup MySQL bằng mysqldump thôi.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Oracle backup phức tạp hơn MySQL nhiều, nhưng cũng mạnh mẽ hơn. Có 2 loại chính: <strong>Physical backup</strong> (sao chép data files) và <strong>Logical backup</strong> (export data). Quan trọng nhất là <strong>RMAN (Recovery Manager)</strong> - công cụ backup chính thức của Oracle.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dev-speech">
+                            <div class="speech-wrap">
+                                <div class="speech-content">RMAN khác gì với export/import anh?</div>
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    <strong>RMAN</strong> backup toàn bộ database ở level block, có thể recovery đến thời điểm bất kỳ. <strong>Export/Import</strong> chỉ backup data logic (như mysqldump), không thể point-in-time recovery. Production luôn dùng RMAN.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="example-box">
+                        <div class="example-box-header">
+                            <span class="example-box-title">RMAN: Basic Backup Commands</span>
+                            <button class="copy-button" onclick="copyCode(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5 .124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 4.625v2.625a2.625 2.625 0 11-5.25 0v-2.625m0-3.875V9.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v3.5m-8.625-1.125a.375.375 0 11-.75 0 .375.375 0 01.75 0z" /></svg>
+                                <span>Sao chép</span>
+                            </button>
+                        </div>
+                        <div class="example-box-content"><code><span class="sql-comment">-- Kết nối RMAN</span>
+$ rman target /
+
+<span class="sql-comment">-- Full backup database</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">BACKUP</span> <span class="sql-keyword">DATABASE</span>;
+
+<span class="sql-comment">-- Backup with compression và tag</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">BACKUP</span> <span class="sql-keyword">AS</span> <span class="sql-keyword">COMPRESSED</span> <span class="sql-keyword">BACKUPSET</span> 
+        <span class="sql-keyword">DATABASE</span> 
+        <span class="sql-keyword">TAG</span> <span class="sql-string">'DAILY_BACKUP'</span>;
+
+<span class="sql-comment">-- Incremental backup (chỉ backup thay đổi)</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">BACKUP</span> <span class="sql-keyword">INCREMENTAL</span> <span class="sql-keyword">LEVEL</span> <span class="sql-number">1</span> <span class="sql-keyword">DATABASE</span>;
+
+<span class="sql-comment">-- Backup archive logs</span>
+<span class="sql-keyword">RMAN></span> <span class="sql-keyword">BACKUP</span> <span class="sql-keyword">ARCHIVELOG</span> <span class="sql-keyword">ALL</span>;</code></div>
+                    </div>
+
+                    <div class="warning-box">
+                        <h4>⚠️ Backup Strategy Best Practices</h4>
+                        <ul class="styled-list">
+                            <li><strong>3-2-1 Rule:</strong> 3 copies, 2 different media, 1 offsite</li>
+                            <li><strong>Test restores:</strong> Backup chưa test = không có backup</li>
+                            <li><strong>Archive log mode:</strong> Bắt buộc cho production</li>
+                            <li><strong>Retention policy:</strong> Định nghĩa bao lâu giữ backup</li>
+                            <li><strong>Monitor backup jobs:</strong> Alert khi backup fail</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-card">
+                            <h4>🔄 Full Backup</h4>
+                            <p>Backup toàn bộ database. Tốn thời gian nhưng restore nhanh nhất</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>📈 Incremental Backup</h4>
+                            <p>Chỉ backup blocks thay đổi. Nhanh nhưng restore phức tạp hơn</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>📜 Archive Log Backup</h4>
+                            <p>Backup transaction logs cho point-in-time recovery</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>⚡ Hot Backup</h4>
+                            <p>Backup khi database đang chạy (không downtime)</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- S7: Tư duy Dev vs DBA -->
+            <section class="card" id="s7">
+                <div class="card-header">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <div class="card-title">7. Tư duy Dev vs DBA - Collaboration is Key</div>
+                </div>
+                <div class="card-body">
+                    <div class="dialogue">
+                        <div class="dialogue-item dev-speech">
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Anh ơi, sau hành trình này em hiểu DBA khó thật. Vậy làm sao để dev và DBA làm việc hiệu quả với nhau?
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dialogue-item dba-speech">
+                            <div class="speech-wrap">
+                                <div class="speech-content">
+                                    Câu hỏi hay! Dev và DBA có góc nhìn khác nhau nhưng cùng mục tiêu: <strong>ứng dụng chạy tốt, ổn định, nhanh</strong>. Để collaboration hiệu quả, cả hai bên cần hiểu nhau.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="architecture-diagram">
+                        <h4 style="margin-bottom: 16px;">Dev vs DBA Mindset</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: left;">
+                            <div style="padding: 15px; background: var(--blue-50); border-radius: 8px;">
+                                <h5>👨‍💻 Developer Mindset</h5>
+                                <ul style="margin: 10px 0; font-size: 0.9rem;">
+                                    <li>Feature-driven</li>
+                                    <li>Fast delivery</li>
+                                    <li>Code flexibility</li>
+                                    <li>"Make it work first"</li>
+                                </ul>
+                            </div>
+                            <div style="padding: 15px; background: var(--green-50); border-radius: 8px;">
+                                <h5>🛡️ DBA Mindset</h5>
+                                <ul style="margin: 10px 0; font-size: 0.9rem;">
+                                    <li>Stability-focused</li>
+                                    <li>Performance-first</li>
+                                    <li>Risk management</li>
+                                    <li>"Plan for scale"</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4>🤝 Collaboration Best Practices</h4>
+                        <ul class="styled-list">
+                            <li><strong>Code Review với DBA:</strong> DBA review SQL performance trước khi deploy</li>
+                            <li><strong>Database Design Sessions:</strong> Cùng thiết kế schema, indexes từ đầu</li>
+                            <li><strong>Performance Testing:</strong> Test với production-like data</li>
+                            <li><strong>Monitoring Together:</strong> Dùng chung dashboard, alert system</li>
+                            <li><strong>Knowledge Sharing:</strong> Dev hiểu execution plans, DBA hiểu business logic</li>
+                        </ul>
+                    </div>
 
                     <div class="tips-box">
                         <h3>
@@ -2444,7 +3014,7 @@ all_activities = query(<span class="sql-string">"""
         </main>
     </div>
 
-    <!-- Footer -->
+    <!-- Enhanced Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -2452,61 +3022,313 @@ all_activities = query(<span class="sql-string">"""
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
                     </svg>
-                    <span>Oracle 12c DBA Course</span>
+                    <span>Oracle 12c DBA Master Course</span>
                 </div>
                 <div class="footer-text">
-                    © 2025 Interactive Oracle 12c DBA Course - Made with ❤️ by Nguyễn Ngọc Khánh
+                    © 2025 Interactive Oracle 12c DBA Course - Made with ❤️ for Oracle Community
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Scroll to top button -->
-    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M18 15l-6-6-6 6"/>
-        </svg>
+    <!-- Floating Action Buttons -->
+    <div class="fab-container">
+        <button class="fab scroll-top" id="scrollTopBtn" onclick="scrollToTop()" title="Scroll to top">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
+                <path d="M18 15l-6-6-6 6"/>
+            </svg>
+        </button>
+        <button class="fab" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+            </svg>
+        </button>
+        <button class="fab" onclick="printContent()" title="Print Content">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                <polyline points="6,9 6,2 18,2 18,9"/>
+                <path d="M6,18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2H20a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H18"/>
+                <polyline points="6,14 6,22 18,22 18,14"/>
+            </svg>
+        </button>
     </div>
 
     <script>
-        // Copy to clipboard for code blocks
-        function initializeCopyButtons() {
-            const copyButtons = document.querySelectorAll('.copy-button');
+        // Theme management
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                themeIcon.innerHTML = '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+                localStorage.setItem('theme', 'light');
+            }
+        }
 
-            copyButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const contentWrapper = button.closest('.example-box').querySelector('.example-box-content');
-                    if (!contentWrapper) return;
-                    
-                    const code = contentWrapper.querySelector('code').innerText;
-                    
-                    navigator.clipboard.writeText(code).then(() => {
-                        const originalContent = button.innerHTML;
-                        button.innerHTML = `
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16"><path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" /></svg>
-                            <span>Đã chép!</span>
-                        `;
-                        
-                        setTimeout(() => {
-                            button.innerHTML = originalContent;
-                        }, 2000);
-                    }).catch(err => {
-                        console.error('Không thể sao chép: ', err);
-                        button.querySelector('span').textContent = 'Lỗi!';
-                    });
-                });
+        // Load saved theme
+        function loadTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                toggleTheme();
+            }
+        }
+
+        // Search functionality
+        function searchContent() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const searchResults = document.getElementById('searchResults');
+            
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
+
+            // Search data - in real implementation, this would be more comprehensive
+            const searchData = [
+                { title: 'Kiến trúc Oracle 12c', content: 'CDB Container Database PDB Pluggable Database Multitenant', section: '#s2' },
+                { title: 'Cài đặt Oracle', content: 'Installation ORACLE_HOME ORACLE_BASE Listener TNS', section: '#s3' },
+                { title: 'Schema và Tablespace', content: 'User Schema Tablespace Data Files Storage', section: '#s4' },
+                { title: 'SQL Performance', content: 'Execution Plan Index Optimization Tuning', section: '#s5' },
+                { title: 'Backup Recovery', content: 'RMAN Backup Restore Recovery Hot Cold', section: '#s6' },
+                { title: 'Dev vs DBA', content: 'Developer Database Administrator Mindset Collaboration', section: '#s7' }
+            ];
+
+            const results = searchData.filter(item => 
+                item.title.toLowerCase().includes(query) || 
+                item.content.toLowerCase().includes(query)
+            );
+
+            if (results.length > 0) {
+                searchResults.innerHTML = results.map(result => `
+                    <div class="search-result-item" onclick="navigateToSection('${result.section}')">
+                        <div class="search-result-title">${result.title}</div>
+                        <div class="search-result-content">Click to navigate to this section</div>
+                    </div>
+                `).join('');
+                searchResults.style.display = 'block';
+            } else {
+                searchResults.innerHTML = '<div class="search-result-item"><div class="search-result-title">No results found</div></div>';
+                searchResults.style.display = 'block';
+            }
+        }
+
+        function navigateToSection(section) {
+            document.getElementById('searchResults').style.display = 'none';
+            document.getElementById('searchInput').value = '';
+            
+            const targetElement = document.querySelector(section);
+            if (targetElement) {
+                targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Enhanced copy function
+        function copyCode(button) {
+            const codeBlock = button.closest('.example-box').querySelector('.example-box-content code');
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(() => {
+                const originalHTML = button.innerHTML;
+                button.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16">
+                        <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.052-.143z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Đã sao chép!</span>
+                `;
+                
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                }, 2000);
+            }).catch(err => {
+                console.error('Copy failed:', err);
             });
         }
-    
-        // Navigation and progress tracking
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav a[href^="#"]');
-            const sections = document.querySelectorAll('.content section[id]');
+
+        // Progress tracking
+        function updateProgress(section) {
+            const progress = (section / 7) * 100;
             const progressBar = document.getElementById('progress-bar');
             const progressPercent = document.getElementById('progress-percent');
-            const scrollTopBtn = document.getElementById('scrollTop');
+            const progressCircle = document.getElementById('progressCircle');
+            
+            if (progressBar) progressBar.style.width = `${progress}%`;
+            if (progressPercent) progressPercent.textContent = `${Math.round(progress)}%`;
+            
+            // Update circular progress
+            if (progressCircle) {
+                const circumference = 2 * Math.PI * 25; // radius = 25
+                const offset = circumference - (progress / 100) * circumference;
+                progressCircle.style.strokeDashoffset = offset;
+            }
+            
+            // Save progress
+            localStorage.setItem('courseProgress', section);
+        }
 
-            // Update active navigation and progress
+        // Demo functionality
+        function showDemo(type) {
+            const demos = {
+                'architecture': {
+                    title: 'Oracle 12c Architecture Demo',
+                    content: `
+                        <h3>🏗️ CDB/PDB Architecture Simulation</h3>
+                        <p>Simulating Container Database with 3 Pluggable Databases:</p>
+                        <div style="font-family: monospace; background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                            CDB$ROOT (Container)<br>
+                            ├── PDB$SEED (Template)<br>
+                            ├── HR_PDB (HR Application)<br>
+                            ├── SALES_PDB (Sales Application)<br>
+                            └── FINANCE_PDB (Finance Application)
+                        </div>
+                        <button class="demo-button" onclick="simulateConnection('HR_PDB')">Connect to HR_PDB</button>
+                        <button class="demo-button" onclick="simulateConnection('SALES_PDB')">Connect to SALES_PDB</button>
+                    `
+                },
+                'sql': {
+                    title: 'SQL Performance Demo',
+                    content: `
+                        <h3>⚡ Execution Plan Analyzer</h3>
+                        <textarea placeholder="Enter your SQL query here..." style="width: 100%; height: 100px; margin: 10px 0; padding: 10px; border-radius: 4px; border: 1px solid #ddd;"></textarea>
+                        <button class="demo-button" onclick="analyzeQuery()">Analyze Performance</button>
+                        <div id="queryResult" style="margin-top: 15px;"></div>
+                    `
+                },
+                'backup': {
+                    title: 'Backup & Recovery Demo',
+                    content: `
+                        <h3>💾 RMAN Backup Simulation</h3>
+                        <p>Choose backup type:</p>
+                        <button class="demo-button" onclick="simulateBackup('FULL')">Full Backup</button>
+                        <button class="demo-button" onclick="simulateBackup('INCREMENTAL')">Incremental Backup</button>
+                        <button class="demo-button" onclick="simulateBackup('ARCHIVELOG')">Archive Log Backup</button>
+                        <div id="backupResult" style="margin-top: 15px;"></div>
+                    `
+                }
+            };
+
+            const demo = demos[type];
+            if (demo) {
+                showModal(demo.title, demo.content);
+            }
+        }
+
+        // Modal functionality
+        function showModal(title, content) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0,0,0,0.5); z-index: 10000;
+                display: flex; align-items: center; justify-content: center;
+                padding: 20px;
+            `;
+            
+            modal.innerHTML = `
+                <div style="
+                    background: white; border-radius: 12px; padding: 30px;
+                    max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto;
+                    position: relative;
+                ">
+                    <button onclick="this.closest('div').parentElement.remove()" style="
+                        position: absolute; top: 15px; right: 15px;
+                        background: none; border: none; font-size: 24px; cursor: pointer;
+                    ">&times;</button>
+                    <h2 style="margin: 0 30px 20px 0; color: #333;">${title}</h2>
+                    ${content}
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+        }
+
+        // Simulation functions
+        function simulateConnection(pdb) {
+            const result = `
+                <div style="background: #d4edda; padding: 10px; border-radius: 4px; margin: 10px 0;">
+                    ✅ Successfully connected to ${pdb}<br>
+                    Service Name: ${pdb.toLowerCase()}<br>
+                    Status: OPEN<br>
+                    Connection String: localhost:1521/${pdb.toLowerCase()}
+                </div>
+            `;
+            
+            const container = document.createElement('div');
+            container.innerHTML = result;
+            event.target.parentNode.appendChild(container);
+        }
+
+        function analyzeQuery() {
+            const resultDiv = document.getElementById('queryResult');
+            resultDiv.innerHTML = `
+                <div style="background: #fff3cd; padding: 15px; border-radius: 4px; border-left: 4px solid #ffc107;">
+                    <h4>📊 Execution Plan Analysis:</h4>
+                    <ul>
+                        <li>Cost: 145 (Medium)</li>
+                        <li>Rows: ~1,000</li>
+                        <li>Operation: INDEX RANGE SCAN ✅</li>
+                        <li>Recommendation: Query is well optimized</li>
+                    </ul>
+                    <p><strong>Tip:</strong> Consider adding WHERE clause to reduce result set.</p>
+                </div>
+            `;
+        }
+
+        function simulateBackup(type) {
+            const resultDiv = document.getElementById('backupResult');
+            const backupInfo = {
+                'FULL': { time: '45 minutes', size: '2.5GB', recovery: 'Point-in-time' },
+                'INCREMENTAL': { time: '15 minutes', size: '500MB', recovery: 'Since last backup' },
+                'ARCHIVELOG': { time: '5 minutes', size: '100MB', recovery: 'Transaction log' }
+            };
+            
+            const info = backupInfo[type];
+            resultDiv.innerHTML = `
+                <div style="background: #d1ecf1; padding: 15px; border-radius: 4px; border-left: 4px solid #17a2b8;">
+                    <h4>💾 ${type} Backup Status:</h4>
+                    <div class="loading-spinner" style="margin: 10px 0;"></div>
+                    <p>Estimated Time: ${info.time}</p>
+                    <p>Estimated Size: ${info.size}</p>
+                    <p>Recovery Type: ${info.recovery}</p>
+                    <p><strong>Status:</strong> <span style="color: green;">✅ Completed Successfully</span></p>
+                </div>
+            `;
+        }
+
+        // Utility functions
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function printContent() {
+            window.print();
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+            
+            // Load saved progress
+            const savedProgress = localStorage.getItem('courseProgress');
+            if (savedProgress) {
+                updateProgress(parseInt(savedProgress));
+            }
+
+            // Enhanced navigation
+            const navLinks = document.querySelectorAll('.nav a[href^="#"]');
+            const sections = document.querySelectorAll('.content section[id]');
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+
             function updateNavigation() {
                 let current = '';
                 const scrollPosition = window.scrollY + 100;
@@ -2520,7 +3342,6 @@ all_activities = query(<span class="sql-string">"""
                     }
                 });
 
-                // Update active nav link
                 navLinks.forEach((link) => {
                     link.classList.remove('active');
                     if (link.getAttribute('href') === `#${current}`) {
@@ -2528,23 +3349,17 @@ all_activities = query(<span class="sql-string">"""
                     }
                 });
 
-                // Update progress bar
-                if (current) {
-                    const sectionNumber = parseInt(current.replace('s', ''));
-                    const progress = (sectionNumber / sections.length) * 100;
-                    progressBar.style.width = `${progress}%`;
-                    progressPercent.textContent = `${Math.round(progress)}%`;
-                }
-
-                // Show/hide scroll to top button
-                if (window.scrollY > 500) {
-                    scrollTopBtn.classList.add('visible');
-                } else {
-                    scrollTopBtn.classList.remove('visible');
+                // Show/hide scroll button
+                if (scrollTopBtn) {
+                    if (window.scrollY > 500) {
+                        scrollTopBtn.classList.add('visible');
+                    } else {
+                        scrollTopBtn.classList.remove('visible');
+                    }
                 }
             }
 
-            // Smooth scroll for navigation links
+            // Smooth scroll for navigation
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -2552,37 +3367,17 @@ all_activities = query(<span class="sql-string">"""
                     const targetSection = document.querySelector(targetId);
                     
                     if (targetSection) {
-                        const offsetTop = targetSection.offsetTop - 20;
-                        window.scrollTo({
-                            top: offsetTop,
-                            behavior: 'smooth'
-                        });
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                 });
             });
 
-            // Scroll event listener
-            window.addEventListener('scroll', updateNavigation);
-            
-            // Add click handlers to dialogue items for better interaction
-            const dialogueItems = document.querySelectorAll('.dialogue-item');
-            dialogueItems.forEach(item => {
-                item.style.transition = 'transform 0.2s ease';
-                item.addEventListener('click', function() {
-                    this.style.transform = 'scale(1.02)';
-                    setTimeout(() => {
-                        this.style.transform = 'scale(1)';
-                    }, 150);
-                });
-            });
-
-            // Add hover effects to cards
+            // Enhanced card interactions
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => {
-                card.style.transition = 'transform 0.2s ease, box-shadow 0.2s ease';
                 card.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-2px)';
-                    this.style.boxShadow = '0 8px 25px rgba(0,0,0,.1)';
+                    this.style.transform = 'translateY(-3px)';
+                    this.style.boxShadow = '0 12px 30px rgba(0,0,0,.08)';
                 });
                 
                 card.addEventListener('mouseleave', function() {
@@ -2591,18 +3386,54 @@ all_activities = query(<span class="sql-string">"""
                 });
             });
 
-            // Initial calls
+            // Hide search results when clicking outside
+            document.addEventListener('click', function(e) {
+                const searchContainer = document.querySelector('.search-container');
+                const searchResults = document.getElementById('searchResults');
+                
+                if (searchResults && !searchContainer.contains(e.target)) {
+                    searchResults.style.display = 'none';
+                }
+            });
+
+            window.addEventListener('scroll', updateNavigation);
             updateNavigation();
-            initializeCopyButtons();
+            
+            // Add some nice entrance animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+
+            // Observe dialogue items for animation
+            document.querySelectorAll('.dialogue-item').forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(item);
+            });
         });
 
-        // Scroll to top function
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+K or Cmd+K for search
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+            }
+            
+            // ESC to close modals and search
+            if (e.key === 'Escape') {
+                const modal = document.querySelector('div[style*="position: fixed"]');
+                if (modal) modal.remove();
+                
+                document.getElementById('searchResults').style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
