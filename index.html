@@ -6,7 +6,7 @@
     <title>Khóa học Oracle 12c DBA – Đối thoại Dev & DBA (Interactive)</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230284c7'><path d='M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z'/></svg>">
     <style>
-        /* Enhanced variables for better theming */
+        /* Enhanced variables for better theming and advanced UI */
         :root {
             --blue-50: #f0f9ff;
             --blue-100: #e0f2fe;
@@ -69,6 +69,51 @@
             --gray-800: #1f2937;
             --gray-900: #111827;
             --amber-50: #fff7ed;
+            --purple-50: #faf5ff;
+            --purple-100: #f3e8ff;
+            --purple-200: #e9d5ff;
+            --purple-300: #d8b4fe;
+            --purple-400: #c084fc;
+            --purple-500: #a855f7;
+            --purple-600: #9333ea;
+            --purple-700: #7c3aed;
+            --purple-800: #6b21a8;
+            --purple-900: #581c87;
+            --emerald-50: #ecfdf5;
+            --emerald-100: #d1fae5;
+            --emerald-200: #a7f3d0;
+            --emerald-300: #6ee7b7;
+            --emerald-400: #34d399;
+            --emerald-500: #10b981;
+            --emerald-600: #059669;
+            --emerald-700: #047857;
+            --emerald-800: #065f46;
+            --emerald-900: #064e3b;
+            --rose-50: #fff1f2;
+            --rose-100: #ffe4e6;
+            --rose-200: #fecdd3;
+            --rose-300: #fda4af;
+            --rose-400: #fb7185;
+            --rose-500: #f43f5e;
+            --rose-600: #e11d48;
+            --rose-700: #be185d;
+            --rose-800: #9f1239;
+            --rose-900: #881337;
+            
+            /* Advanced shadow system */
+            --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+            
+            /* Animation timing functions */
+            --ease-in-out-cubic: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-in-back: cubic-bezier(0.36, 0, 0.66, -0.56);
+            --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
         * {
@@ -86,24 +131,99 @@
             line-height: 1.6;
             color: #374151;
             background: linear-gradient(180deg, #f9fafb, #fff);
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        /* Advanced scroll animations */
+        @keyframes slideInFromLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(90deg, var(--blue-600), var(--indigo-700));
-            color: #fff;
-            padding: 64px 0 48px;
-            position: relative;
-            overflow: hidden;
+        @keyframes slideInFromRight {
+            0% {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
 
-        .hero:before {
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -468px 0;
+            }
+            100% {
+                background-position: 468px 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.8), 0 0 30px rgba(59, 130, 246, 0.6);
+            }
+        }
+
+        /* Enhanced particle background animation */
+        .hero::before {
             content: "";
             position: absolute;
             inset: -40% -20% auto auto;
@@ -112,82 +232,183 @@
             background: radial-gradient(closest-side, rgba(255,255,255,.15), transparent 70%);
             filter: blur(30px);
             transform: rotate(25deg);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 10%;
+            left: -10%;
+            width: 30vw;
+            height: 30vw;
+            background: radial-gradient(closest-side, rgba(255,255,255,.1), transparent 70%);
+            border-radius: 50%;
+            filter: blur(20px);
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Enhanced Hero Section with advanced effects */
+        .hero {
+            background: linear-gradient(135deg, var(--blue-600), var(--indigo-700), var(--purple-600));
+            color: #fff;
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
 
         .hero h1 {
-            font-size: 2.6rem;
+            font-size: clamp(2rem, 5vw, 3.2rem);
             font-weight: 800;
-            letter-spacing: .2px;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #e0f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s var(--ease-out-back);
         }
 
         .hero p {
-            opacity: .95;
-            font-size: 1.15rem;
-            margin-top: .5rem;
+            opacity: 0.95;
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            animation: fadeInUp 1s var(--ease-out-back) 0.2s both;
         }
 
         .badges {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 16px;
+            gap: 12px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s var(--ease-out-back) 0.4s both;
         }
 
         .badge {
-            background: rgba(255,255,255,.2);
-            padding: 8px 14px;
+            background: rgba(255,255,255,.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,.2);
+            padding: 10px 16px;
             border-radius: 999px;
-            font-size: .9rem;
+            font-size: 0.9rem;
+            font-weight: 500;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            transition: all 0.3s var(--ease-in-out-cubic);
+            cursor: pointer;
+        }
+
+        .badge:hover {
+            background: rgba(255,255,255,.25);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,.15);
         }
 
         .hero-wrap {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr auto;
             align-items: center;
-            gap: 24px;
+            gap: 40px;
+            position: relative;
+            z-index: 2;
+        }
+
+        @media (max-width: 768px) {
+            .hero-wrap {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
         }
 
         .hero-text {
-            flex: 2;
             min-width: 300px;
         }
 
         .hero-illustration {
-            flex: 1;
-            min-width: 260px;
+            min-width: 280px;
             display: flex;
             justify-content: center;
+            animation: fadeInUp 1s var(--ease-out-back) 0.6s both;
         }
 
         .db-card {
-            background: linear-gradient(135deg, var(--blue-500), var(--indigo-600));
-            border-radius: 16px;
-            width: 200px;
-            height: 200px;
+            background: linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.1));
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 24px;
+            width: 240px;
+            height: 240px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            box-shadow: 0 16px 40px rgba(0,0,0,.25);
+            gap: 12px;
+            box-shadow: var(--shadow-2xl);
+            transition: all 0.4s var(--ease-out-back);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .db-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .db-card:hover {
+            transform: translateY(-8px) rotateY(5deg);
+            box-shadow: 0 30px 60px rgba(0,0,0,.3);
+        }
+
+        .db-card:hover::before {
+            left: 100%;
         }
 
         .db-card svg {
-            width: 64px;
-            height: 64px;
+            width: 72px;
+            height: 72px;
             color: #fff;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,.2));
+            transition: transform 0.3s var(--ease-out-back);
+        }
+
+        .db-card:hover svg {
+            transform: scale(1.1) rotateY(10deg);
         }
 
         .db-title {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,.2);
         }
 
         .db-sub {
-            opacity: .9;
+            opacity: 0.9;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,.2);
         }
 
         /* Main Layout */
@@ -624,36 +845,419 @@
             font-size: .9rem;
         }
 
-        /* Enhanced search functionality */
+        /* Advanced visual enhancements */
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        }
+
+        body.dark-mode .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Enhanced hero section */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="0.5" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            pointer-events: none;
+        }
+
+        /* Improved notification system */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--green-500);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 10000;
+            max-width: 300px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: var(--red-500);
+        }
+
+        .notification.warning {
+            background: var(--yellow-500);
+            color: var(--gray-900);
+        }
+
+        /* Advanced loading states */
+        .skeleton {
+            background: linear-gradient(90deg, var(--gray-200) 25%, var(--gray-100) 50%, var(--gray-200) 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Enhanced sidebar with better visual hierarchy */
+        .sidebar-sticky::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: -20px;
+            bottom: -20px;
+            background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.1), transparent 70%);
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar:hover .sidebar-sticky::before {
+            opacity: 1;
+        }
+
+        /* Enhanced typography with better readability */
+        .typography-enhanced {
+            font-feature-settings: "liga" on, "kern" on;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Improved dialogue system with typing animation */
+        .dialogue-item.typing::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: var(--blue-500);
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Advanced code block features */
+        .example-box {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .example-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue-500), var(--indigo-500), var(--purple-500));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .example-box:hover::before {
+            opacity: 1;
+        }
+
+        .code-line-numbers {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 40px;
+            background: rgba(0,0,0,0.1);
+            border-right: 1px solid rgba(255,255,255,0.1);
+            font-family: ui-monospace, Menlo, Consolas, monospace;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            padding: 16px 8px;
+            line-height: 1.4;
+            counter-reset: line;
+        }
+
+        .code-line-numbers::before {
+            content: counter(line);
+            counter-increment: line;
+            display: block;
+        }
+
+        /* Enhanced interactive elements */
+        .interactive-button {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--blue-600), var(--indigo-600));
+            border: none;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+        }
+
+        .interactive-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .interactive-button:hover::before {
+            left: 100%;
+        }
+
+        .interactive-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        /* Advanced progress visualization */
+        .progress-ring {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .progress-ring svg {
+            transform: rotate(-90deg);
+            width: 100%;
+            height: 100%;
+        }
+
+        .progress-ring circle {
+            fill: none;
+            stroke-width: 8;
+            stroke-linecap: round;
+        }
+
+        .progress-ring .background {
+            stroke: var(--gray-200);
+        }
+
+        .progress-ring .progress {
+            stroke: url(#gradient);
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            transition: stroke-dashoffset 0.8s ease;
+        }
+
+        .progress-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 10px;
+            background: var(--gray-50);
+            border-radius: 8px;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--blue-600);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            margin-top: 4px;
+        }
+
+        /* Enhanced search with autocomplete */
+        .search-autocomplete {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1001;
+            display: none;
+        }
+
+        .autocomplete-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--gray-100);
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .autocomplete-item:hover,
+        .autocomplete-item.selected {
+            background: var(--blue-50);
+        }
+
+        .autocomplete-icon {
+            width: 16px;
+            height: 16px;
+            color: var(--gray-400);
+        }
+
+        /* Improved tooltip system */
+        .tooltip-advanced {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip-advanced .tooltip-content {
+            visibility: hidden;
+            width: 250px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            text-align: left;
+            border-radius: 8px;
+            padding: 12px 16px;
+            position: absolute;
+            z-index: 1000;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -125px;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateY(10px);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        .tooltip-advanced .tooltip-content::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: rgba(0, 0, 0, 0.9) transparent transparent transparent;
+        }
+
+        .tooltip-advanced:hover .tooltip-content {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Enhanced responsive breakpoints */
+        @media (max-width: 1440px) {
+            .container {
+                max-width: 1200px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .hero-wrap {
+                gap: 20px;
+            }
+            .hero-text {
+                flex: 1;
+                min-width: 280px;
+            }
+            .hero-illustration {
+                flex: 1;
+                min-width: 200px;
+            }
+        }
         .search-container {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+        }
+
+        .search-input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
         }
 
         .search-box {
             width: 100%;
-            padding: 12px 16px 12px 45px;
+            padding: 16px 20px 16px 50px;
             border: 2px solid var(--gray-200);
-            border-radius: 12px;
+            border-radius: 16px;
             font-size: 1rem;
-            transition: all 0.3s;
-            background: #fff;
+            transition: all 0.3s var(--ease-in-out-cubic);
+            background: var(--gray-50);
+            backdrop-filter: blur(10px);
         }
 
         .search-box:focus {
             outline: none;
-            border-color: var(--blue-400);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            border-color: var(--blue-500);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1), var(--shadow-lg);
+            transform: translateY(-1px);
         }
 
         .search-icon {
             position: absolute;
-            left: 15px;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
             color: var(--gray-400);
             width: 20px;
             height: 20px;
+            transition: color 0.3s;
+        }
+
+        .search-box:focus + .search-icon {
+            color: var(--blue-500);
+        }
+
+        .search-filters {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.6s var(--ease-out-back) 0.2s both;
+        }
+
+        .search-filter {
+            padding: 6px 12px;
+            border: 1px solid var(--gray-300);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s var(--ease-in-out-cubic);
+            user-select: none;
+        }
+
+        .search-filter:hover,
+        .search-filter.active {
+            background: var(--blue-500);
+            color: white;
+            border-color: var(--blue-500);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
         }
 
         .search-results {
@@ -661,37 +1265,223 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: #fff;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--gray-200);
-            border-radius: 8px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-            max-height: 300px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-2xl);
+            max-height: 400px;
             overflow-y: auto;
             z-index: 1000;
             display: none;
+            margin-top: 8px;
         }
 
         .search-result-item {
-            padding: 12px 16px;
+            padding: 16px 20px;
             cursor: pointer;
             border-bottom: 1px solid var(--gray-100);
-            transition: background 0.2s;
+            transition: all 0.2s var(--ease-in-out-cubic);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
         }
 
         .search-result-item:hover {
             background: var(--blue-50);
+            transform: translateX(4px);
+        }
+
+        .search-result-icon {
+            width: 24px;
+            height: 24px;
+            color: var(--blue-500);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .search-result-content {
+            flex: 1;
         }
 
         .search-result-title {
             font-weight: 600;
             color: var(--gray-900);
             margin-bottom: 4px;
+            line-height: 1.3;
         }
 
-        .search-result-content {
+        .search-result-excerpt {
             font-size: 0.9rem;
             color: var(--gray-600);
             line-height: 1.4;
+            margin-bottom: 6px;
+        }
+
+        .search-result-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .search-result-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--blue-100);
+            color: var(--blue-700);
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Interactive Code Playground */
+        .code-playground {
+            background: linear-gradient(135deg, var(--gray-50), var(--blue-50));
+            border: 2px solid var(--blue-200);
+            border-radius: 20px;
+            padding: 24px;
+            margin: 24px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-playground::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, var(--blue-100), transparent, var(--purple-100), transparent);
+            animation: float 20s linear infinite;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .code-playground-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .code-playground-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .code-playground-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gray-900);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-playground-tabs {
+            display: flex;
+            gap: 4px;
+        }
+
+        .code-tab {
+            padding: 8px 16px;
+            border: none;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .code-tab.active {
+            background: var(--blue-500);
+            color: white;
+        }
+
+        .code-editor {
+            background: var(--gray-900);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .code-editor::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(90deg, #ff5f56, #ffbd2e, #27ca3f);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+        }
+
+        .code-input {
+            width: 100%;
+            min-height: 200px;
+            background: transparent;
+            border: none;
+            color: #e5e7eb;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            resize: vertical;
+            outline: none;
+            margin-top: 40px;
+        }
+
+        .code-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+
+        .code-action-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .code-action-btn.primary {
+            background: var(--blue-600);
+            color: white;
+        }
+
+        .code-action-btn.primary:hover {
+            background: var(--blue-700);
+            transform: translateY(-1px);
+        }
+
+        .code-action-btn.secondary {
+            background: var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .code-action-btn.secondary:hover {
+            background: var(--gray-300);
+        }
+
+        .code-output {
+            background: var(--gray-100);
+            border-radius: 12px;
+            padding: 16px;
+            margin-top: 16px;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.9rem;
+            min-height: 100px;
+            display: none;
         }
 
         /* Enhanced progress indicator */
@@ -1045,6 +1835,119 @@
             }
         }
 
+        /* Learning path visualization */
+        .learning-path {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--blue-50), var(--indigo-50));
+            border-radius: 12px;
+            border: 1px solid var(--blue-100);
+        }
+
+        .path-step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 16px;
+            border-radius: 10px;
+            background: white;
+            border: 2px solid var(--gray-200);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .path-step:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .path-step.completed {
+            border-color: var(--green-300);
+            background: var(--green-50);
+        }
+
+        .path-step.current {
+            border-color: var(--blue-400);
+            background: var(--blue-50);
+            animation: currentStep 2s infinite;
+        }
+
+        @keyframes currentStep {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); }
+            50% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); }
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .path-step.completed .step-icon {
+            background: var(--green-500);
+            color: white;
+        }
+
+        .path-step.current .step-icon {
+            background: var(--blue-500);
+            color: white;
+        }
+
+        .path-step:not(.completed):not(.current) .step-icon {
+            background: var(--gray-200);
+            color: var(--gray-600);
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+        }
+
+        /* Interactive tips */
+        .tip-interactive {
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .tip-interactive:hover {
+            background: var(--blue-50);
+            transform: translateX(5px);
+        }
+
+        .tip-interactive.highlighted {
+            background: var(--yellow-100);
+            border-left: 4px solid var(--yellow-500);
+            animation: tipHighlight 0.5s ease;
+        }
+
+        @keyframes tipHighlight {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
         /* Architecture diagram */
         .architecture-diagram {
             background: #fff;
@@ -1158,31 +2061,63 @@
     <section class="hero">
         <div class="container">
             <div class="hero-wrap">
-                <div class="hero-text">
+                <div class="hero-text typography-enhanced">
                     <h1>Khóa học Oracle 12c DBA qua đối thoại</h1>
                     <p>Từ Developer đến Database Administrator – lộ trình ~100 giờ, thực chiến, học bằng đối thoại Dev & DBA.</p>
                     <div class="badges">
-                        <span class="badge">
+                        <span class="badge tooltip-advanced" data-tooltip="Học tập linh hoạt với thời gian tự do">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M8.5 2a.5.5 0 0 0-1 0v5.5H2a.5.5 0 0 0 0 1h5.5V14a.5.5 0 0 0 1 0V8.5H14a.5.5 0 0 0 0-1H8.5V2Z" /></svg>
-                            100 giờ học
+                            <span class="loading-dots">100 giờ học</span>
+                            <div class="tooltip-content">
+                                <strong>Lộ trình học tập toàn diện</strong><br>
+                                • 7 chương từ cơ bản đến nâng cao<br>
+                                • Thực hành với Oracle 12c thật<br>
+                                • Bài tập và case study thực tế
+                            </div>
                         </span>
-                        <span class="badge">
+                        <span class="badge tooltip-advanced" data-tooltip="Kiến trúc mới nhất của Oracle">
                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v9A1.5 1.5 0 0 0 3.5 14h9a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 12.5 2h-9ZM3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-9ZM5 5.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5Zm0 2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5A.5.5 0 0 1 5 7.5Zm.5 1.5a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2Z" /></svg>
                             CDB/PDB Multitenant
+                            <div class="tooltip-content">
+                                <strong>Oracle 12c Multitenant Architecture</strong><br>
+                                • Container Database (CDB)<br>
+                                • Pluggable Database (PDB)<br>
+                                • Resource sharing và scalability
+                            </div>
                         </span>
-                        <span class="badge">
+                        <span class="badge tooltip-advanced" data-tooltip="Performance tuning và optimization">
                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" width="16" height="16"><path d="M8 1a.5.5 0 0 1 .5.5v1.513a4.502 4.502 0 0 1 3.58 1.417l1.07-1.07a.5.5 0 0 1 .708.708l-1.07 1.07A4.502 4.502 0 0 1 13.987 8H15.5a.5.5 0 0 1 0 1h-1.513a4.502 4.502 0 0 1-1.417 3.58l1.07 1.07a.5.5 0 0 1-.708.708l-1.07-1.07A4.502 4.502 0 0 1 8 13.987V15.5a.5.5 0 0 1-1 0v-1.513a4.502 4.502 0 0 1-3.58-1.417l-1.07 1.07a.5.5 0 0 1-.708-.708l1.07-1.07A4.502 4.502 0 0 1 2.013 9H.5a.5.5 0 0 1 0-1h1.513A4.502 4.502 0 0 1 4.42 4.42L3.35 3.35a.5.5 0 0 1 .708-.708l1.07 1.07A4.502 4.502 0 0 1 8 2.013V.5a.5.5 0 0 1 .5-.5ZM6 8a2 2 0 1 0 4 0 2 2 0 0 0-4 0Z" /></svg>
                             Tối ưu & Backup
+                            <div class="tooltip-content">
+                                <strong>Performance & Backup Mastery</strong><br>
+                                • SQL tuning và execution plans<br>
+                                • RMAN backup strategies<br>
+                                • Point-in-time recovery
+                            </div>
                         </span>
+                    </div>
+                    
+                    <!-- Action buttons -->
+                    <div class="hero-actions" style="margin-top: 24px;">
+                        <button class="interactive-button" onclick="scrollToSection('#s1')">
+                            🚀 Bắt đầu học ngay
+                        </button>
+                        <button class="interactive-button" onclick="showDemo('overview')" style="background: rgba(255,255,255,0.2); margin-left: 12px;">
+                            📺 Xem demo
+                        </button>
                     </div>
                 </div>
                 <div class="hero-illustration">
-                    <div class="db-card" aria-hidden="true">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <div class="db-card glassmorphism" aria-hidden="true" onclick="animateCard(this)">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="db-icon">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/>
                         </svg>
                         <div class="db-title">Oracle 12c</div>
                         <div class="db-sub">DBA Master</div>
+                        <div class="db-stats" style="margin-top: 12px; font-size: 0.8rem; opacity: 0.9;">
+                            <div>7 Chapters</div>
+                            <div>100+ Examples</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1223,35 +2158,107 @@
                         </ul>
                     </div>
                     <div class="progress">
-                        <div class="progress-circle">
+                        <div class="progress-ring">
                             <svg>
-                                <circle class="progress-circle-bg" cx="30" cy="30" r="25"></circle>
-                                <circle class="progress-circle-fill" cx="30" cy="30" r="25" id="progressCircle"></circle>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="var(--blue-500)" />
+                                        <stop offset="100%" stop-color="var(--indigo-500)" />
+                                    </linearGradient>
+                                </defs>
+                                <circle class="background" cx="60" cy="60" r="45"></circle>
+                                <circle class="progress" cx="60" cy="60" r="45" id="progressRing"></circle>
                             </svg>
-                            <div class="progress-text" id="progress-percent">14%</div>
+                            <div class="progress-text" id="progress-percent" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-weight: 700; font-size: 1.1rem; color: var(--blue-600);">14%</div>
                         </div>
-                        <div class="label">Tiến độ học tập</div>
-                        <div class="bar"><div class="fill" id="progress-bar"></div></div>
+                        
+                        <div class="progress-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="completed-chapters">1</div>
+                                <div class="stat-label">Chương</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="study-time">12</div>
+                                <div class="stat-label">Giờ</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="completion-rate">85</div>
+                                <div class="stat-label">%</div>
+                            </div>
+                        </div>
+                        
+                        <div class="label" style="text-align: center; margin-top: 15px; font-weight: 600;">Tiến độ học tập</div>
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card glassmorphism">
                     <div class="card-header">
                         <div class="card-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
                             </svg>
                         </div>
-                        <div class="card-title">Mẹo học tập</div>
+                        <div class="card-title">Mẹo học tập thông minh</div>
                     </div>
                     <div class="card-body">
+                        <div class="learning-path">
+                            <div class="path-step completed" data-step="1">
+                                <div class="step-icon">✓</div>
+                                <div class="step-content">
+                                    <div class="step-title">Cơ bản</div>
+                                    <div class="step-desc">Kiến trúc & Cài đặt</div>
+                                </div>
+                            </div>
+                            <div class="path-step current" data-step="2">
+                                <div class="step-icon">📚</div>
+                                <div class="step-content">
+                                    <div class="step-title">Trung cấp</div>
+                                    <div class="step-desc">Schema & Performance</div>
+                                </div>
+                            </div>
+                            <div class="path-step" data-step="3">
+                                <div class="step-icon">🎆</div>
+                                <div class="step-content">
+                                    <div class="step-title">Nâng cao</div>
+                                    <div class="step-desc">Backup & Collaboration</div>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <ul class="tips-card-list">
-                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span>Học từng phần, thực hành ngay</span></li>
-                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span>Luôn xem execution plan, tránh <code>SELECT *</code></span></li>
-                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span>"Backup is Job #1"</span></li>
-                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span>Hiểu rõ CDB/PDB & ServiceName khi kết nối</span></li>
-                            <li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg><span>Tư duy như DBA: hiệu năng trước tiên</span></li>
+                            <li class="tip-interactive" onclick="highlightTip(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+                                <span>Học từng phần, thực hành ngay</span>
+                            </li>
+                            <li class="tip-interactive" onclick="highlightTip(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+                                <span>Luôn xem execution plan, tránh <code>SELECT *</code></span>
+                            </li>
+                            <li class="tip-interactive" onclick="highlightTip(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+                                <span>"Backup is Job #1"</span>
+                            </li>
+                            <li class="tip-interactive" onclick="highlightTip(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+                                <span>Hiểu rõ CDB/PDB & ServiceName khi kết nối</span>
+                            </li>
+                            <li class="tip-interactive" onclick="highlightTip(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" /></svg>
+                                <span>Tư duy như DBA: hiệu năng trước tiên</span>
+                            </li>
                         </ul>
+                        
+                        <div class="tip-of-day" style="margin-top: 20px; padding: 15px; background: linear-gradient(135deg, var(--yellow-50), var(--orange-50)); border-radius: 10px; border-left: 4px solid var(--orange-400);">
+                            <div style="font-weight: 600; color: var(--orange-800); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                💡 Tip hôm nay
+                                <button onclick="getRandomTip()" style="background: none; border: none; cursor: pointer; color: var(--orange-600);" title="Tip ngẫu nhiên">
+                                    🎲
+                                </button>
+                            </div>
+                            <div id="daily-tip" style="color: var(--orange-700); font-size: 0.9rem; line-height: 1.4;">
+                                Hãy luôn kiểm tra execution plan trước khi deploy SQL vào production!
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3148,64 +4155,254 @@ $ rman target /
             });
         }
 
+        // Enhanced interactive functions
+        function scrollToSection(sectionId) {
+            const element = document.querySelector(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                showNotification('Đang điều hướng đến section...', 'info');
+            }
+        }
+
+        function animateCard(card) {
+            card.style.transform = 'scale(1.1) rotateY(10deg)';
+            setTimeout(() => {
+                card.style.transform = 'scale(1.05) rotateY(5deg)';
+            }, 200);
+            
+            showNotification('🎉 Oracle 12c Architecture Demo!', 'success');
+        }
+
+        function highlightTip(tipElement) {
+            // Remove highlight from other tips
+            document.querySelectorAll('.tip-interactive').forEach(tip => {
+                tip.classList.remove('highlighted');
+            });
+            
+            // Add highlight to clicked tip
+            tipElement.classList.add('highlighted');
+            
+            // Auto-remove highlight after animation
+            setTimeout(() => {
+                tipElement.classList.remove('highlighted');
+            }, 2000);
+            
+            showNotification('💡 Tip được lưu vào ghi chú!', 'success');
+        }
+
+        function getRandomTip() {
+            const tips = [
+                'Luôn backup trước khi thực hiện thay đổi lớn!',
+                'Sử dụng EXPLAIN PLAN để hiểu cách Oracle thực thi SQL.',
+                'Kiểm tra tablespace usage thường xuyên để tránh hết dung lượng.',
+                'Học cách đọc AWR reports để phân tích performance.',
+                'Index không phải lúc nào cũng tốt - đôi khi full table scan nhanh hơn!',
+                'Hiểu về CDB và PDB architecture trong Oracle 12c.',
+                'RMAN backup có thể chạy song song để tăng tốc độ.',
+                'Monitoring alert log files là thói quen tốt của DBA.',
+                'Statistics cũ có thể làm optimizer chọn execution plan tệ.',
+                'Collaboration giữa Dev và DBA là chìa khóa thành công!'
+            ];
+            
+            const randomTip = tips[Math.floor(Math.random() * tips.length)];
+            const tipElement = document.getElementById('daily-tip');
+            
+            if (tipElement) {
+                tipElement.style.opacity = '0';
+                setTimeout(() => {
+                    tipElement.textContent = randomTip;
+                    tipElement.style.opacity = '1';
+                }, 300);
+            }
+            
+            showNotification('🎲 Tip mới đã được tạo!', 'info');
+        }
+
+        function showNotification(message, type = 'success') {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notification => notification.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            const icons = {
+                success: '✅',
+                error: '❌',
+                warning: '⚠️',
+                info: 'ℹ️'
+            };
+            
+            notification.innerHTML = `
+                <span class="notification-icon">${icons[type] || icons.info}</span>
+                <span>${message}</span>
+                <button class="notification-close" onclick="this.parentElement.remove()">&times;</button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            // Auto-hide after 4 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (notification.parentElement) {
+                        notification.remove();
+                    }
+                }, 300);
+            }, 4000);
+        }
+
+        function updateLearningPath(currentSection) {
+            const steps = document.querySelectorAll('.path-step');
+            
+            steps.forEach((step, index) => {
+                const stepNumber = index + 1;
+                step.classList.remove('completed', 'current');
+                
+                if (stepNumber < Math.ceil(currentSection / 2.5)) {
+                    step.classList.add('completed');
+                } else if (stepNumber === Math.ceil(currentSection / 2.5)) {
+                    step.classList.add('current');
+                }
+            });
+        }
+
         // Progress tracking
         function updateProgress(section) {
             const progress = (section / 7) * 100;
             const progressBar = document.getElementById('progress-bar');
             const progressPercent = document.getElementById('progress-percent');
-            const progressCircle = document.getElementById('progressCircle');
+            const progressRing = document.getElementById('progressRing');
             
             if (progressBar) progressBar.style.width = `${progress}%`;
             if (progressPercent) progressPercent.textContent = `${Math.round(progress)}%`;
             
-            // Update circular progress
-            if (progressCircle) {
-                const circumference = 2 * Math.PI * 25; // radius = 25
+            // Update circular progress ring
+            if (progressRing) {
+                const circumference = 2 * Math.PI * 45; // radius = 45
                 const offset = circumference - (progress / 100) * circumference;
-                progressCircle.style.strokeDashoffset = offset;
+                progressRing.style.strokeDashoffset = offset;
             }
             
-            // Save progress
+            // Update statistics
+            const completedChapters = document.getElementById('completed-chapters');
+            const studyTime = document.getElementById('study-time');
+            const completionRate = document.getElementById('completion-rate');
+            
+            if (completedChapters) completedChapters.textContent = section;
+            if (studyTime) studyTime.textContent = Math.round(section * 14.3); // ~100 hours / 7 chapters
+            if (completionRate) completionRate.textContent = Math.round(progress);
+            
+            // Update learning path
+            updateLearningPath(section);
+            
+            // Save progress with timestamp
             localStorage.setItem('courseProgress', section);
+            localStorage.setItem('lastStudyTime', new Date().toISOString());
+            
+            // Show progress notification
+            if (section > 1) { // Don't show for initial load
+                showNotification(`Tiến độ đã cập nhật: ${Math.round(progress)}%!`, 'success');
+            }
         }
 
         // Demo functionality
         function showDemo(type) {
             const demos = {
+                'overview': {
+                    title: 'Oracle 12c DBA Course Overview',
+                    content: `
+                        <h3>🎓 Welcome to Oracle 12c DBA Interactive Course</h3>
+                        <div style="background: linear-gradient(135deg, #f0f9ff, #e0f2fe); padding: 20px; border-radius: 12px; margin: 15px 0;">
+                            <h4 style="color: #0369a1; margin-bottom: 15px;">📊 Course Statistics</h4>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                                <div style="text-align: center; padding: 10px; background: white; border-radius: 8px;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #0284c7;">7</div>
+                                    <div style="font-size: 0.9rem; color: #64748b;">Chapters</div>
+                                </div>
+                                <div style="text-align: center; padding: 10px; background: white; border-radius: 8px;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #0284c7;">100+</div>
+                                    <div style="font-size: 0.9rem; color: #64748b;">Hours Content</div>
+                                </div>
+                                <div style="text-align: center; padding: 10px; background: white; border-radius: 8px;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #0284c7;">50+</div>
+                                    <div style="font-size: 0.9rem; color: #64748b;">Code Examples</div>
+                                </div>
+                                <div style="text-align: center; padding: 10px; background: white; border-radius: 8px;">
+                                    <div style="font-size: 2rem; font-weight: bold; color: #0284c7;">15+</div>
+                                    <div style="font-size: 0.9rem; color: #64748b;">Interactive Demos</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 20px;">
+                            <button class="demo-button" onclick="startLearningJourney()">🚀 Start Learning Journey</button>
+                            <button class="demo-button" onclick="showDemo('architecture')">🏗️ Architecture Demo</button>
+                            <button class="demo-button" onclick="showDemo('sql')">⚡ SQL Performance</button>
+                        </div>
+                    `
+                },
                 'architecture': {
-                    title: 'Oracle 12c Architecture Demo',
+                    title: 'Oracle 12c Architecture Interactive Demo',
                     content: `
                         <h3>🏗️ CDB/PDB Architecture Simulation</h3>
-                        <p>Simulating Container Database with 3 Pluggable Databases:</p>
-                        <div style="font-family: monospace; background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
-                            CDB$ROOT (Container)<br>
-                            ├── PDB$SEED (Template)<br>
-                            ├── HR_PDB (HR Application)<br>
-                            ├── SALES_PDB (Sales Application)<br>
-                            └── FINANCE_PDB (Finance Application)
+                        <p>Explore Oracle 12c Multitenant Architecture:</p>
+                        <div style="font-family: monospace; background: #1e293b; color: #e2e8f0; padding: 20px; border-radius: 12px; margin: 15px 0; font-size: 0.9rem; line-height: 1.6;">
+                            <div style="color: #fbbf24; font-weight: bold;">💼 CDB$ROOT (Container Database)</div>
+                            <div style="margin-left: 20px; color: #a78bfa;">├── 🌱 PDB$SEED (Template)</div>
+                            <div style="margin-left: 20px; color: #34d399;">├── 👥 HR_PDB (HR Application)</div>
+                            <div style="margin-left: 20px; color: #60a5fa;">├── 📊 SALES_PDB (Sales Application)</div>
+                            <div style="margin-left: 20px; color: #f87171;">└── 💰 FINANCE_PDB (Finance Application)</div>
                         </div>
-                        <button class="demo-button" onclick="simulateConnection('HR_PDB')">Connect to HR_PDB</button>
-                        <button class="demo-button" onclick="simulateConnection('SALES_PDB')">Connect to SALES_PDB</button>
+                        <div style="margin: 20px 0;">
+                            <h4>Try connecting to different PDBs:</h4>
+                            <button class="demo-button" onclick="simulateConnection('HR_PDB')">Connect to HR_PDB</button>
+                            <button class="demo-button" onclick="simulateConnection('SALES_PDB')">Connect to SALES_PDB</button>
+                            <button class="demo-button" onclick="simulateConnection('FINANCE_PDB')">Connect to FINANCE_PDB</button>
+                        </div>
+                        <div id="connectionResults" style="margin-top: 15px;"></div>
                     `
                 },
                 'sql': {
-                    title: 'SQL Performance Demo',
+                    title: 'SQL Performance Analyzer',
                     content: `
-                        <h3>⚡ Execution Plan Analyzer</h3>
-                        <textarea placeholder="Enter your SQL query here..." style="width: 100%; height: 100px; margin: 10px 0; padding: 10px; border-radius: 4px; border: 1px solid #ddd;"></textarea>
-                        <button class="demo-button" onclick="analyzeQuery()">Analyze Performance</button>
-                        <div id="queryResult" style="margin-top: 15px;"></div>
+                        <h3>⚡ Execution Plan Analyzer & Optimizer</h3>
+                        <div style="margin: 15px 0;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600;">Enter your SQL query:</label>
+                            <textarea id="sqlInput" placeholder="SELECT e.first_name, e.last_name, d.department_name FROM employees e JOIN departments d ON e.department_id = d.department_id WHERE e.salary > 5000;" style="width: 100%; height: 120px; margin: 10px 0; padding: 15px; border-radius: 8px; border: 1px solid #d1d5db; font-family: monospace; font-size: 0.9rem;"></textarea>
+                        </div>
+                        <div style="margin: 15px 0;">
+                            <button class="demo-button" onclick="analyzeQuery()">📊 Analyze Performance</button>
+                            <button class="demo-button" onclick="generateSampleQueries()">🎲 Load Sample Query</button>
+                        </div>
+                        <div id="queryResult" style="margin-top: 20px;"></div>
                     `
                 },
                 'backup': {
-                    title: 'Backup & Recovery Demo',
+                    title: 'RMAN Backup & Recovery Simulator',
                     content: `
-                        <h3>💾 RMAN Backup Simulation</h3>
-                        <p>Choose backup type:</p>
-                        <button class="demo-button" onclick="simulateBackup('FULL')">Full Backup</button>
-                        <button class="demo-button" onclick="simulateBackup('INCREMENTAL')">Incremental Backup</button>
-                        <button class="demo-button" onclick="simulateBackup('ARCHIVELOG')">Archive Log Backup</button>
-                        <div id="backupResult" style="margin-top: 15px;"></div>
+                        <h3>💾 RMAN Backup Strategy Simulator</h3>
+                        <div style="background: #f8fafc; padding: 20px; border-radius: 12px; margin: 15px 0; border-left: 4px solid #0284c7;">
+                            <h4 style="color: #0369a1; margin-bottom: 10px;">📈 Current Database Status</h4>
+                            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; font-size: 0.9rem;">
+                                <div>Database Size: <strong>2.5 GB</strong></div>
+                                <div>Archive Mode: <strong style="color: #059669;">ENABLED</strong></div>
+                                <div>Last Backup: <strong>2 days ago</strong></div>
+                                <div>Recovery Window: <strong>7 days</strong></div>
+                            </div>
+                        </div>
+                        <p style="margin-bottom: 15px;">Choose your backup strategy:</p>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 20px;">
+                            <button class="demo-button" onclick="simulateBackup('FULL')">🔄 Full Backup</button>
+                            <button class="demo-button" onclick="simulateBackup('INCREMENTAL')">📈 Incremental</button>
+                            <button class="demo-button" onclick="simulateBackup('ARCHIVELOG')">📜 Archive Log</button>
+                            <button class="demo-button" onclick="simulateBackup('CROSSCHECK')">✓ Crosscheck</button>
+                        </div>
+                        <div id="backupResult" style="margin-top: 20px;"></div>
                     `
                 }
             };
@@ -3213,6 +4410,31 @@ $ rman target /
             const demo = demos[type];
             if (demo) {
                 showModal(demo.title, demo.content);
+            }
+        }
+
+        // Enhanced simulation functions
+        function startLearningJourney() {
+            scrollToSection('#s1');
+            setTimeout(() => {
+                showNotification('🎓 Welcome to your Oracle DBA journey! Starting with Chapter 1...', 'success');
+            }, 500);
+        }
+
+        function generateSampleQueries() {
+            const sampleQueries = [
+                "SELECT e.first_name, e.last_name, d.department_name FROM employees e JOIN departments d ON e.department_id = d.department_id WHERE e.salary > 5000;",
+                "SELECT COUNT(*) FROM employees WHERE hire_date > SYSDATE - 365;",
+                "SELECT department_id, AVG(salary) FROM employees GROUP BY department_id HAVING AVG(salary) > 8000;",
+                "SELECT * FROM employees WHERE UPPER(last_name) LIKE 'SMITH%';",
+                "SELECT e.employee_id, e.first_name, m.first_name as manager_name FROM employees e LEFT JOIN employees m ON e.manager_id = m.employee_id;"
+            ];
+            
+            const randomQuery = sampleQueries[Math.floor(Math.random() * sampleQueries.length)];
+            const sqlInput = document.getElementById('sqlInput');
+            if (sqlInput) {
+                sqlInput.value = randomQuery;
+                showNotification('🎲 Sample query loaded!', 'info');
             }
         }
 
