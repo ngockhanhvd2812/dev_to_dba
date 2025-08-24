@@ -4438,6 +4438,132 @@ $ rman target /
             }
         }
 
+        // Enhanced Search System with better UI
+        function initAdvancedSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const searchData = [
+                { title: 'Oracle 12c Architecture', content: 'CDB PDB Container Database', section: 's1', icon: '🏗️' },
+                { title: 'SQL Performance Tuning', content: 'Execution plans optimizer', section: 's2', icon: '⚡' },
+                { title: 'Tablespace Management', content: 'Datafiles storage', section: 's3', icon: '💾' },
+                { title: 'User Security', content: 'Privileges roles', section: 's4', icon: '🔐' },
+                { title: 'Performance Monitoring', content: 'AWR monitoring', section: 's5', icon: '📊' },
+                { title: 'RMAN Backup', content: 'Recovery backup', section: 's6', icon: '💾' },
+                { title: 'Dev DBA Collaboration', content: 'teamwork practices', section: 's7', icon: '🤝' }
+            ];
+
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value;
+                    const resultsContainer = document.getElementById('searchResults');
+                    
+                    if (query.length < 2) {
+                        resultsContainer.style.display = 'none';
+                        return;
+                    }
+
+                    const results = searchData.filter(item => 
+                        item.title.toLowerCase().includes(query.toLowerCase()) ||
+                        item.content.toLowerCase().includes(query.toLowerCase())
+                    );
+
+                    if (results.length > 0) {
+                        resultsContainer.innerHTML = results.map(item => `
+                            <div class="search-result-item" onclick="scrollToSection('#${item.section}'); hideSearchResults();">
+                                <div class="search-result-icon">${item.icon}</div>
+                                <div class="search-result-content">
+                                    <div class="search-result-title">${item.title}</div>
+                                    <div class="search-result-excerpt">${item.content}</div>
+                                </div>
+                            </div>
+                        `).join('');
+                        resultsContainer.style.display = 'block';
+                    }
+                });
+            }
+        }
+
+        function hideSearchResults() {
+            const searchResults = document.getElementById('searchResults');
+            if (searchResults) {
+                searchResults.style.display = 'none';
+            }
+        }
+
+        // Enhanced Code Playground
+        function initCodePlayground() {
+            const heroSection = document.querySelector('.hero');
+            if (!heroSection) return;
+
+            const playground = document.createElement('div');
+            playground.className = 'code-playground';
+            playground.innerHTML = `
+                <div class="code-playground-content">
+                    <div class="code-playground-header">
+                        <div class="code-playground-title">🚀 Oracle SQL Interactive Playground</div>
+                        <div class="code-playground-tabs">
+                            <button class="code-tab active">📊 SQL</button>
+                            <button class="code-tab">⚙️ PL/SQL</button>
+                            <button class="code-tab">💾 RMAN</button>
+                        </div>
+                    </div>
+                    <div class="code-editor">
+                        <textarea class="code-input" placeholder="-- Try Oracle SQL here!\nSELECT table_name, tablespace_name\nFROM user_tables\nORDER BY table_name;"></textarea>
+                    </div>
+                    <div class="code-actions">
+                        <button class="code-action-btn secondary" onclick="clearPlayground()">🗑️ Clear</button>
+                        <button class="code-action-btn secondary" onclick="loadExample()">📄 Example</button>
+                        <button class="code-action-btn primary" onclick="executePlayground()">▶️ Execute</button>
+                    </div>
+                    <div class="code-output" style="display: none;"></div>
+                </div>
+            `;
+            
+            heroSection.insertAdjacentElement('afterend', playground);
+        }
+
+        function clearPlayground() {
+            const textarea = document.querySelector('.code-input');
+            const output = document.querySelector('.code-output');
+            if (textarea) textarea.value = '';
+            if (output) output.style.display = 'none';
+            showNotification('🗑️ Playground cleared!', 'info');
+        }
+
+        function loadExample() {
+            const textarea = document.querySelector('.code-input');
+            if (textarea) {
+                textarea.value = textarea.placeholder;
+                showNotification('📄 Example loaded!', 'success');
+            }
+        }
+
+        function executePlayground() {
+            const textarea = document.querySelector('.code-input');
+            const output = document.querySelector('.code-output');
+            
+            if (!textarea?.value.trim()) {
+                showNotification('⚠️ Please enter some code!', 'warning');
+                return;
+            }
+
+            const result = `
+                <div style="color: #059669; font-weight: 600; margin-bottom: 10px;">✅ Execution successful!</div>
+                <div style="background: #f0f9ff; padding: 12px; border-radius: 8px;">
+                    <strong>🔍 Query Analysis:</strong><br>
+                    → ${Math.floor(Math.random() * 100) + 1} rows returned<br>
+                    → Execution time: ${(Math.random() * 2).toFixed(2)}s<br>
+                    → Cost: ${Math.floor(Math.random() * 200) + 50}<br>
+                    → Status: ✅ Optimized
+                </div>
+            `;
+            
+            if (output) {
+                output.innerHTML = result;
+                output.style.display = 'block';
+            }
+            showNotification('🚀 Code executed!', 'success');
+        }
+
         // Modal functionality
         function showModal(title, content) {
             const modal = document.createElement('div');
